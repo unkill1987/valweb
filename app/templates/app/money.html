@@ -94,7 +94,7 @@
       <!-- Sidebar -->
       <ul class="sidebar navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" href="app/index.html">
+          <a class="nav-link" href="index.html">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
           </a>
@@ -111,32 +111,41 @@
             <span>계약 관리</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <h6 class="dropdown-header">Login Screens:</h6>
-            <a class="dropdown-item" href="{% static 'app/login.html'%}">Login</a>
-            <a class="dropdown-item" href="{% static 'app/register.html'%}">Register</a>
-            <a class="dropdown-item" href="{% static 'app/forgot-password.html'%}">Forgot Password</a>
-            <div class="dropdown-divider"></div>
-            <h6 class="dropdown-header">Other Pages:</h6>
-            <a class="dropdown-item" href="{% static 'app/404.html'%}">404 Page</a>
-            <a class="dropdown-item" href="{% static 'app/blank.html'%}">Blank Page</a>
+            <a class="dropdown-item" href="{% static 'app/login.html'%}">계약 생성</a>
+            <a class="dropdown-item" href="{% static 'app/register.html'%}">진행중인 계약</a>
+            <a class="dropdown-item" href="{% static 'app/forgot-password.html'%}">완료된 계약</a>
+
           </div>
         </li>
             <li class="nav-item">
-          <a class="nav-link" href="{% static 'app/tables.html'%}">
+          <a class="nav-link" href="calendar.html">
             <i class="fas fa-fw fa-calendar"></i>
             <span>일정 관리</span></a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="{% static 'app/tables.html'%}">
-            <i class="fas fa-fw fa-credit-card"></i>
-            <span>자금 관리</span></a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-cubes"></i>
+            <span>자금 관리</span>
+            </a>
+          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+            <a class="dropdown-item" href="{% static 'app/login.html'%}">결제 내역</a>
+            <a class="dropdown-item" href="{% static 'app/register.html'%}">결제 하기</a>
+            <a class="dropdown-item" href="{% static 'app/forgot-password.html'%}">출금 하기</a>
+
+          </div>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="{% static 'app/tables.html'%}">
-            <i class="fas fa-fw fa-address-book"></i>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-cubes"></i>
             <span>계약자 관리</span></a>
+          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+            <a class="dropdown-item" href="{% static 'app/login.html'%}">수출자</a>
+            <a class="dropdown-item" href="{% static 'app/register.html'%}">보험사</a>
+            <a class="dropdown-item" href="{% static 'app/forgot-password.html'%}">운송사</a>
+            <a class="dropdown-item" href="{% static 'app/forgot-password.html'%}">관세청</a>
+          </div>
         </li>
       </ul>
 
