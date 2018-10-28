@@ -21,3 +21,10 @@ def money(request):
 
 def people(request):
     return render(request, 'app/people.html', {})
+
+def forms(request):
+    return render(request, 'app/forms.html', {})
+
+
+def login(request):
+    return render(request, 'app/login.html', {})

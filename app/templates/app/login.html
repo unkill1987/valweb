@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 
   <head>
@@ -12,23 +13,45 @@
     <title>SB Admin - Login</title>
 
     <!-- Bootstrap core CSS-->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'app/vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="{% static 'app/vendor/fontawesome-free/css/all.min.css'%}" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin.css" rel="stylesheet">
+    <link href="{% static 'app/css/sb-admin.css'%}" rel="stylesheet">
 
   </head>
+<style>
+  .bg-dark{ background:white!important; }
+  .btn-primary{ background:#721c24!important; border-color:#721c24!important;}
+   a{color:#721c24ed}
+    img {text-align:center; }
+  .form-control:focus{border-color:#721c24ed; box-shadow: 0 0 0 0.1rem rgba(114, 24, 36, 0.93);}
+  .custom-select:focus{border-color:#721c24ed; box-shadow: 0 0 0 0.1rem rgba(114, 24, 36, 0.93);}
+  .custom-select{ -webkit-appearance:none;}
+</style>
+
 
   <body class="bg-dark">
-
+    <img class="container-fluid" src="{% static 'app/img/img1.png'%}">
     <div class="container">
-      <div class="card card-login mx-auto mt-5">
-        <div class="card-header">Login</div>
-        <div class="card-body">
+      <div class="card-login mx-auto mt-5">
+
+
           <form>
+
+            <select class="custom-select" name="role" style="width:200px;height:45px;">
+                <option value="1" selected>수입자</option>
+                <option value="2">수출자</option>
+                <option value="3">보험사</option>
+                <option value="4">관세청</option>
+            </select>
+            <div class="form-group">
+              <div class="form-label-group">
+
+              </div>
+            </div>
             <div class="form-group">
               <div class="form-label-group">
                 <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="required" autofocus="autofocus">
@@ -57,14 +80,14 @@
           </div>
         </div>
       </div>
-    </div>
+
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'app/vendor/jquery/jquery.min.js'%}"></script>
+    <script src="{% static 'app/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="{% static 'app/vendor/jquery-easing/jquery.easing.min.js'%}"></script>
 
   </body>
 
