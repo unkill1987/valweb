@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 
 
@@ -27,4 +28,17 @@ def forms(request):
 
 
 def login(request):
-    return render(request, 'app/login.html', {})
+    if request.method == 'GET':
+        return render(request, 'app/login.html', {})
+    else:
+        return HttpResponse()
+
+
+def register(request):
+    if request.method =='GET':
+        return render(request,'app/register.html',{})
+    else:
+        user_id = request.POST['user_id']
+        user_name = request.POST['user_name']
+        print(user_id, user_name)
+        return HttpResponse('회원가입 완료')

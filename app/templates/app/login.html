@@ -2,6 +2,19 @@
 {% load static %}
 <html lang="en">
 
+<!--<script src="https://apis.google.com/js/platform.js" async defer>-->
+  <!--function onSignIn(googleUser) {-->
+  <!--var profile = googleUser.getBasicProfile();-->
+  <!--console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.-->
+  <!--console.log('Name: ' + profile.getName());-->
+  <!--console.log('Image URL: ' + profile.getImageUrl());-->
+  <!--console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.-->
+<!--}-->
+
+
+
+<!--</script>-->
+<!--<meta name = "google-signin-client_id"content = " 291743131584-mt4pdmfk57hp2u7k4t0bah2mb60pp58i.apps.googleusercontent.com ">-->
   <head>
 
     <meta charset="utf-8">
@@ -9,7 +22,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'app/img/favicon.ico'%}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'app/img/icon.ico'%}">
     <title>Valkyrie - Login</title>
 
     <!-- Bootstrap core CSS-->
@@ -24,17 +37,17 @@
   </head>
 <style>
   .bg-dark{ background:white!important; }
-  .btn-primary{ background:#721c24!important; border-color:#721c24!important;}
-   a{color:#721c24ed}
+  .btn-primary{ background:#007bff!important; border-color:#007bff!important;}
+   a{color:#007bffed}
     img {text-align:center; }
-  .form-control:focus{border-color:#721c24ed; box-shadow: 0 0 0 0.1rem rgba(114, 24, 36, 0.93);}
-  .custom-select:focus{border-color:#721c24ed; box-shadow: 0 0 0 0.1rem rgba(114, 24, 36, 0.93);}
+  .form-control:focus{border-color:#007bffed; }
+  .custom-select:focus{border-color:#007bffed; }
   .custom-select{ -webkit-appearance:none;}
 </style>
 
 
   <body class="bg-dark">
-    <img class="container-fluid" src="{% static 'app/img/img1.png'%}">
+    <img class="container-fluid" src="{% static 'app/img/img3.png'%}">
     <div class="container">
       <div class="card-login mx-auto mt-5">
 
@@ -73,9 +86,12 @@
               </div>
             </div>
             <a class="btn btn-primary btn-block" href="{% url 'index' %}">Login</a>
+
+              <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
           </form>
           <div class="text-center">
-            <a class="d-block small mt-3" href="register">Register an Account</a>
+            <a class="d-block small mt-3" href="{% url 'register' %}">Register an Account</a>
             <a class="d-block small" href="forgot-password">Forgot Password?</a>
           </div>
         </div>
