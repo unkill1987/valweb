@@ -43,11 +43,28 @@
   .form-control:focus{border-color:#007bffed; }
   .custom-select:focus{border-color:#007bffed; }
   .custom-select{ -webkit-appearance:none;}
+
+  @media (max-width:560px) {
+    img.container-fluid {
+      min-width:350px;
+    }
+  }
+
+  @media (min-width:660px) {
+    img.container-fluid {
+      max-width:800px;
+    }
+  }
+
+
 </style>
 
 
   <body class="bg-dark">
+  <div style='text-align:right'>Ver. 1.0 </div>
+  <div style="text-align:center;">
     <img class="container-fluid" src="{% static 'app/img/img3.png'%}">
+    </div>
     <div class="container">
       <div class="card-login mx-auto mt-5">
 
