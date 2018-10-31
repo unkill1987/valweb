@@ -148,12 +148,15 @@
       </ul>
 
         <!--진행중인 계약-->
-<div class="container" style="margin:5px">
+<div class="container" style="margin:5px; margin-bottom:100px;">
     <h1 class="my-4">진행중인 계약</h1>
     <div class="row">
         {% for c in contract %}
         <div class="col-lg-4 mb-4">
+
+          <input type="checkbox" id="{{c.id}}" value="{{ c.id }}"><span>Check</span>
           <div class="card h-100">
+
             <h4 class="card-header">{{c.contractname}}</h4>
             <div class="card-body">
               <p class="card-text">{{c.md5}}<br>
@@ -168,30 +171,19 @@
           </div>
         </div>
         {% endfor %}
-        <!--<div class="col-lg-4 mb-4">-->
-          <!--<div class="card h-100">-->
-            <!--<h4 class="card-header">Card Title</h4>-->
-            <!--<div class="card-body">-->
-              <!--<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p>-->
-            <!--</div>-->
-            <!--<div class="card-footer">-->
-              <!--<a href="#" class="btn btn-primary">Learn More</a>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-lg-4 mb-4">-->
-          <!--<div class="card h-100">-->
-            <!--<h4 class="card-header">Card Title</h4>-->
-            <!--<div class="card-body">-->
-              <!--<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>-->
-            <!--</div>-->
-            <!--<div class="card-footer">-->
-              <!--<a href="#" class="btn btn-primary">Learn More</a>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
+        <hr>
+
+
       </div>
-</div>
+  <div class="row">
+    <div style="text-align:center; margin:auto;" >
+         <input type="button" value="선택삭제" id="delete_btn"></input>
+
+        </div>
+  </div>
+
+
+    </div>
         <!-- Sticky Footer -->
 
         <footer class="sticky-footer" >
@@ -243,5 +235,18 @@
     <script src="{% static 'app/js/sb-admin.min.js'%}"></script>
 
   </body>
+  <script>
+      $('#delete_btn').click(function() {
+        check_ids = ''
+        sep = ''
+        $('input:checked').each(function() {
+          check_ids += sep + $(this).val()
+          sep = ','
+        })
+        location = '/app/remove?check_id=' + check_ids
+        return false
+      })
+
+    </script>
 
 </html>

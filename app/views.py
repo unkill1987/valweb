@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import hashlib
 import sys
 import os
@@ -10,6 +10,20 @@ import time
 from app.models import Contract
 from valweb import settings
 
+
+def remove(request):
+    # deletes all objects from Car database table
+    # Contract.objects.get('id').delete()
+    check_id = request.GET['check_id']
+    check_ids = check_id.split(',')
+
+
+    for id in check_ids:
+        try:
+            Contract.objects.get(id=id).delete()
+            return render(request, 'app/ing.html',{})
+        except:
+            return render(request, 'app/ing.html',{})
 
 def submit(request):
     contractname = request.POST['contractname']
@@ -78,7 +92,7 @@ def submit(request):
     contract = Contract(contractname=contractname, md5=a, sha1=b, sha256=c, filename='contract_' + time_format + '.txt')
     contract.save()
 
-    return render(request, 'app/submit.html',{'contractname':contractname, 'a':a,'b':b,'c':c})
+    return render(request, 'app/submit.html', {'contractname':contractname, 'a':a,'b':b,'c':c})
 
 
 def download(request):
