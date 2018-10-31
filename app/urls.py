@@ -30,4 +30,7 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('forgot/', views.forgot, name='forgot'),
     path('submit/', views.submit, name='submit'),
+    path('ing/', views.ing, name='ing'),
+    path('done/', views.done, name='done'),
+    path('download/', views.download, name='download'),
 ]

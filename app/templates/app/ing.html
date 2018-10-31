@@ -110,7 +110,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <a class="dropdown-item" href="{% url 'forms' %}">계약 생성</a>
-            <a class="dropdown-item" href="{% url 'ing' %}">진행중인 계약</a>
+            <a class="dropdown-item" href="">진행중인 계약</a>
             <a class="dropdown-item" href="{% url 'done' %}">완료된 계약</a>
 
           </div>
@@ -147,37 +147,51 @@
         </li>
       </ul>
 
-    <div id="content-wrapper">
-
-        <div class="container-fluid">
-
-          <!-- Breadcrumbs-->
-
-          <!-- Page Content -->
-          <h1>계약 생성 완료(Hash)</h1>
-          <hr>
-            <h2>Contract Name:{{contractname}}</h2>
-            <h2>{{a}}</h2><br>
-            <h2>{{b}}</h2><br>
-            <h2>{{c}}</h2>
-
-
-        </div>
-        <!-- /.container-fluid -->
-
-        <!-- Sticky Footer -->
-        <footer class="sticky-footer">
-          <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-              <span>Copyright © Your Website 2018</span>
+        <!--진행중인 계약-->
+<div class="container" style="margin:5px">
+    <h1 class="my-4">진행중인 계약</h1>
+    <div class="row">
+        {% for c in contract %}
+        <div class="col-lg-4 mb-4">
+          <div class="card h-100">
+            <h4 class="card-header">{{c.contractname}}</h4>
+            <div class="card-body">
+              <p class="card-text">{{c.md5}}<br>
+              {{c.sha1}}<br>
+              {{c.sha256}}</p>
+            </div>
+            <div class="card-footer">
+              <a href="{% url 'download' %}?id={{ c.id }}" class="btn btn-primary" target="_blank">
+                    {{c.filename}}
+              </a>
             </div>
           </div>
-        </footer>
-
+        </div>
+        {% endfor %}
+        <!--<div class="col-lg-4 mb-4">-->
+          <!--<div class="card h-100">-->
+            <!--<h4 class="card-header">Card Title</h4>-->
+            <!--<div class="card-body">-->
+              <!--<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p>-->
+            <!--</div>-->
+            <!--<div class="card-footer">-->
+              <!--<a href="#" class="btn btn-primary">Learn More</a>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-lg-4 mb-4">-->
+          <!--<div class="card h-100">-->
+            <!--<h4 class="card-header">Card Title</h4>-->
+            <!--<div class="card-body">-->
+              <!--<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>-->
+            <!--</div>-->
+            <!--<div class="card-footer">-->
+              <!--<a href="#" class="btn btn-primary">Learn More</a>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
       </div>
-
-
-
+</div>
         <!-- Sticky Footer -->
 
         <footer class="sticky-footer" >

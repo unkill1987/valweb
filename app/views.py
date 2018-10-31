@@ -7,7 +7,12 @@ import os
 
 import time
 # Create your views here.
+from app.models import Contract
+from valweb import settings
+
+
 def submit(request):
+    contractname = request.POST['contractname']
     cable = request.POST['cable']
     mail = request.POST['mail']
     telex = request.POST['telex']
@@ -29,10 +34,11 @@ def submit(request):
 
     time_format = time.strftime('%Y-%m-%d_%H%M%S', time.localtime(time.time()))
 
-    file = open('계약_' + time_format + '.txt', 'wt')
+    file = open('contract_' + time_format + '.txt', 'wt')
     file.write('Letter of Credit'+'\n'
-                'Address Form'+'\n'
-                'Cable Address:' + cable + '\n'
+               'Contract:'+contractname+'\n'
+               'Address Form'+'\n'
+               'Cable Address:' + cable + '\n'
                'Mailing Address:' + mail +'\n'
                'Telex Number:' + telex + '\n'
                'To:' + to +'\n'
@@ -40,13 +46,13 @@ def submit(request):
                'Bank Form'+'\n'
                'Applicant:'+applicant +'\n'
                'Beneficiary:' + beneficiary +'\n'
-               'Advising Bank;' + bank +'\n'
+               'Advising Bank:' + bank +'\n'
                'Expiry Date:' +date+'\n'
                'Expiry Place:'+place+'\n'
                'Currency Code:' +code+'\n'
-                'Currency Amount:'+camount+'\n'
+               'Currency Amount:'+camount+'\n'
                'Credit Available With:'+cwith+'\n'
-                'Order Form'+'\n'
+               'Order Form'+'\n'
                'Exporter:'+exporter +'\n'
                'Name of Commodity:' + commodity +'\n'
                'Quantity:'+quantity+'\n'
@@ -54,7 +60,7 @@ def submit(request):
                'Amount:' +amount+'\n')
     file.close()
 
-    file = open('계약_' + time_format + '.txt', 'rb')
+    file = open('contract_' + time_format + '.txt', 'rb')
     data = file.read()
 
     # hasher = hashlib.md5()
@@ -68,8 +74,32 @@ def submit(request):
     c= 'SHA-256 : ' + hashlib.sha256(data).hexdigest()
     file.close()
 
+    # 데이터 저장
+    contract = Contract(contractname=contractname, md5=a, sha1=b, sha256=c, filename='contract_' + time_format + '.txt')
+    contract.save()
 
-    return render(request, 'app/submit.html',{'a':a,'b':b,'c':c})
+    return render(request, 'app/submit.html',{'contractname':contractname, 'a':a,'b':b,'c':c})
+
+
+def download(request):
+    id = request.GET['id']
+    c = Contract.objects.get(id=id)
+
+    filepath = os.path.join(settings.BASE_DIR, c.filename)
+    filename = os.path.basename(filepath)
+    with open(filepath, 'rb') as f:
+        response = HttpResponse(f, content_type='text/plain')
+        response['Content-Disposition'] = 'inline; filename="{}"'.format(filename)
+        return response
+
+def ing(request):
+    contract = Contract.objects.order_by('-id')
+
+    return render(request, 'app/ing.html', {'contract':contract})
+
+
+def done(request):
+    return render(request, 'app/done.html', {})
 
 
 def index(request):

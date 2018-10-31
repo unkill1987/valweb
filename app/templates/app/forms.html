@@ -110,8 +110,8 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <a class="dropdown-item" href="">계약 생성</a>
-            <a class="dropdown-item" href="">진행중인 계약</a>
-            <a class="dropdown-item" href="">완료된 계약</a>
+            <a class="dropdown-item" href="{% url 'ing' %}">진행중인 계약</a>
+            <a class="dropdown-item" href="{% url 'done' %}">완료된 계약</a>
 
           </div>
         </li>
@@ -172,9 +172,10 @@
                             <div class="row">
                                 <div class="col-lg-4">
                                     <h2 class="panel-heading">
-                                        Letter of Credit</h2>
+                                        Contract Name</h2>
+                                    <input class="form-control" name="contractname">
                                     <p style="font-size:25px"> Address Form </p>
-                                        <div class="form-group">
+                                            <div class="form-group">
                                             <label>Cable address:</label>
                                             <input class="form-control" name="cable">
                                             <p class="help-block"></p>
@@ -231,10 +232,10 @@
                                             <div class="form-group">
                                             <label>Currency Code:</label><br>
                                             <select style="width:300px; height:38px; border-radius:4px" name="code">
-                                                <option value="달러">달러(00000000)</option>
-                                                <option value="원화">원화(00000001)</option>
-                                                <option value="엔화">엔화(00000002)</option>
-                                                <option value="위안화">위안화(00000003)</option>
+                                                <option value="USD">USD(840)</option>
+                                                <option value="KRW">KRW(410)</option>
+                                                <option value="JPY">JPY(392)</option>
+                                                <option value="CNY">CNY(156)</option>
 
                                             </select>
                                             </div>
