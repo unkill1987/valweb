@@ -1,5 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+import hashlib
+import sys
+import os
+
 
 import time
 # Create your views here.
@@ -47,10 +51,25 @@ def submit(request):
                'Name of Commodity:' + commodity +'\n'
                'Quantity:'+quantity+'\n'
                'Unit Price:'+price+'\n'
-               'Amount:' +amount+'\n'
-               )
+               'Amount:' +amount+'\n')
     file.close()
-    return render(request, 'app/submit.html',{})
+
+    file = open('계약_' + time_format + '.txt', 'rb')
+    data = file.read()
+
+    # hasher = hashlib.md5()
+    # with open('myfile.jpg', 'rb') as afile:
+    #     buf = afile.read()
+    #     hasher.update(buf)
+    # print(hasher.hexdigest())
+
+    a= 'MD5 : ' + hashlib.md5(data).hexdigest()
+    b= 'SHA-1 : ' + hashlib.sha1(data).hexdigest()
+    c= 'SHA-256 : ' + hashlib.sha256(data).hexdigest()
+    file.close()
+
+
+    return render(request, 'app/submit.html',{'a':a,'b':b,'c':c})
 
 
 def index(request):
