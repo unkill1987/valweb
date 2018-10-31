@@ -147,6 +147,11 @@
         </li>
       </ul>
 
+
+
+       <!--계약서 작성 -->
+
+
     <div id="content-wrapper">
       <div id="page-wrapper" style="margin:10px;">
             <div class="row">
@@ -159,192 +164,145 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Basic Form Elements
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <form role="form">
-                                        <div class="form-group">
-                                            <label>Text Input</label>
-                                            <input class="form-control">
-                                            <p class="help-block">Example block-level help text here.</p>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Text Input with Placeholder</label>
-                                            <input class="form-control" placeholder="Enter text">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Static Control</label>
-                                            <p class="form-control-static">email@example.com</p>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>File input</label>
-                                            <input type="file">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Text area</label>
-                                            <textarea class="form-control" rows="3"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Checkboxes</label>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" value="">Checkbox 1
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" value="">Checkbox 2
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" value="">Checkbox 3
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Inline Checkboxes</label>
-                                            <label class="checkbox-inline">
-                                                <input type="checkbox">1
-                                            </label>
-                                            <label class="checkbox-inline">
-                                                <input type="checkbox">2
-                                            </label>
-                                            <label class="checkbox-inline">
-                                                <input type="checkbox">3
-                                            </label>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Radio Buttons</label>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>Radio 1
-                                                </label>
-                                            </div>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">Radio 2
-                                                </label>
-                                            </div>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">Radio 3
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Inline Radio Buttons</label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" checked>1
-                                            </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2">2
-                                            </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">3
-                                            </label>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Selects</label>
-                                            <select class="form-control">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Multiple Selects</label>
-                                            <select multiple class="form-control">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
-                                        </div>
 
-                                    </form>
+
+                        <div class="panel-body">
+                            <form role="form" action="{% url 'submit' %}" method="post">
+
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <h2 class="panel-heading">
+                                        Letter of Credit</h2>
+                                    <p style="font-size:25px"> Address Form </p>
+                                        <div class="form-group">
+                                            <label>Cable address:</label>
+                                            <input class="form-control" name="cable">
+                                            <p class="help-block"></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Mailing Address:</label>
+                                            <input class="form-control" name="mail">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Telex Number:</label>
+                                            <input class="form-control" name="telex">
+                                            <p class="help-block"></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>To:</label>
+                                            <input class="form-control" name="to">
+                                            <p class="help-block"></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Dear Sirs:</label>
+                                            <input class="form-control" name="dear">
+                                            <p class="help-block"></p>
+                                        </div>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
-                                <div class="col-lg-6">
-                                    <h1>Disabled Form States</h1>
-                                    <form role="form">
-                                        <fieldset disabled>
+                            <div class="col-lg-4">
+                                <h2> &nbsp </h2>
+                                    <p style="font-size:25px"> Bank Form </p>
                                             <div class="form-group">
-                                                <label for="disabledSelect">Disabled input</label>
-                                                <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input" disabled>
+                                            <label>Applicant:</label>
+                                            <input class="form-control" name="applicant">
+                                            <p class="help-block"></p>
                                             </div>
                                             <div class="form-group">
-                                                <label for="disabledSelect">Disabled select menu</label>
-                                                <select id="disabledSelect" class="form-control">
-                                                    <option>Disabled select</option>
-                                                </select>
+                                            <label>Beneficiary:</label>
+                                            <input class="form-control" name="beneficiary">
+                                            <p class="help-block"></p>
                                             </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox">Disabled Checkbox
-                                                </label>
+                                            <div class="form-group">
+                                            <label>Advising Bank:</label>
+                                            <input class="form-control" name="bank">
+                                            <p class="help-block"></p>
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Disabled Button</button>
-                                        </fieldset>
-                                    </form>
-                                    <h1>Form Validation States</h1>
-                                    <form role="form">
-                                        <div class="form-group has-success">
-                                            <label class="control-label" for="inputSuccess">Input with success</label>
-                                            <input type="text" class="form-control" id="inputSuccess">
-                                        </div>
-                                        <div class="form-group has-warning">
-                                            <label class="control-label" for="inputWarning">Input with warning</label>
-                                            <input type="text" class="form-control" id="inputWarning">
-                                        </div>
-                                        <div class="form-group has-error">
-                                            <label class="control-label" for="inputError">Input with error</label>
-                                            <input type="text" class="form-control" id="inputError">
-                                        </div>
-                                    </form>
-                                    <h1>Input Groups</h1>
-                                    <form role="form">
-                                        <div class="form-group input-group">
-                                            <span class="input-group-addon">@</span>
-                                            <input type="text" class="form-control" placeholder="Username">
-                                        </div>
-                                        <div class="form-group input-group">
-                                            <input type="text" class="form-control">
-                                            <span class="input-group-addon">.00</span>
-                                        </div>
-                                        <div class="form-group input-group">
-                                            <span class="input-group-addon"><i class="fa fa-eur"></i>
-                                            </span>
-                                            <input type="text" class="form-control" placeholder="Font Awesome Icon">
-                                        </div>
-                                        <div class="form-group input-group">
-                                            <span class="input-group-addon">$</span>
-                                            <input type="text" class="form-control">
-                                            <span class="input-group-addon">.00</span>
-                                        </div>
-                                        <div class="form-group input-group">
-                                            <input type="text" class="form-control">
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
-                                                </button>
-                                            </span>
-                                        </div>
-                                    </form>
+                                            <div class="form-group">
+                                            <label>Expiry Date:</label>
+                                            <input type="date" class="form-control" name="date">
+                                            <p class="help-block"></p>
+                                            </div>
+                                            <div class="form-group">
+                                            <label>Expiry Place:</label>
+                                            <input class="form-control" name="place">
+                                            <p class="help-block"></p>
+                                            </div>
+                                            <div class="form-group">
+                                            <label>Currency Code:</label><br>
+                                            <select style="width:300px; height:38px; border-radius:4px" name="code">
+                                                <option value="달러">달러(00000000)</option>
+                                                <option value="원화">원화(00000001)</option>
+                                                <option value="엔화">엔화(00000002)</option>
+                                                <option value="위안화">위안화(00000003)</option>
+
+                                            </select>
+                                            </div>
+                                            <div class="form-group">
+                                            <label>Currency Amount:</label>
+                                            <input class="form-control" name="camount">
+                                            <p class="help-block"></p>
+                                            </div>
+                                            <div class="form-group">
+                                            <label>Credit Available With:</label><br>
+                                            <select style="width:300px; height:38px; border-radius:4px" name="with">
+                                                <option value="Issuing Bank">Issuing Bank</option>
+                                                <option value="Any Bank">Any Bank</option>
+                                                <option value="Other">Other</option>
+
+                                            </select>
+                                            </div>
+
+
+                                </div>
+                            <div class="col-lg-4">
+                                <h2> &nbsp </h2>
+                                    <p style="font-size:25px"> Order Form </p>
+                                            <div class="form-group">
+                                            <label>Exporter:</label>
+                                            <input class="form-control" name="exporter">
+                                            <p class="help-block"></p>
+                                            </div>
+                                            <div class="form-group">
+                                            <label>Name of Commodity:</label>
+                                            <input class="form-control" name="commodity">
+                                            <p class="help-block"></p>
+                                            </div>
+                                            <div class="form-group">
+                                            <label>Quantity:</label>
+                                            <input class="form-control" name="quantity">
+                                            <p class="help-block"></p>
+                                            </div>
+                                            <div class="form-group">
+                                            <label>Unit Price:</label>
+                                            <input class="form-control" name="price">
+                                            <p class="help-block"></p>
+                                            </div>
+                                            <div class="form-group">
+                                            <label>Amount:</label>
+                                            <input class="form-control" name="amount">
+                                            <p class="help-block"></p>
+                                            </div>
+
+
+
+
+
+                                </div>
+
+
+
+                                <!-- /.col-lg-6 (nested) -->
+                            </div>
+                            <!-- /.row (nested) -->
                                     <div style="text-align:center">
                                         <button type="submit" class="btn btn-default">작성 완료</button>
                                         <button type="reset" class="btn btn-default">다시 작성하기</button>
                                     </div>
-                                </div>
-                                <!-- /.col-lg-6 (nested) -->
-                            </div>
-                            <!-- /.row (nested) -->
+                                                                        {% csrf_token %}
+                            </form>
                         </div>
+
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
