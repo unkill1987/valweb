@@ -3,10 +3,7 @@ from django.shortcuts import render, redirect
 import hashlib
 import sys
 import os
-
-
 import time
-# Create your views here.
 from app.models import Contract
 from valweb import settings
 
@@ -17,13 +14,14 @@ def remove(request):
     check_id = request.GET['check_id']
     check_ids = check_id.split(',')
 
-
     for id in check_ids:
         try:
             Contract.objects.get(id=id).delete()
-            return render(request, 'app/ing.html',{})
+            return redirect('ing')
+
         except:
-            return render(request, 'app/ing.html',{})
+            return redirect('ing')
+
 
 def submit(request):
     contractname = request.POST['contractname']
@@ -49,29 +47,29 @@ def submit(request):
     time_format = time.strftime('%Y-%m-%d_%H%M%S', time.localtime(time.time()))
 
     file = open('contract_' + time_format + '.txt', 'wt')
-    file.write('Letter of Credit'+'\n'
-               'Contract:'+contractname+'\n'
-               'Address Form'+'\n'
-               'Cable Address:' + cable + '\n'
-               'Mailing Address:' + mail +'\n'
-               'Telex Number:' + telex + '\n'
-               'To:' + to +'\n'
-               'Dear Sirs:' + dear +'\n'
-               'Bank Form'+'\n'
-               'Applicant:'+applicant +'\n'
-               'Beneficiary:' + beneficiary +'\n'
-               'Advising Bank:' + bank +'\n'
-               'Expiry Date:' +date+'\n'
-               'Expiry Place:'+place+'\n'
-               'Currency Code:' +code+'\n'
-               'Currency Amount:'+camount+'\n'
-               'Credit Available With:'+cwith+'\n'
-               'Order Form'+'\n'
-               'Exporter:'+exporter +'\n'
-               'Name of Commodity:' + commodity +'\n'
-               'Quantity:'+quantity+'\n'
-               'Unit Price:'+price+'\n'
-               'Amount:' +amount+'\n')
+    file.write('Letter of Credit' + '\n'
+                                    'Contract:' + contractname + '\n'
+                                                                 'Address Form' + '\n'
+                                                                                  'Cable Address:' + cable + '\n'
+                                                                                                             'Mailing Address:' + mail + '\n'
+                                                                                                                                         'Telex Number:' + telex + '\n'
+                                                                                                                                                                   'To:' + to + '\n'
+                                                                                                                                                                                'Dear Sirs:' + dear + '\n'
+                                                                                                                                                                                                      'Bank Form' + '\n'
+                                                                                                                                                                                                                    'Applicant:' + applicant + '\n'
+                                                                                                                                                                                                                                               'Beneficiary:' + beneficiary + '\n'
+                                                                                                                                                                                                                                                                              'Advising Bank:' + bank + '\n'
+                                                                                                                                                                                                                                                                                                        'Expiry Date:' + date + '\n'
+                                                                                                                                                                                                                                                                                                                                'Expiry Place:' + place + '\n'
+                                                                                                                                                                                                                                                                                                                                                          'Currency Code:' + code + '\n'
+                                                                                                                                                                                                                                                                                                                                                                                    'Currency Amount:' + camount + '\n'
+                                                                                                                                                                                                                                                                                                                                                                                                                   'Credit Available With:' + cwith + '\n'
+                                                                                                                                                                                                                                                                                                                                                                                                                                                      'Order Form' + '\n'
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                     'Exporter:' + exporter + '\n'
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              'Name of Commodity:' + commodity + '\n'
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 'Quantity:' + quantity + '\n'
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          'Unit Price:' + price + '\n'
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  'Amount:' + amount + '\n')
     file.close()
 
     file = open('contract_' + time_format + '.txt', 'rb')
@@ -83,16 +81,16 @@ def submit(request):
     #     hasher.update(buf)
     # print(hasher.hexdigest())
 
-    a= 'MD5 : ' + hashlib.md5(data).hexdigest()
-    b= 'SHA-1 : ' + hashlib.sha1(data).hexdigest()
-    c= 'SHA-256 : ' + hashlib.sha256(data).hexdigest()
+    a = 'MD5 : ' + hashlib.md5(data).hexdigest()
+    b = 'SHA-1 : ' + hashlib.sha1(data).hexdigest()
+    c = 'SHA-256 : ' + hashlib.sha256(data).hexdigest()
     file.close()
 
     # 데이터 저장
     contract = Contract(contractname=contractname, md5=a, sha1=b, sha256=c, filename='contract_' + time_format + '.txt')
     contract.save()
 
-    return render(request, 'app/submit.html', {'contractname':contractname, 'a':a,'b':b,'c':c})
+    return render(request, 'app/submit.html', {'contractname': contractname, 'a': a, 'b': b, 'c': c})
 
 
 def download(request):
@@ -106,10 +104,12 @@ def download(request):
         response['Content-Disposition'] = 'inline; filename="{}"'.format(filename)
         return response
 
+
 def ing(request):
+    n = Contract.objects.count()
     contract = Contract.objects.order_by('-id')
 
-    return render(request, 'app/ing.html', {'contract':contract})
+    return render(request, 'app/ing.html', {'contract': contract, 'n': n})
 
 
 def done(request):
@@ -117,7 +117,9 @@ def done(request):
 
 
 def index(request):
-    return render(request, 'app/index.html', {})
+    n = Contract.objects.count()
+
+    return render(request, 'app/index.html', {'n': n})
 
 
 def charts(request):
@@ -133,12 +135,10 @@ def money(request):
 
 
 def people(request):
-
     return render(request, 'app/people.html', {})
 
 
 def forms(request):
-
     return render(request, 'app/forms.html', {})
 
 

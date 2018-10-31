@@ -110,7 +110,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <a class="dropdown-item" href="{% url 'forms' %}">계약 생성</a>
-            <a class="dropdown-item" href="">진행중인 계약</a>
+            <a class="dropdown-item" href="{% url 'ing' %}">진행중인 계약</a>
             <a class="dropdown-item" href="{% url 'done' %}">완료된 계약</a>
 
           </div>
@@ -149,7 +149,7 @@
 
         <!--진행중인 계약-->
 <div class="container" style="margin:5px; margin-bottom:100px;">
-    <h1 class="my-4">진행중인 계약</h1>
+    <h1 class="my-4">진행중인 계약({{n}}건)</h1>
     <div class="row">
         {% for c in contract %}
         <div class="col-lg-4 mb-4">
@@ -177,7 +177,7 @@
       </div>
   <div class="row">
     <div style="text-align:center; margin:auto;" >
-         <input type="button" value="선택삭제" id="delete_btn"></input>
+      <input type="button" value="선택삭제" id="delete_btn">
 
         </div>
   </div>
