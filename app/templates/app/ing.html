@@ -171,11 +171,36 @@
           </div>
         </div>
         {% endfor %}
-        <hr>
+<hr>
+    </div>
+<hr>
+  <div class="pagination" style="text-align:center; margin:auto;">
+    <span class="step-links" style="text-align:center; margin:auto;">
+      <ul class="pagination pagination-lg" >
+        {% if contract.has_previous %}
+            <li><a class="btn" style="font-size:20px" href="?page=1">&laquo; first&nbsp</a></li>
+            <li><a class="btn" style="font-size:20px" href="?page={{ contract.previous_page_number }}">previous</a></li>
+        {% endif %}
 
 
-      </div>
+      {% for pg in contract.paginator.page_range %}
+        {% if blogs.number == pg %}
+          <li><a style="font-size:20px" href="?page={{pg}}" class="btn btn-default">{{pg}}</a></li>
+        {% else %}
+          <li><a style="font-size:20px" href="?page={{pg}}" class="btn">{{pg}}</a></li>
+        {% endif %}
+      {% endfor %}
+
+
+        {% if contract.has_next %}
+            <li><a class="btn" style="font-size:20px" href="?page={{ contract.next_page_number }}">next&nbsp</a></li>
+            <li><a class="btn" style="font-size:20px" href="?page={{ contract.paginator.num_pages }}">last &raquo;</a></li>
+        {% endif %}
+        </ul>
+    </span>
+  </div>
   <div class="row">
+
     <div style="text-align:center; margin:auto;" >
 
       <input type="button" value="선택삭제" id="delete_btn">
@@ -183,17 +208,10 @@
         </div>
   </div>
 
-
-    </div>
+  </div>
         <!-- Sticky Footer -->
 
-        <footer class="sticky-footer" >
-          <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-              <span>Copyright © Your Website 2018</span>
-            </div>
-          </div>
-        </footer>
+
 
       </div>
       <!-- /.content-wrapper -->
