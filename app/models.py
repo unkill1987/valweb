@@ -11,6 +11,7 @@ class Contract(models.Model):
 
 
 class Member(models.Model):
+    user_role = models.CharField(max_length=20)
     user_id = models.CharField(max_length=20, primary_key=True)
     user_name = models.CharField(max_length=20)
     user_pw = models.CharField(max_length=20)

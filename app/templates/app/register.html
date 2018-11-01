@@ -9,7 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Register</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'app/img/icon.ico'%}">
+    <title>Valkyrie - register</title>
 
     <!-- Bootstrap core CSS-->
     <link href="{% static 'app/vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
@@ -34,6 +35,13 @@
 
 
                 <!--user_name-->
+                <hr>
+                <p>Role</p>
+                <input type="checkbox" name="user_role" value="1">&nbsp수입자&nbsp
+                <input type="checkbox" name="user_role" value="2">&nbsp수출자&nbsp
+                <input type="checkbox" name="user_role" value="3">&nbsp보험사&nbsp
+                <input type="checkbox" name="user_role" value="4">&nbsp운송사&nbsp
+                <hr>
                 <div class="form-group">
                     <div class="form-label-group">
                         <input type="text" name="user_name" id="user_name" class="form-control" placeholder="name"
@@ -57,6 +65,7 @@
                         <label for="user_pw">Password</label>
                     </div>
                 </div>
+                <hr>
                 <!--&lt;!&ndash;user_comfirm_password&ndash;&gt;-->
                 <!--<div class="form-group">-->
                 <!--<div class="form-label-group">-->
@@ -73,6 +82,7 @@
                 <a class="d-block small mt-3" href="{% url 'login'%}">Login Page</a>
                 <a class="d-block small" href="{% url 'forgot' %}">Forgot Password?</a>
             </div>
+            <hr>
         </div>
     </div>
 </div>
@@ -80,7 +90,7 @@
 <!--여기까지 수정했습니다!-->
 <!--여기까지 수정했습니다!-->
 
-</form>
+
 
 <!-- Bootstrap core JavaScript-->
 <script src="{% static 'app/vendor/jquery/jquery.min.js'%}"></script>

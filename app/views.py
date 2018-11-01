@@ -150,10 +150,11 @@ def login(request):
     else:
         email = request.POST['email']
         password = request.POST['password']
+        user_role = request.POST['user_role']
 
         result_dict = {}
         try:
-            Member.objects.get(user_id=email, user_pw=password)
+            Member.objects.get(user_role=user_role, user_id=email, user_pw=password)
             result_dict['result'] = 'success'
             request.session['user_id'] = email
         except Member.DoesNotExist:
@@ -166,10 +167,11 @@ def register(request):
         return render(request, 'app/register.html', {})
     else:
         result_dict = {}
-
+        user_role = request.POST['user_role']
         user_name = request.POST['user_name']
         user_id = request.POST['user_id']
         user_pw = request.POST['user_pw']
+
 
         if user_name == '' or user_id == '' or user_pw == '':
             result_dict['result'] = '공백은 사용할 수 없습니다.'
@@ -180,7 +182,7 @@ def register(request):
                 Member.objects.get(user_id=user_id)
                 result_dict['result'] = '이미 가입된 아이디가 있습니다.'
             except Member.DoesNotExist:
-                member = Member(user_id=user_id, user_pw=user_pw, user_name=user_name)
+                member = Member(user_role=user_role, user_id=user_id, user_pw=user_pw, user_name=user_name)
                 member.c_date = timezone.now()
                 member.save()
                 result_dict['result'] = '가입완료'
