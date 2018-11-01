@@ -89,6 +89,12 @@ def submit(request):
 
     # 데이터 저장
     contract = Contract(contractname=contractname, md5=a, sha1=b, sha256=c, filename='contract_' + time_format + '.txt')
+
+    # 로그인한 사용자 정보를 Contract에 같이 저장
+    user_id = request.session['user_id']
+    member = Member.objects.get(user_id=user_id)
+    contract.owner = member
+
     contract.save()
 
     return render(request, 'app/submit.html', {'contractname': contractname, 'a': a, 'b': b, 'c': c})
@@ -108,19 +114,45 @@ def download(request):
 
 
 def ing(request):
-    n = Contract.objects.count()
-    contract = Contract.objects.order_by('-id')
+    try:
+        user_id = request.session['user_id']
+        member = Member.objects.get(user_id=user_id)
+        n = len(Contract.objects.filter(owner=member))
+        contract = Contract.objects.filter(owner=member)
 
-    return render(request, 'app/ing.html', {'contract': contract, 'n': n})
+        return render(request, 'app/ing.html', {'contract': contract, 'n': n})
+    except:
+        return redirect('login')
 
 
 def done(request):
     return render(request, 'app/done.html', {})
 
+def logout(request):
+    del request.session['user_role']
+    del request.session['user_id']
+    return render(request, 'app/logout.html',{})
 
 def index(request):
-    n = Contract.objects.count()
-    return render(request, 'app/index.html', {'n': n})
+
+    try:
+        user_id = request.session['user_id']
+        user_role = request.session['user_role']
+        n = len(Contract.objects.filter(owner=Member.objects.get(user_id=user_id)))
+
+        templates = ''
+        if user_role == '1':
+            templates = 'app/index.html'
+        elif user_role == '2':
+            templates = 'app/blank.html'
+        elif user_role == '3':
+            templates = 'app/blank.html'
+        else:
+            templates = 'app/login.html'
+
+        return render(request, templates, {'n': n})
+    except:
+        return redirect('login')
 
 
 
@@ -158,6 +190,7 @@ def login(request):
             Member.objects.get(user_role=user_role, user_id=email, user_pw=password)
             result_dict['result'] = 'success'
             request.session['user_id'] = email
+            request.session['user_role'] = user_role
         except Member.DoesNotExist:
             result_dict['result'] = 'fail'
         return JsonResponse(result_dict)
