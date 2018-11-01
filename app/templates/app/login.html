@@ -116,13 +116,13 @@
     <script>
       $('#login').click(function() {
         $.ajax({
-          url: '/app/login/',
+          url: '/app/',
           type: 'post',
           data: $('form').serialize(),
           success: function(res) {
             alert(res.result)
             if(res.result == 'success') {
-              location = '/app/'
+              location = '/app/index'
             }
           }
         })

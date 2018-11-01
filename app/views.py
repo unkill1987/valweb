@@ -119,8 +119,9 @@ def done(request):
 
 def index(request):
     n = Contract.objects.count()
-
     return render(request, 'app/index.html', {'n': n})
+
+
 
 
 def charts(request):
