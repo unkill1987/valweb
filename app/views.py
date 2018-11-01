@@ -144,9 +144,12 @@ def done(request):
     return render(request, 'app/done.html', {})
 
 def logout(request):
-    del request.session['user_role']
-    del request.session['user_id']
-    return render(request, 'app/logout.html',{})
+    try:
+        del request.session['user_role']
+        del request.session['user_id']
+        return redirect('login')
+    except:
+        return render(request, 'app/login.html',{})
 
 def index(request):
 
