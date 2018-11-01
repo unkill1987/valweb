@@ -1,11 +1,12 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 import hashlib
 import sys
 import os
 import time
-from app.models import Contract
+from app.models import Contract, Member
 from valweb import settings
+from django.utils import timezone
 
 
 def remove(request):
@@ -48,28 +49,28 @@ def submit(request):
 
     file = open('contract_' + time_format + '.txt', 'wt')
     file.write('Letter of Credit' + '\n'
-                                    'Contract:' + contractname + '\n'
-                                                                 'Address Form' + '\n'
-                                                                                  'Cable Address:' + cable + '\n'
-                                                                                                             'Mailing Address:' + mail + '\n'
-                                                                                                                                         'Telex Number:' + telex + '\n'
-                                                                                                                                                                   'To:' + to + '\n'
-                                                                                                                                                                                'Dear Sirs:' + dear + '\n'
-                                                                                                                                                                                                      'Bank Form' + '\n'
-                                                                                                                                                                                                                    'Applicant:' + applicant + '\n'
-                                                                                                                                                                                                                                               'Beneficiary:' + beneficiary + '\n'
-                                                                                                                                                                                                                                                                              'Advising Bank:' + bank + '\n'
-                                                                                                                                                                                                                                                                                                        'Expiry Date:' + date + '\n'
-                                                                                                                                                                                                                                                                                                                                'Expiry Place:' + place + '\n'
-                                                                                                                                                                                                                                                                                                                                                          'Currency Code:' + code + '\n'
-                                                                                                                                                                                                                                                                                                                                                                                    'Currency Amount:' + camount + '\n'
-                                                                                                                                                                                                                                                                                                                                                                                                                   'Credit Available With:' + cwith + '\n'
-                                                                                                                                                                                                                                                                                                                                                                                                                                                      'Order Form' + '\n'
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                     'Exporter:' + exporter + '\n'
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              'Name of Commodity:' + commodity + '\n'
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 'Quantity:' + quantity + '\n'
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          'Unit Price:' + price + '\n'
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  'Amount:' + amount + '\n')
+                'Contract:' + contractname + '\n'
+                'Address Form' + '\n'
+                'Cable Address:' + cable + '\n'
+                'Mailing Address:' + mail + '\n'
+                'Telex Number:' + telex + '\n'
+                'To:' + to + '\n'
+                'Dear Sirs:' + dear + '\n'
+                'Bank Form' + '\n'
+                'Applicant:' + applicant + '\n'
+                'Beneficiary:' + beneficiary + '\n'
+                'Advising Bank:' + bank + '\n'
+                'Expiry Date:' + date + '\n'
+                'Expiry Place:' + place + '\n'
+                'Currency Code:' + code + '\n'
+                'Currency Amount:' + camount + '\n'
+                'Credit Available With:' + cwith + '\n'
+                'Order Form' + '\n'
+                'Exporter:' + exporter + '\n'
+                'Name of Commodity:' + commodity + '\n'
+                'Quantity:' + quantity + '\n'
+                'Unit Price:' + price + '\n'
+                'Amount:' + amount + '\n')
     file.close()
 
     file = open('contract_' + time_format + '.txt', 'rb')
@@ -146,17 +147,44 @@ def login(request):
     if request.method == 'GET':
         return render(request, 'app/login.html', {})
     else:
-        return HttpResponse()
+        email = request.POST['email']
+        password = request.POST['password']
+
+        result_dict = {}
+        try:
+            Member.objects.get(user_id=email, user_pw=password)
+            result_dict['result'] = 'success'
+            request.session['user_id'] = email
+        except Member.DoesNotExist:
+            result_dict['result'] = 'fail'
+        return JsonResponse(result_dict)
 
 
 def register(request):
     if request.method == 'GET':
         return render(request, 'app/register.html', {})
     else:
-        user_id = request.POST['user_id']
+        result_dict = {}
+
         user_name = request.POST['user_name']
-        print(user_id, user_name)
-        return HttpResponse('회원가입 완료')
+        user_id = request.POST['user_id']
+        user_pw = request.POST['user_pw']
+
+        if user_name == '' or user_id == '' or user_pw == '':
+            result_dict['result'] = '공백은 사용할 수 없습니다.'
+            return JsonResponse(result_dict)
+
+        else:
+            try:
+                Member.objects.get(user_id=user_id)
+                result_dict['result'] = '이미 가입된 아이디가 있습니다.'
+            except Member.DoesNotExist:
+                member = Member(user_id=user_id, user_pw=user_pw, user_name=user_name)
+                member.c_date = timezone.now()
+                member.save()
+                result_dict['result'] = '가입완료'
+
+            return JsonResponse(result_dict)
 
 
 def forgot(request):

@@ -16,7 +16,6 @@
 <!--</script>-->
 <!--<meta name = "google-signin-client_id"content = " 291743131584-mt4pdmfk57hp2u7k4t0bah2mb60pp58i.apps.googleusercontent.com ">-->
   <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -33,7 +32,6 @@
 
     <!-- Custom styles for this template-->
     <link href="{% static 'app/css/sb-admin.css'%}" rel="stylesheet">
-
   </head>
 <style>
   .bg-dark{ background:white!important; }
@@ -55,11 +53,7 @@
       max-width:800px;
     }
   }
-
-
 </style>
-
-
   <body class="bg-dark">
   <div style='text-align:right'>Ver. 1.0 </div>
   <div style="text-align:center;">
@@ -67,10 +61,7 @@
     </div>
     <div class="container">
       <div class="card-login mx-auto mt-5">
-
-
           <form>
-
             <select class="custom-select" name="role" style="width:200px;height:45px;">
                 <option value="1" selected>수입자</option>
                 <option value="2">수출자</option>
@@ -84,13 +75,13 @@
             </div>
             <div class="form-group">
               <div class="form-label-group">
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="required" autofocus="autofocus">
+                <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required="required" autofocus="autofocus">
                 <label for="inputEmail">Email address</label>
               </div>
             </div>
             <div class="form-group">
               <div class="form-label-group">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
+                <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
                 <label for="inputPassword">Password</label>
               </div>
             </div>
@@ -102,10 +93,10 @@
                 </label>
               </div>
             </div>
-            <a class="btn btn-primary btn-block" href="{% url 'index' %}">Login</a>
+            <a id='login' class="btn btn-primary btn-block" href="{% url 'index' %}">Login</a>
 
               <div class="g-signin2" data-onsuccess="onSignIn"></div>
-
+              {% csrf_token %}
           </form>
           <div class="text-center">
             <a class="d-block small mt-3" href="{% url 'register' %}">Register an Account</a>
@@ -122,6 +113,23 @@
     <!-- Core plugin JavaScript-->
     <script src="{% static 'app/vendor/jquery-easing/jquery.easing.min.js'%}"></script>
 
+    <script>
+      $('#login').click(function() {
+        $.ajax({
+          url: '/app/login/',
+          type: 'post',
+          data: $('form').serialize(),
+          success: function(res) {
+            alert(res.result)
+            if(res.result == 'success') {
+              location = '/app/'
+            }
+          }
+        })
+        return false
+      })
+
+    </script>
   </body>
 
 </html>

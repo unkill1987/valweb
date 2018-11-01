@@ -8,3 +8,13 @@ class Contract(models.Model):
     sha1 = models.CharField(max_length=100)
     sha256 = models.CharField(max_length=100)
     filename =models.CharField(max_length=100)
+
+
+class Member(models.Model):
+    user_id = models.CharField(max_length=20, primary_key=True)
+    user_name = models.CharField(max_length=20)
+    user_pw = models.CharField(max_length=20)
+    c_date = models.DateTimeField(null=True)
+
+    def __str__(self):
+        return self.user_id
