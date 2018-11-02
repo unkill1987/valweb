@@ -153,7 +153,7 @@
           </ol>
 
           <!-- Area Chart Example-->
-     <div class="card mb-3">
+<div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-chart-area"></i>
                             달러화</div>
@@ -198,11 +198,6 @@
 
                 {% endautoescape %}
             </div>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-           </div>
-                    </div>
-             </div>
-
         <!-- /.container-fluid -->
 
 
@@ -236,6 +231,7 @@
         </div>
       </div>
     </div>
+    </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="{% static 'app/vendor/jquery/jquery.min.js'%}"></script>
@@ -245,16 +241,25 @@
     <script src="{% static 'app/vendor/jquery-easing/jquery.easing.min.js'%}"></script>
 
     <!-- Page level plugin JavaScript-->
-    <script src="{% static 'app/vendor/chart.js/Chart.min.js'%}"></script>
+    <!--<script src="{% static 'app/vendor/chart.js/Chart.min.js'%}"></script>-->
 
     <!-- Custom scripts for all pages-->
     <script src="{% static 'app/js/sb-admin.min.js'%}"></script>
 
     <!-- Demo scripts for this page-->
-    <script src="{% static 'app/js/demo/chart-area-demo.js'%}"></script>
-    <script src="{% static 'app/js/demo/chart-bar-demo.js'%}"></script>
-    <script src="{% static 'app/js/demo/chart-pie-demo.js'%}"></script>
-
+    <!--<script src="{% static 'app/js/demo/chart-area-demo.js'%}"></script>-->
+    <!--<script src="{% static 'app/js/demo/chart-bar-demo.js'%}"></script>-->
+    <!--<script src="{% static 'app/js/demo/chart-pie-demo.js'%}"></script>-->
+<script>
+        $.ajax({
+          dataType: 'jsonp',
+          url: 'https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=jcOjzh5wbftON76cbSdcbSQVCct2tdap&searchdate=20181102&data=AP01',
+          success: function(res) {
+            alert(11)
+          }
+        })
+      </script>
   </body>
+
 
 </html>

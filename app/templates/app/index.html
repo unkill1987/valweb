@@ -239,22 +239,21 @@
           </div>
 
           <!-- Area Chart Example-->
+          <div class="container-fluid">
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-chart-area"></i>
               달러 환율 차트</div>
             <div class="card-body">
 
+                {% autoescape off %}
+                {{ plot1 }}
+                {% endautoescape %}
 
 
-          <!-- DataTables Example -->
 
-
-        <!-- /.container-fluid -->
-
-        <!-- Sticky Footer -->
-
-      </div>
+            </div>
+          </div>
       <!-- /.content-wrapper -->
 
     </div>

@@ -6,10 +6,10 @@
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-  <link rel="shortcut icon" type="image/x-icon" href="{% static 'app/img/icon.ico'%}">
+ 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <title>Valkyrie - calendar</title>
 
     <!-- Bootstrap core CSS-->
@@ -147,17 +147,8 @@
         <div class="container-fluid">
 
           <!-- Breadcrumbs-->
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a>일정관리</a>
-            </li>
-            <li class="breadcrumb-item active">Calendar</li>
-          </ol>
 
-          <!-- Page Content -->
-          <div class="card mb-3">
-          <iframe class="chartjs-render-monitor" src="https://calendar.google.com/calendar/embed?src=ko.south_korea%23holiday%40group.v.calendar.google.com&ctz=Asia%2FSeoul" style="border: 0" frameborder="0" height="600" scrolling="no"></iframe>
-            </div>
+          <div id="app"></div>
         </div>
         <!-- /.container-fluid -->
 
@@ -194,6 +185,8 @@
       </div>
     </div>
 
+	<script src="{% static 'app/dist/vbc-browser.js'%}"></script>
+
     <!-- Bootstrap core JavaScript-->
     <script src="{% static 'app/vendor/jquery/jquery.min.js'%}"></script>
     <script src="{% static 'app/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
@@ -203,6 +196,16 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{% static 'app/js/sb-admin.min.js'%}"></script>
+
+  <script>
+        $.ajax({
+          dataType: 'jsonp',
+          url: 'https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=jcOjzh5wbftON76cbSdcbSQVCct2tdap&searchdate=20181102&data=AP01',
+          success: function(res) {
+            alert(11)
+          }
+        })
+      </script>
 
   </body>
 
