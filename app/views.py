@@ -159,7 +159,23 @@ def logout(request):
 
 
 def index(request):
+    res1 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD')
+    json_data = res1.json()
+    basePrice1 = json_data[0].get('basePrice')
+    sellprice1 = json_data[0].get('cashSellingPrice')
+    buyprice1 = json_data[0].get('cashBuyingPrice')
 
+    res2 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWJPY')
+    json_data = res2.json()
+    basePrice2 = json_data[0].get('basePrice')
+    sellprice2 = json_data[0].get('cashSellingPrice')
+    buyprice2 = json_data[0].get('cashBuyingPrice')
+
+    res3 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWCNY')
+    json_data = res3.json()
+    basePrice3 = json_data[0].get('basePrice')
+    sellprice3 = json_data[0].get('cashSellingPrice')
+    buyprice3 = json_data[0].get('cashBuyingPrice')
 
     try:
         user_id = request.session['user_id']
@@ -178,15 +194,41 @@ def index(request):
         else:
             templates = 'app/login.html'
 
-        return render(request, templates, {'n': n})
+        return render(request, templates, {'n': n,'basePrice1': basePrice1,'sellprice1':sellprice1,'buyprice1':buyprice1,
+                                               'basePrice2':basePrice2,'sellprice2':sellprice2,'buyprice2':buyprice2,
+                                               'basePrice3':basePrice3,'sellprice3':sellprice3,'buyprice3':buyprice3})
     except:
         return redirect('login')
 
+def test(request):
+    return render(request,'app/test.html',{})
+
+
+
+import requests
 
 def charts(request):
+    res1 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD')
+    json_data = res1.json()
+    basePrice1 = json_data[0].get('basePrice')
+    sellprice1 = json_data[0].get('cashSellingPrice')
+    buyprice1 = json_data[0].get('cashBuyingPrice')
 
+    res2 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWJPY')
+    json_data = res2.json()
+    basePrice2 = json_data[0].get('basePrice')
+    sellprice2 = json_data[0].get('cashSellingPrice')
+    buyprice2 = json_data[0].get('cashBuyingPrice')
 
-    return render(request, 'app/charts.html', {})
+    res3 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWCNY')
+    json_data = res3.json()
+    basePrice3 = json_data[0].get('basePrice')
+    sellprice3 = json_data[0].get('cashSellingPrice')
+    buyprice3 = json_data[0].get('cashBuyingPrice')
+
+    return render(request, 'app/charts.html', {'basePrice1': basePrice1,'sellprice1':sellprice1,'buyprice1':buyprice1,
+                                               'basePrice2':basePrice2,'sellprice2':sellprice2,'buyprice2':buyprice2,
+                                               'basePrice3':basePrice3,'sellprice3':sellprice3,'buyprice3':buyprice3})
 
 
 def calendar(request):

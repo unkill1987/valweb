@@ -153,15 +153,88 @@
           </ol>
 
           <!-- Area Chart Example-->
+<div>
+  <div class="container-fluid" style="margin:5px; margin-bottom:100px;">
+    <h1 class="my-4"></h1>
 
-        <!-- /.container-fluid -->
+    <div class="row">
+        <div class="col-lg-4 mb-4" >
 
+          <div class="card h-100">
 
+            <h4 class="card-header">USD(달러)</h4>
+            <div class="card-body">
+              <table class="card-text">
+                <tr>
+                  <td>BasePrice : </td>
+                  <td>${{ basePrice1 }}</td>
+                </tr>
+                <tr>
+                  <td>SellingPrice :</td>
+                  <td>${{sellprice1}}</td>
+                </tr>
+                <tr>
+                  <td>BuyingPrice :</td>
+                  <td>${{buyprice1}}</td>
+              </table>
+            </div>
+            <div class="card-footer">
+            </div>
+          </div>
+        </div>
+      <div class="col-lg-4 mb-4" >
 
-      </div>
-      <!-- /.content-wrapper -->
+          <div class="card h-100">
 
+            <h4 class="card-header">JPY(엔)</h4>
+            <div class="card-body">
+              <table class="card-text">
+                <tr>
+                  <td>BasePrice : </td>
+                  <td>¥{{ basePrice2 }}</td>
+                </tr>
+                <tr>
+                  <td>SellingPrice :</td>
+                  <td>¥{{sellprice2}}</td>
+                </tr>
+                <tr>
+                  <td>BuyingPrice :</td>
+                  <td>¥{{buyprice2}}</td>
+              </table>
+            </div>
+            <div class="card-footer">
+            </div>
+          </div>
+        </div>
+      <div class="col-lg-4 mb-4" >
+
+          <div class="card h-100">
+
+            <h4 class="card-header">CNY(위안)</h4>
+            <div class="card-body">
+              <table class="card-text">
+                <tr>
+                  <td>BasePrice : </td>
+                  <td>Y{{ basePrice3 }}</td>
+                </tr>
+                <tr>
+                  <td>SellingPrice :</td>
+                  <td>Y{{sellprice3}}</td>
+                </tr>
+                <tr>
+                  <td>BuyingPrice :</td>
+                  <td>Y{{buyprice3}}</td>
+              </table>
+            </div>
+            <div class="card-footer">
+            </div>
+          </div>
+        </div>
     </div>
+  </div>
+</div>
+
+
     <!-- /#wrapper -->
 
     <!-- Scroll to Top Button-->
@@ -206,15 +279,19 @@
     <!--<script src="{% static 'app/js/demo/chart-area-demo.js'%}"></script>-->
     <!--<script src="{% static 'app/js/demo/chart-bar-demo.js'%}"></script>-->
     <!--<script src="{% static 'app/js/demo/chart-pie-demo.js'%}"></script>-->
-<script>
-        $.ajax({
-          dataType: 'jsonp',
-          url: 'https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=jcOjzh5wbftON76cbSdcbSQVCct2tdap&searchdate=20181102&data=AP01',
-          success: function(res) {
-            alert(11)
-          }
-        })
-      </script>
+<!--<script>-->
+    <!--$('#btn').click(function() {-->
+
+        <!--$.ajax({-->
+          <!--dataType: 'jsonp',-->
+          <!--url: 'https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD',-->
+          <!--success: function(res) {-->
+            <!--$(this).after(res)-->
+          <!--}-->
+        <!--})-->
+    <!--})-->
+      <!--</script>-->
+    </div></div>
   </body>
 
 
