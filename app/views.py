@@ -159,23 +159,23 @@ def logout(request):
 
 
 def index(request):
-    res1 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD')
+    res1 = requests.get('https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=jcOjzh5wbftON76cbSdcbSQVCct2tdap&searchdate=20180102&data=AP01')
     json_data = res1.json()
-    basePrice1 = json_data[0].get('basePrice')
-    sellprice1 = json_data[0].get('cashSellingPrice')
-    buyprice1 = json_data[0].get('cashBuyingPrice')
+    basePrice1 = json_data[29].get('deal_bas_r')
+    sellprice1 = json_data[29].get('ttb')
+    buyprice1 = json_data[29].get('tts')
 
-    res2 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWJPY')
+    res2 = requests.get('https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=jcOjzh5wbftON76cbSdcbSQVCct2tdap&searchdate=20180102&data=AP01')
     json_data = res2.json()
-    basePrice2 = json_data[0].get('basePrice')
-    sellprice2 = json_data[0].get('cashSellingPrice')
-    buyprice2 = json_data[0].get('cashBuyingPrice')
+    basePrice2 = json_data[18].get('deal_bas_r')
+    sellprice2 = json_data[18].get('ttb')
+    buyprice2 = json_data[18].get('tts')
 
-    res3 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWCNY')
+    res3 = requests.get('https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=jcOjzh5wbftON76cbSdcbSQVCct2tdap&searchdate=20180102&data=AP01')
     json_data = res3.json()
-    basePrice3 = json_data[0].get('basePrice')
-    sellprice3 = json_data[0].get('cashSellingPrice')
-    buyprice3 = json_data[0].get('cashBuyingPrice')
+    basePrice3 = json_data[7].get('deal_bas_r')
+    sellprice3 = json_data[7].get('ttb')
+    buyprice3 = json_data[7].get('tts')
 
     try:
         user_id = request.session['user_id']
@@ -208,23 +208,26 @@ def test(request):
 import requests
 
 def charts(request):
-    res1 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD')
+    res1 = requests.get(
+        'https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=jcOjzh5wbftON76cbSdcbSQVCct2tdap&searchdate=20180102&data=AP01')
     json_data = res1.json()
-    basePrice1 = json_data[0].get('basePrice')
-    sellprice1 = json_data[0].get('cashSellingPrice')
-    buyprice1 = json_data[0].get('cashBuyingPrice')
+    basePrice1 = json_data[29].get('deal_bas_r')
+    sellprice1 = json_data[29].get('ttb')
+    buyprice1 = json_data[29].get('tts')
 
-    res2 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWJPY')
+    res2 = requests.get(
+        'https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=jcOjzh5wbftON76cbSdcbSQVCct2tdap&searchdate=20180102&data=AP01')
     json_data = res2.json()
-    basePrice2 = json_data[0].get('basePrice')
-    sellprice2 = json_data[0].get('cashSellingPrice')
-    buyprice2 = json_data[0].get('cashBuyingPrice')
+    basePrice2 = json_data[18].get('deal_bas_r')
+    sellprice2 = json_data[18].get('ttb')
+    buyprice2 = json_data[18].get('tts')
 
-    res3 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWCNY')
+    res3 = requests.get(
+        'https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=jcOjzh5wbftON76cbSdcbSQVCct2tdap&searchdate=20180102&data=AP01')
     json_data = res3.json()
-    basePrice3 = json_data[0].get('basePrice')
-    sellprice3 = json_data[0].get('cashSellingPrice')
-    buyprice3 = json_data[0].get('cashBuyingPrice')
+    basePrice3 = json_data[7].get('deal_bas_r')
+    sellprice3 = json_data[7].get('ttb')
+    buyprice3 = json_data[7].get('tts')
 
     return render(request, 'app/charts.html', {'basePrice1': basePrice1,'sellprice1':sellprice1,'buyprice1':buyprice1,
                                                'basePrice2':basePrice2,'sellprice2':sellprice2,'buyprice2':buyprice2,
