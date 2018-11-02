@@ -159,27 +159,25 @@ def logout(request):
 
 
 def index(request):
-
-
     headers = {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
-    res1 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD',headers=headers)
+    res1 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD', headers=headers)
     json_data = res1.json()
-    basePrice1 = json_data[0].get('basePrice')
-    sellprice1 = json_data[0].get('cashSellingPrice')
-    buyprice1 = json_data[0].get('cashBuyingPrice')
+    basePrice1 = json_data[0]['basePrice']
+    sellprice1 = json_data[0]['cashSellingPrice']
+    buyprice1 = json_data[0]['cashBuyingPrice']
 
-    res2 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWJPY',headers=headers)
+    res2 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWJPY', headers=headers)
     json_data = res2.json()
-    basePrice2 = json_data[0].get('basePrice')
-    sellprice2 = json_data[0].get('cashSellingPrice')
-    buyprice2 = json_data[0].get('cashBuyingPrice')
+    basePrice2 = json_data[0]['basePrice']
+    sellprice2 = json_data[0]['cashSellingPrice']
+    buyprice2 = json_data[0]['cashBuyingPrice']
 
-    res3 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWCNY',headers=headers)
+    res3 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWCNY', headers=headers)
     json_data = res3.json()
-    basePrice3 = json_data[0].get('basePrice')
-    sellprice3 = json_data[0].get('cashSellingPrice')
-    buyprice3 = json_data[0].get('cashBuyingPrice')
+    basePrice3 = json_data[0]['basePrice']
+    sellprice3 = json_data[0]['cashSellingPrice']
+    buyprice3 = json_data[0]['cashBuyingPrice']
 
     try:
         user_id = request.session['user_id']
@@ -216,21 +214,21 @@ def charts(request):
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
     res1 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD', headers=headers)
     json_data = res1.json()
-    basePrice1 = json_data[0].get('basePrice')
-    sellprice1 = json_data[0].get('cashSellingPrice')
-    buyprice1 = json_data[0].get('cashBuyingPrice')
+    basePrice1 = json_data[0]['basePrice']
+    sellprice1 = json_data[0]['cashSellingPrice']
+    buyprice1 = json_data[0]['cashBuyingPrice']
 
     res2 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWJPY', headers=headers)
     json_data = res2.json()
-    basePrice2 = json_data[0].get('basePrice')
-    sellprice2 = json_data[0].get('cashSellingPrice')
-    buyprice2 = json_data[0].get('cashBuyingPrice')
+    basePrice2 = json_data[0]['basePrice']
+    sellprice2 = json_data[0]['cashSellingPrice']
+    buyprice2 = json_data[0]['cashBuyingPrice']
 
     res3 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWCNY', headers=headers)
     json_data = res3.json()
-    basePrice3 = json_data[0].get('basePrice')
-    sellprice3 = json_data[0].get('cashSellingPrice')
-    buyprice3 = json_data[0].get('cashBuyingPrice')
+    basePrice3 = json_data[0]['basePrice']
+    sellprice3 = json_data[0]['cashSellingPrice']
+    buyprice3 = json_data[0]['cashBuyingPrice']
 
     return render(request, 'app/charts.html', {'basePrice1': basePrice1,'sellprice1':sellprice1,'buyprice1':buyprice1,
                                                'basePrice2':basePrice2,'sellprice2':sellprice2,'buyprice2':buyprice2,
