@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 
   <head>
 
@@ -165,6 +165,7 @@
             <h4 class="card-header">USD(달러)</h4>
             <div class="card-body">
               <table class="card-text">
+
                 <tr>
                   <td>BasePrice : </td>
                   <td>${{ basePrice1 }}</td>
@@ -179,6 +180,20 @@
               </table>
             </div>
             <div class="card-footer">
+            <table>
+            <tr>
+              <td>$</td>
+              <td><input type="text" id="usnum"></td>
+            </tr>
+              <tr>
+                <td></td>
+                <td><input class="btn btn-primary" style="width:170px; height:40px;" type="button" value="결과보기" onclick="mul1()"></td>
+              </tr>
+              <tr>
+                <td>￦</td>
+          <td><input id="result1"></td>
+              </tr>
+                </table>
             </div>
           </div>
         </div>
@@ -189,6 +204,7 @@
             <h4 class="card-header">JPY(엔)</h4>
             <div class="card-body">
               <table class="card-text">
+
                 <tr>
                   <td>BasePrice : </td>
                   <td>¥{{ basePrice2 }}</td>
@@ -203,9 +219,25 @@
               </table>
             </div>
             <div class="card-footer">
+         <table>
+            <tr>
+              <td>¥</td>
+              <td><input type="text" id="jpnum"></td>
+            </tr>
+              <tr>
+                <td></td>
+                <td><input class="btn btn-primary" style="width:170px; height:40px;" type="button" value="결과보기" onclick="mul2()"></td>
+              </tr>
+              <tr>
+                <td>￦</td>
+          <td><input id="result2"></td>
+              </tr>
+                </table>
+          </div>
             </div>
           </div>
-        </div>
+
+
       <div class="col-lg-4 mb-4" >
 
           <div class="card h-100">
@@ -213,6 +245,7 @@
             <h4 class="card-header">CNY(위안)</h4>
             <div class="card-body">
               <table class="card-text">
+
                 <tr>
                   <td>BasePrice : </td>
                   <td>Y{{ basePrice3 }}</td>
@@ -227,12 +260,51 @@
               </table>
             </div>
             <div class="card-footer">
+              <table>
+            <tr>
+              <td>Y</td>
+              <td><input type="text" id="chnum"></td>
+            </tr>
+              <tr>
+                <td></td>
+                <td><input class="btn btn-primary" style="width:170px; height:40px;" type="button" value="결과보기" onclick="mul3()"></td>
+              </tr>
+              <tr>
+                <td>￦</td>
+          <td><input id="result3"></td>
+              </tr>
+                </table>
+
             </div>
           </div>
         </div>
     </div>
   </div>
 </div>
+
+
+
+
+
+          <script>
+            function mul1() {
+            var usnum = document.getElementById('usnum');
+            var result1 = eval(usnum.value)*{{ basePrice1 }}
+            document.getElementById('result1').value = result1;}
+            function mul2() {
+            var jpnum = document.getElementById('jpnum');
+            var result2 = eval(jpnum.value)*{{ basePrice2 }}
+            document.getElementById('result2').value = result2;}
+            function mul3() {
+            var chnum = document.getElementById('chnum');
+            var result3 = eval(chnum.value)*{{ basePrice3 }}
+            document.getElementById('result3').value = result3;}
+
+
+          </script>
+
+
+        </div>
 
 
     <!-- /#wrapper -->

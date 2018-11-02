@@ -180,6 +180,8 @@ def index(request):
     buyprice3 = json_data[0]['cashBuyingPrice']
 
     try:
+
+
         user_id = request.session['user_id']
         user_role = request.session['user_role']
         n = len(Contract.objects.filter(owner=Member.objects.get(user_id=user_id)))
@@ -229,10 +231,15 @@ def charts(request):
     basePrice3 = json_data[0]['basePrice']
     sellprice3 = json_data[0]['cashSellingPrice']
     buyprice3 = json_data[0]['cashBuyingPrice']
+    start = datetime.datetime(2018, 10, 1)
+    end = datetime.datetime.now()
+
+
 
     return render(request, 'app/charts.html', {'basePrice1': basePrice1,'sellprice1':sellprice1,'buyprice1':buyprice1,
                                                'basePrice2':basePrice2,'sellprice2':sellprice2,'buyprice2':buyprice2,
-                                               'basePrice3':basePrice3,'sellprice3':sellprice3,'buyprice3':buyprice3})
+                                               'basePrice3':basePrice3,'sellprice3':sellprice3,'buyprice3':buyprice3,
+                                               })
 
 
 def calendar(request):
