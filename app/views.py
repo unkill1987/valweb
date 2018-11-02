@@ -1,3 +1,8 @@
+import datetime
+import matplotlib.pyplot as plt, mpld3
+from matplotlib import pylab
+from pylab import *
+import pandas_datareader.data as web
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
@@ -28,10 +33,10 @@ def remove(request):
     for id in check_ids:
         try:
             Contract.objects.get(id=id).delete()
-            return redirect('ing')
-
         except:
-            return redirect('ing')
+            pass
+
+    return redirect('ing')
 
 
 def submit(request):
@@ -107,8 +112,9 @@ def submit(request):
 
     contract.save()
 
-    return render(request, 'app/submit.html', {'contractname': contractname, 'a': a, 'b': b, 'c': c})
-
+    return redirect('ing')
+    # return render(request, 'app/submit.html', {'contractname': contractname, 'a': a, 'b': b, 'c': c})
+#
 
 def download(request):
     id = request.GET['id']
@@ -127,7 +133,8 @@ def ing(request):
     try:
         user_id = request.session['user_id']
         member = Member.objects.get(user_id=user_id)
-        contract = Contract.objects.filter(owner=member)
+        contract = Contract.objects.filter(owner=member).order_by('-id')
+
         n = len(contract)
 
         paginator = Paginator(contract, 6)
@@ -152,6 +159,12 @@ def logout(request):
         return render(request, 'app/login.html',{})
 
 def index(request):
+    start = datetime.datetime(2018, 10, 1)
+    end = datetime.datetime.now()
+    ko = web.DataReader("DEXKOUS", 'fred', start, end)
+    ax1 = ko.plot()
+    fig1 = ax1.get_figure()
+    plot1 = mpld3.fig_to_html(fig1)
 
     try:
         user_id = request.session['user_id']
@@ -168,15 +181,32 @@ def index(request):
         else:
             templates = 'app/login.html'
 
-        return render(request, templates, {'n': n})
+        return render(request, templates, {'n': n,'plot1':plot1})
     except:
         return redirect('login')
 
 
-
-
 def charts(request):
-    return render(request, 'app/charts.html', {})
+    start = datetime.datetime(2018, 10, 1)
+    end = datetime.datetime.now()
+
+    # 달러 환율
+    ko = web.DataReader("DEXKOUS", 'fred', start, end)
+    ax1 = ko.plot()
+    fig1 = ax1.get_figure()
+    plot1 = mpld3.fig_to_html(fig1)
+    # 엔 환율
+    jp = web.DataReader("DEXJPUS", 'fred', start, end)
+    ax2 = jp.plot()
+    fig2 = ax2.get_figure()
+    plot2 = mpld3.fig_to_html(fig2)
+    # 위안 환율
+    cn = web.DataReader("DEXCHUS", 'fred', start, end)
+    ax3 = cn.plot()
+    fig3 = ax3.get_figure()
+    plot3 = mpld3.fig_to_html(fig3)
+
+    return render(request, 'app/charts.html', {'plot1': plot1, 'plot2': plot2, 'plot3': plot3})
 
 
 def calendar(request):

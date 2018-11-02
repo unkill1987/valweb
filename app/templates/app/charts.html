@@ -153,49 +153,58 @@
           </ol>
 
           <!-- Area Chart Example-->
+     <div class="card mb-3">
+            <div class="card-header">
+              <i class="fas fa-chart-area"></i>
+                            달러화</div>
+            <div class="card-body">
+                {% autoescape off %}
+
+                {{ plot1 }}
+
+
+                {% endautoescape %}
+            </div>
+            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+           </div>
+
+
+
+                    <!-- Area Chart Example-->
           <div class="card mb-3">
             <div class="card-header">
               <i class="fas fa-chart-area"></i>
-                            Area Chart Example</div>
+                            엔화</div>
             <div class="card-body">
+                {% autoescape off %}
 
+                {{ plot2 }}
+
+
+                {% endautoescape %}
+            </div>
+           <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+
+          </div>
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fas fa-chart-area"></i>
+                            위안화</div>
+            <div class="card-body">
+                {% autoescape off %}
+
+                {{ plot3 }}
+
+
+                {% endautoescape %}
             </div>
             <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-          </div>
+           </div>
+                    </div>
+             </div>
 
-          <div class="row">
-            <div class="col-lg-8">
-              <div class="card mb-3">
-                <div class="card-header">
-
-                  Bar Chart Example</div>
-                <div class="card-body">
-
-                </div>
-                <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="card mb-3">
-                <div class="card-header">
-
-                  Pie Chart Example</div>
-                <div class="card-body">
-
-                </div>
-                <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-              </div>
-            </div>
-          </div>
-
-          <p class="small text-center text-muted my-5">
-            <em>More chart examples coming soon...</em>
-          </p>
-
-        </div>
         <!-- /.container-fluid -->
 
-        <!-- Sticky Footer -->
 
 
       </div>
