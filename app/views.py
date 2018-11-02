@@ -178,7 +178,7 @@ def index(request):
         else:
             templates = 'app/login.html'
 
-        return render(request, templates, {'n': n, 'plot1':plot1})
+        return render(request, templates, {'n': n})
     except:
         return redirect('login')
 
