@@ -156,8 +156,10 @@ def logout(request):
     except:
         return render(request, 'app/login.html',{})
 
+
+
 def index(request):
-    
+
 
     try:
         user_id = request.session['user_id']
