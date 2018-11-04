@@ -1,4 +1,5 @@
 import mpld3
+import requests
 from pylab import *
 import pandas_datareader.data as web
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
@@ -12,6 +13,7 @@ from app.models import Contract, Member
 from valweb import settings
 from django.utils import timezone
 
+
 def paging(request):
     user_id = request.session['user_id']
     member = Member.objects.get(user_id=user_id)
@@ -21,6 +23,25 @@ def paging(request):
     page = request.GET.get('page')
     contracts = paginator.get_page(page)
     return render(request, 'app/ing.html', {'contracts': contracts})
+
+
+def share(request):
+    check_id = request.GET['check_id']
+    check_ids = check_id.split(',')
+    share_user = request.GET['share_user']
+
+    for id in check_ids:
+        try:
+            share = Contract.objects.get(id=id)
+            share.share1=share_user
+            share.save()
+
+        except:
+            pass
+    return redirect('ing')
+
+
+
 
 def remove(request):
     # deletes all objects from Car database table
@@ -35,6 +56,22 @@ def remove(request):
             pass
 
     return redirect('ing')
+
+def remove2(request):
+    # deletes all objects from Car database table
+    # Contract.objects.get('id').delete()
+    check_id = request.GET['check_id']
+    check_ids = check_id.split(',')
+
+    for id in check_ids:
+        try:
+            remove = Contract.objects.get(id=id)
+            remove.share1 = ' '
+            remove.save()
+        except:
+            pass
+
+    return redirect('ing2')
 
 
 def submit(request):
@@ -144,9 +181,44 @@ def ing(request):
     except:
         return redirect('login')
 
+def ing2(request):
+    try:
+        user_id = request.session['user_id']
+        member = Member.objects.get(user_id=user_id)
+        contract = Contract.objects.filter(share1=member).order_by('-id')
+
+        n = len(contract)
+
+        paginator = Paginator(contract, 6)
+
+        page = request.GET.get('page')
+        contracts = paginator.get_page(page)
+
+        return render(request, 'app/ing2.html', {'contract': contracts, 'n': n})
+    except:
+        return redirect('login')
+
 
 def done(request):
-    return render(request, 'app/done.html', {})
+
+    try:
+        user_role = request.session['user_role']
+
+        templates = ''
+        if user_role == '1':
+            templates = 'app/done.html'
+        elif user_role == '2':
+            templates = 'app/done2.html'
+        elif user_role == '3':
+            templates = 'app/blank.html'
+        elif user_role == '4':
+            templates = 'app/blank.html'
+        else:
+            templates = 'app/login.html'
+        return render(request, templates, {})
+    except:
+        return redirect('login')
+
 
 def logout(request):
     try:
@@ -190,7 +262,7 @@ def index(request):
         if user_role == '1':
             templates = 'app/index.html'
         elif user_role == '2':
-            templates = 'app/blank.html'
+            templates = 'app/index2.html'
         elif user_role == '3':
             templates = 'app/blank.html'
         elif user_role == '4':
@@ -204,12 +276,6 @@ def index(request):
     except:
         return redirect('login')
 
-def test(request):
-    return render(request,'app/test.html',{})
-
-
-
-import requests
 
 def charts(request):
     headers = {
@@ -234,16 +300,53 @@ def charts(request):
     start = datetime.datetime(2018, 10, 1)
     end = datetime.datetime.now()
 
+    try:
+
+        user_role = request.session['user_role']
 
 
-    return render(request, 'app/charts.html', {'basePrice1': basePrice1,'sellprice1':sellprice1,'buyprice1':buyprice1,
-                                               'basePrice2':basePrice2,'sellprice2':sellprice2,'buyprice2':buyprice2,
-                                               'basePrice3':basePrice3,'sellprice3':sellprice3,'buyprice3':buyprice3,
-                                               })
+        templates = ''
+        if user_role == '1':
+            templates = 'app/charts.html'
+        elif user_role == '2':
+            templates = 'app/charts2.html'
+        elif user_role == '3':
+            templates = 'app/blank.html'
+        elif user_role == '4':
+            templates = 'app/blank.html'
+        else:
+            templates = 'app/login.html'
+
+        return render(request, templates, {'basePrice1': basePrice1,'sellprice1':sellprice1,'buyprice1':buyprice1,
+                                           'basePrice2':basePrice2,'sellprice2':sellprice2,'buyprice2':buyprice2,
+                                           'basePrice3':basePrice3,'sellprice3':sellprice3,'buyprice3':buyprice3})
+    except:
+        return redirect('login')
+
+
+
 
 
 def calendar(request):
-    return render(request, 'app/calendar.html', {})
+    try:
+        user_role = request.session['user_role']
+
+        templates = ''
+        if user_role == '1':
+            templates = 'app/calendar.html'
+        elif user_role == '2':
+            templates = 'app/calendar2.html'
+        elif user_role == '3':
+            templates = 'app/blank.html'
+        elif user_role == '4':
+            templates = 'app/blank.html'
+        else:
+            templates = 'app/login.html'
+
+        return render(request, templates, {})
+    except:
+        return redirect('login')
+
 
 
 def money(request):

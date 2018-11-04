@@ -21,8 +21,23 @@ from app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/',views.index, name='index'),
+    path('index2/',views.index, name='index2'),
+
     path('charts/', views.charts, name='charts'),
+    path('charts2/', views.charts, name='charts2'),
+
+    path('ing/', views.ing, name='ing'),
+    path('ing2/', views.ing2, name='ing2'),
+
     path('calendar/', views.calendar, name='calendar'),
+    path('calendar2/', views.calendar, name='calendar2'),
+
+    path('done/', views.done, name='done'),
+    path('done2/', views.done, name='done2'),
+
+    path('remove/', views.remove, name='remove'),
+    path('remove2/', views.remove2, name='remove2'),
+
     path('money/', views.money, name='money'),
     path('people/', views.people, name='people'),
     path('forms/', views.forms, name='forms'),
@@ -30,10 +45,8 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('forgot/', views.forgot, name='forgot'),
     path('submit/', views.submit, name='submit'),
-    path('ing/', views.ing, name='ing'),
-    path('done/', views.done, name='done'),
     path('download/', views.download, name='download'),
-    path('remove/', views.remove, name='remove'),
+    path('share/', views.share, name='share'),
     path('logout/', views.logout, name='logout'),
-    path('test/', views.test, name='test'),
+
 ]
