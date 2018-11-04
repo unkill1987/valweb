@@ -155,8 +155,8 @@ def download(request):
     id = request.GET['id']
     c = Contract.objects.get(id=id)
 
-    # filepath = os.path.join(settings.BASE_DIR, c.filename)
-    filepath = os.path.join('/home/valkyrie1234', c.filename)
+    filepath = os.path.join(settings.BASE_DIR, c.filename)
+    # filepath = os.path.join('/home/valkyrie1234', c.filename)
     filename = os.path.basename(filepath)
     with open(filepath, 'rb') as f:
         response = HttpResponse(f, content_type='text/plain')
