@@ -30,7 +30,7 @@
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-      <a class="navbar-brand mr-1" href="{% url 'index' %}">Valkyrie system</a>
+      <a class="navbar-brand mr-1" href="{% url 'index2' %}">Valkyrie system</a>
 
       <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
@@ -92,14 +92,14 @@
       <!-- Sidebar -->
       <ul class="sidebar navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" href="{% url 'index' %}">
+          <a class="nav-link" href="{% url 'index2' %}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
           </a>
 
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'charts' %}">
+          <a class="nav-link" href="{% url 'charts2' %}">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>환율정보</span></a>
         </li>
@@ -109,14 +109,15 @@
             <span>계약 관리</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <a class="dropdown-item" href="{% url 'forms' %}">계약 생성</a>
-            <a class="dropdown-item" href="{% url 'ing' %}">진행중인 계약</a>
-            <a class="dropdown-item" href="{% url 'done' %}">완료된 계약</a>
+           <a class="dropdown-item" href="{% url 'forms2' %}">계약 생성</a>
+            <a class="dropdown-item" href="{% url 'ing2' %}">진행중인 계약</a>
+            <a class="dropdown-item" href="{% url 'shared2' %}">공유된 계약</a>
+            <a class="dropdown-item" href="{% url 'done2' %}">완료된 계약</a>
 
           </div>
         </li>
             <li class="nav-item">
-          <a class="nav-link" href="{% url 'calendar' %}">
+          <a class="nav-link" href="{% url 'calendar2' %}">
             <i class="fas fa-fw fa-calendar"></i>
             <span>일정 관리</span></a>
         </li>
@@ -147,30 +148,103 @@
         </li>
       </ul>
 
+
+
+       <!--계약서 작성 -->
+
+
     <div id="content-wrapper">
+      <div id="page-wrapper" style="margin:10px;">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">계약 생성</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
 
-        <div class="container-fluid">
 
-          <!-- Breadcrumbs-->
+                        <div class="panel-body">
+                            <form role="form" action="{% url 'submit2' %}" method="post">
 
-          <!-- Page Content -->
-          <h1>계약 생성 완료(Hash)</h1>
-          <hr>
-            <h2>Contract Name:{{contractname}}</h2>
-            <p style="font-size:25px;">{{a}}</p>
-            <p style="font-size:25px;">{{b}}</p>
-            <p style="font-size:25px;">{{c}}</p>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <h2 class="panel-heading">
+                                        Contract Name</h2>
+                                    <input class="form-control" name="contractname">
+                                    <p style="font-size:25px"> Address Form </p>
+                                            <div class="form-group">
+                                            <label>Cable Address:</label>
+                                            <input class="form-control" name="cable">
+                                            <p class="help-block"></p>
+                                        </div>
+
+                                </div>
+
+                            <div class="col-lg-4">
+                                <h2> &nbsp </h2>
+                                    <p style="font-size:25px"> Bank Form </p>
+                                            <div class="form-group">
+                                            <label>Applicant:</label>
+                                            <input class="form-control" name="applicant">
+                                            <p class="help-block"></p>
+                                            </div>
+                                            <select style="width:300px; height:38px; border-radius:4px" name="code">
+                                                <option value="USD">USD(840)</option>
+                                                <option value="KRW">KRW(410)</option>
+                                                <option value="JPY">JPY(392)</option>
+                                                <option value="CNY">CNY(156)</option>
+
+                                            </select>
 
 
+                                            </div>
+
+
+
+                            <div class="col-lg-4">
+                                <h2> &nbsp </h2>
+                                    <p style="font-size:25px"> Order Form </p>
+                                            <div class="form-group">
+                                            <label>Exporter:</label>
+                                            <input class="form-control" name="exporter">
+                                            <p class="help-block"></p>
+                                            </div>
+
+                                    </div>
+
+
+
+
+
+                            </div>
+
+
+
+                                <!-- /.col-lg-6 (nested) -->
+
+                            <!-- /.row (nested) -->
+                                    <div style="text-align:center">
+                                        <hr>
+                                        <button type="submit" class="btn btn-primary">작성 완료</button>
+                                        <button type="reset" class="btn btn-primary">다시 작성하기</button>
+                                    </div>
+                                                                        {% csrf_token %}
+                            </form>
+                        </div>
+
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
         </div>
-        <!-- /.container-fluid -->
-
-        <!-- Sticky Footer -->
-
-
-      </div>
-
-
+    </div>
 
         <!-- Sticky Footer -->
 

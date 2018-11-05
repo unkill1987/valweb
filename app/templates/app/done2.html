@@ -99,7 +99,7 @@
 
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'chart2' %}">
+          <a class="nav-link" href="{% url 'charts2' %}">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>환율정보</span></a>
         </li>
@@ -109,8 +109,10 @@
             <span>계약 관리</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+            <a class="dropdown-item" href="{% url 'forms2' %}">계약 생성</a>
             <a class="dropdown-item" href="{% url 'ing2' %}">진행중인 계약</a>
-            <a class="dropdown-item" href="">완료된 계약</a>
+            <a class="dropdown-item" href="{% url 'shared2' %}">공유받은 계약</a>
+            <a class="dropdown-item" href="{% url 'done2' %}">완료된 계약</a>
 
           </div>
         </li>

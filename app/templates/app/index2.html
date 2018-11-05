@@ -120,7 +120,9 @@
             <span>계약 관리</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+            <a class="dropdown-item" href="{% url 'forms2' %}">계약 생성</a>
             <a class="dropdown-item" href="{% url 'ing2' %}">진행중인 계약</a>
+            <a class="dropdown-item" href="{% url 'shared2' %}">공유받은 계약</a>
             <a class="dropdown-item" href="{% url 'done2' %}">완료된 계약</a>
 
           </div>
@@ -179,7 +181,7 @@
                   <div class="card-body-icon">
                     <i class="fas fa-fw fa-list"></i>
                   </div>
-                  <div class="mr-5">진행중인 계약({{n}})</div>
+                  <div class="mr-5">진행중인 계약({{n1}})</div>
                 </div>
                 <a class="card-footer text-white clearfix small z-1" href="{% url 'ing2' %}">
                   <span class="float-left">View Details</span>

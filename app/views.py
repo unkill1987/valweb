@@ -9,7 +9,7 @@ import hashlib
 import sys
 import os
 import time
-from app.models import Contract, Member
+from app.models import Contract, Member, Contract2
 from valweb import settings
 from django.utils import timezone
 
@@ -25,7 +25,7 @@ def paging(request):
     return render(request, 'app/ing.html', {'contracts': contracts})
 
 
-def share(request):
+def share1(request):
     check_id = request.GET['check_id']
     check_ids = check_id.split(',')
     share_user = request.GET['share_user']
@@ -33,14 +33,27 @@ def share(request):
     for id in check_ids:
         try:
             share = Contract.objects.get(id=id)
-            share.share1=share_user
+            share.share2=share_user
             share.save()
 
         except:
             pass
     return redirect('ing')
 
+def share2(request):
+    check_id = request.GET['check_id']
+    check_ids = check_id.split(',')
+    share_user = request.GET['share_user']
 
+    for id in check_ids:
+        try:
+            share = Contract2.objects.get(id=id)
+            share.share1=share_user
+            share.save()
+
+        except:
+            pass
+    return redirect('ing2')
 
 
 def remove(request):
@@ -65,9 +78,7 @@ def remove2(request):
 
     for id in check_ids:
         try:
-            remove = Contract.objects.get(id=id)
-            remove.share1 = ' '
-            remove.save()
+            Contract2.objects.get(id=id).delete()
         except:
             pass
 
@@ -132,13 +143,13 @@ def submit(request):
     #     hasher.update(buf)
     # print(hasher.hexdigest())
 
-    a = 'MD5 : ' + hashlib.md5(data).hexdigest()
-    b = 'SHA-1 : ' + hashlib.sha1(data).hexdigest()
+    # a = 'MD5 : ' + hashlib.md5(data).hexdigest()
+    # b = 'SHA-1 : ' + hashlib.sha1(data).hexdigest()
     c = 'SHA-256 : ' + hashlib.sha256(data).hexdigest()
     file.close()
 
     # 데이터 저장
-    contract = Contract(contractname=contractname, md5=a, sha1=b, sha256=c, filename='contract_' + time_format + '.txt')
+    contract = Contract(contractname=contractname, sha256=c, filename='contract_' + time_format + '.txt')
 
     # 로그인한 사용자 정보를 Contract에 같이 저장
     user_id = request.session['user_id']
@@ -148,8 +159,46 @@ def submit(request):
     contract.save()
 
     return redirect('ing')
-    # return render(request, 'app/submit.html', {'contractname': contractname, 'a': a, 'b': b, 'c': c})
+
 #
+
+def submit2(request):
+    contractname = request.POST['contractname']
+
+    time_format = time.strftime('%Y-%m-%d_%H%M%S', time.localtime(time.time()))
+
+    file = open('contract2_' + time_format + '.txt', 'wt')
+    file.write('Letter of Credit' + '\n'
+                'Contract:' + contractname + '\n'
+               )
+
+    file.close()
+
+    file = open('contract2_' + time_format + '.txt', 'rb')
+    data = file.read()
+
+    # hasher = hashlib.md5()
+    # with open('myfile.jpg', 'rb') as afile:
+    #     buf = afile.read()
+    #     hasher.update(buf)
+    # print(hasher.hexdigest())
+    #
+    # a = 'MD5 : ' + hashlib.md5(data).hexdigest()
+    # b = 'SHA-1 : ' + hashlib.sha1(data).hexdigest()
+    c = 'SHA-256 : ' + hashlib.sha256(data).hexdigest()
+    file.close()
+
+    # 데이터 저장
+    contract = Contract2(contractname=contractname, sha256=c, filename='contract2_' + time_format + '.txt')
+
+    # 로그인한 사용자 정보를 Contract에 같이 저장
+    user_id = request.session['user_id']
+    member = Member.objects.get(user_id=user_id)
+    contract.owner = member
+
+    contract.save()
+
+    return redirect('ing2')
 
 def download(request):
     id = request.GET['id']
@@ -185,7 +234,7 @@ def ing2(request):
     try:
         user_id = request.session['user_id']
         member = Member.objects.get(user_id=user_id)
-        contract = Contract.objects.filter(share1=member).order_by('-id')
+        contract = Contract2.objects.filter(owner=member).order_by('-id')
 
         n = len(contract)
 
@@ -198,6 +247,39 @@ def ing2(request):
     except:
         return redirect('login')
 
+def shared(request):
+    try:
+        user_id = request.session['user_id']
+        member = Member.objects.get(user_id=user_id)
+        contract = Contract2.objects.filter(share1=member).order_by('-id')
+
+        n = len(contract)
+
+        paginator = Paginator(contract, 6)
+
+        page = request.GET.get('page')
+        contracts = paginator.get_page(page)
+
+        return render(request, 'app/shared.html', {'contract': contracts, 'n': n})
+    except:
+        return redirect('login')
+
+def shared2(request):
+    try:
+        user_id = request.session['user_id']
+        member = Member.objects.get(user_id=user_id)
+        contract = Contract.objects.filter(share2=member).order_by('-id')
+
+        n = len(contract)
+        paginator = Paginator(contract, 6)
+
+        page = request.GET.get('page')
+        contracts = paginator.get_page(page)
+
+        return render(request, 'app/shared2.html', {'contract': contracts, 'n': n})
+    except Exception as e:
+        print(e)
+        return redirect('login')
 
 def done(request):
 
@@ -257,6 +339,7 @@ def index(request):
         user_id = request.session['user_id']
         user_role = request.session['user_role']
         n = len(Contract.objects.filter(owner=Member.objects.get(user_id=user_id)))
+        n1 = len(Contract.objects.filter(share1=Member.objects.get(user_id=user_id)))
 
         templates = ''
         if user_role == '1':
@@ -270,7 +353,7 @@ def index(request):
         else:
             templates = 'app/login.html'
 
-        return render(request, templates, {'n': n,'basePrice1': basePrice1,'sellprice1':sellprice1,'buyprice1':buyprice1,
+        return render(request, templates, {'n': n,'n1':n1,'basePrice1': basePrice1,'sellprice1':sellprice1,'buyprice1':buyprice1,
                                                'basePrice2':basePrice2,'sellprice2':sellprice2,'buyprice2':buyprice2,
                                                'basePrice3':basePrice3,'sellprice3':sellprice3,'buyprice3':buyprice3})
     except:
@@ -359,6 +442,9 @@ def people(request):
 
 def forms(request):
     return render(request, 'app/forms.html', {})
+
+def forms2(request):
+    return render(request, 'app/forms2.html', {})
 
 
 def login(request):

@@ -38,15 +38,30 @@ urlpatterns = [
     path('remove/', views.remove, name='remove'),
     path('remove2/', views.remove2, name='remove2'),
 
+    path('forms/', views.forms, name='forms'),
+    path('forms2/', views.forms2, name='forms2'),
+
     path('money/', views.money, name='money'),
     path('people/', views.people, name='people'),
-    path('forms/', views.forms, name='forms'),
+
+    path('submit/', views.submit, name='submit'),
+    path('submit2/', views.submit2, name='submit2'),
+
+    path('share1/', views.share1, name='share1'),
+    path('share2/', views.share2, name='share2'),
+
+    path('shared/', views.shared, name='shared'),
+    path('shared2/', views.shared2, name='shared2'),
+
+    path('submit/', views.submit, name='submit'),
+    path('submit2/', views.submit2, name='submit2'),
+
+
+
     path('', views.login, name='login'),
     path('register/', views.register, name='register'),
     path('forgot/', views.forgot, name='forgot'),
-    path('submit/', views.submit, name='submit'),
     path('download/', views.download, name='download'),
-    path('share/', views.share, name='share'),
     path('logout/', views.logout, name='logout'),
 
 ]

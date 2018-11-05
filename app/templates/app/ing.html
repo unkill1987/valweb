@@ -111,8 +111,8 @@
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <a class="dropdown-item" href="{% url 'forms' %}">계약 생성</a>
             <a class="dropdown-item" href="{% url 'ing' %}">진행중인 계약</a>
+            <a class="dropdown-item" href="{% url 'shared' %}">공유받은 계약</a>
             <a class="dropdown-item" href="{% url 'done' %}">완료된 계약</a>
-
           </div>
         </li>
             <li class="nav-item">
@@ -160,8 +160,8 @@
 
             <h4 class="card-header">{{c.contractname}}</h4>
             <div class="card-body">
-              <p class="card-text">{{c.md5}}<br>
-              {{c.sha1}}<br>
+              <p class="card-text">
+
               {{c.sha256}}</p>
             </div>
             <div class="card-footer">
@@ -201,12 +201,12 @@
         </ul>
     </span>
   </div>
-<!--<form role="form" action="{% url 'share' %}" method="post">-->
+
   <div class="row">
 
     <div style="text-align:center; margin:auto;" >
       <input type="text" name="share_user" id="share_user">
-      <input class="btn btn-primary" type="button" value="공유하기" id="share">
+      <input class="btn btn-primary" type="button" value="공유하기" id="share1">
       <input class="btn btn-primary" type="button" value="선택삭제" id="delete_btn">
 
 
@@ -274,7 +274,7 @@
         return false
       })
 
-      $('#share').click(function(){
+      $('#share1').click(function(){
         var share_user = $("#share_user").val();
         check_ids = ''
         sep = ''
@@ -282,7 +282,7 @@
           check_ids += sep + $(this).val()
           sep = ','
         })
-        location = '/app/share?check_id=' + check_ids +'&share_user=' + share_user
+        location = '/app/share1?check_id=' + check_ids +'&share_user=' + share_user
         return false
       })
 
