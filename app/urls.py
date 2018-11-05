@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from app import views
+from app.views import srrecieved
 
 urlpatterns = [
 
@@ -73,15 +74,18 @@ urlpatterns = [
     path('share4_1/', views.share4_1, name='share4_1'),
     path('share4_2/', views.share4_2, name='share4_2'),
 
-    path('shared/', views.shared, name='shared'),
+
     path('shared2/', views.shared2, name='shared2'),
-    path('shared2_1/', views.shared2_1, name='shared2_1'),
 
-    path('recieved1/', views.recieved1, name='recieved1'),
-    path('recieved2/', views.recieved2, name='recieved2'),
+    path('cirecieved/', views.cirecieved, name='cirecieved'),
+    path('blrecieved1/', views.blrecieved1, name='blrecieved1'),
+    path('blrecieved2/', views.blrecieved2, name='blrecieved2'),
+    path('dorecieved/', views.dorecieved, name='dorecieved'),
+    path('srrecieved', views.srrecieved, name='srrecieved'),
 
-    path('reremove1/', views.reremove1, name='reremove1'),
-    path('reremove2/', views.reremove2, name='reremove2'),
+    path('blremove1/', views.blremove1, name='blremove1'),
+    path('blremove2/', views.blremove2, name='blremove2'),
+    path('doremove/', views.doremove, name='doremove'),
 
     path('download/', views.download, name='download'),
     path('download2/', views.download2, name='download2'),

@@ -106,13 +106,23 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-fw fa-clipboard"></i>
-            <span>계약 관리</span>
+            <span>신용장(L/C) 신청</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <a class="dropdown-item" href="{% url 'forms' %}">L/C 신청서 작성</a>
-            <a class="dropdown-item" href="{% url 'ing' %}">작성한 L/C 신청서</a>
-            <a class="dropdown-item" href="{% url 'shared' %}">받은 송장</a>
-            <a class="dropdown-item" href="{% url 'recieved1' %}">받은 B/L</a>
+            <a class="dropdown-item" href="{% url 'ing' %}">L/C 신청서 관리</a>
+
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-clipboard"></i>
+            <span>받은 문서</span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+            <a class="dropdown-item" href="{% url 'cirecieved' %}">C/I 확인</a>
+            <a class="dropdown-item" href="{% url 'blrecieved1' %}">B/L 확인</a>
+            <a class="dropdown-item" href="{% url 'dorecieved' %}">D/O 확인</a>
 
           </div>
         </li>

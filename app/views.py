@@ -63,7 +63,7 @@ def share2_1(request):
     for id in check_ids:
         try:
             share = Contract_Srequest.objects.get(id=id)
-            share.share3=share_user
+            share.share4=share_user
             share.save()
 
         except:
@@ -211,11 +211,11 @@ def shareremove2_1(request):
     for id in check_ids:
         try:
             share = Contract_Srequest.objects.get(id=id)
-            share.share3 = ' '
+            share.share4 = ' '
             share.save()
         except:
             pass
-    return redirect('shared2_1')
+    return redirect('srrecieved')
 
 def shareremove4_1(request):
     # deletes all objects from Car database table
@@ -233,7 +233,7 @@ def shareremove4_1(request):
             pass
     return redirect('shared4_1')
 
-def reremove1(request):
+def blremove1(request):
     # deletes all objects from Car database table
     # Contract.objects.get('id').delete()
     check_id = request.GET['check_id']
@@ -246,9 +246,9 @@ def reremove1(request):
             share.save()
         except:
             pass
-    return redirect('recieved1')
+    return redirect('blrecieved1')
 
-def reremove2(request):
+def blremove2(request):
     # deletes all objects from Car database table
     # Contract.objects.get('id').delete()
     check_id = request.GET['check_id']
@@ -261,7 +261,22 @@ def reremove2(request):
             share.save()
         except:
             pass
-    return redirect('recieved2')
+    return redirect('blrecieved2')
+
+def doremove(request):
+    # deletes all objects from Car database table
+    # Contract.objects.get('id').delete()
+    check_id = request.GET['check_id']
+    check_ids = check_id.split(',')
+
+    for id in check_ids:
+        try:
+            share = Contract_DO.objects.get(id=id)
+            share.share2 = ' '
+            share.save()
+        except:
+            pass
+    return redirect('dorecieved')
 
 def submit(request):
     contractname = request.POST['contractname']
@@ -410,7 +425,7 @@ def submit2(request):
 
 
 def submit2_1(request):
-    invoicename = request.POST['invoicename']
+    srname = request.POST['srequestname']
     a = request.POST['a']
     b = request.POST['b']
     c = request.POST['c']
@@ -426,9 +441,7 @@ def submit2_1(request):
     m = request.POST['m']
     n = request.POST['n']
     o = request.POST['o']
-    p = request.POST['p']
-    q = request.POST['q']
-    r = request.POST['r']
+
 
 
 
@@ -436,25 +449,23 @@ def submit2_1(request):
 
     file = open('Srequest_' + time_format + '.txt', 'wt')
     file.write('SHIPPING REQUEST' + '\n'
-                'Invoice name:' + invoicename + '\n'
-'1.Shipper/Seller:' + a + '\n'
+                'Request name:' + srname + '\n'
+'1.Shipper:' + a + '\n'
 '2.Consignee:' + b + '\n'
-'3.Departure date:' + c + '\n'
-'4.Vessel/Flight:' + d + '\n'
-'5.From:' + e + '\n'
-'6.To:' + f + '\n'
-'7.Invoice No.and Date:' + g + '\n'
-'8.L/C No.and Date:' + h + '\n'
-'9.Buyer(if other than consignee):' + i + '\n'
-'10.Other reference:' + j + '\n'
-'11.Terms of delivery and payment:' + k + '\n'
-'12.Shipping Mark:' + l + '\n'
-'13.No.and kind of packages:' + m + '\n'
-'14.Goods description:' + n + '\n'
-'15.Quantity:' + o + '\n'
-'16.Unit price:' + p + '\n'
-'17. Amount:' + q + '\n'
-'18.Singed by:' + r + '\n'
+'3.Notify Party:' + c + '\n'
+'4.Vessel:' + d + '\n'
+'5.Voyage No.:' + e + '\n'
+'6.Port of Loading:' + f + '\n'
+'7.Port of Discharge:' + g + '\n'
+'8.Final Destination:' + h + '\n'
+'9.Marking:' + i + '\n'
+'10.Packages:' + j + '\n'
+'11.Description of Goods:' + k + '\n'
+'12.Gross Weight:' + l + '\n'
+'13.Measurement:' + m + '\n'
+'14.Freight Term:' + n + '\n'
+'15.Original B/L:' + o + '\n'
+
                )
 
     file.close()
@@ -466,7 +477,7 @@ def submit2_1(request):
     file.close()
 
     # 데이터 저장
-    contract = Contract_Srequest(contractname=invoicename, sha256=hash, filename='Srequest_' + time_format + '.txt')
+    contract = Contract_Srequest(contractname=srname, sha256=hash, filename='Srequest_' + time_format + '.txt')
 
     # 로그인한 사용자 정보를 Contract에 같이 저장
     user_id = request.session['user_id']
@@ -732,7 +743,7 @@ def ing4_2(request):
     except:
         return redirect('login')
 
-def shared(request):
+def cirecieved(request):
     try:
         user_id = request.session['user_id']
         member = Member.objects.get(user_id=user_id)
@@ -744,7 +755,7 @@ def shared(request):
         page = request.GET.get('page')
         contracts = paginator.get_page(page)
 
-        return render(request, 'app/shared.html', {'contract': contracts, 'n': n})
+        return render(request, 'app/cirecieved.html', {'contract': contracts, 'n': n})
     except:
         return redirect('login')
 
@@ -765,11 +776,12 @@ def shared2(request):
         print(e)
         return redirect('login')
 
-def shared2_1(request):
+
+def srrecieved(request):
     try:
         user_id = request.session['user_id']
         member = Member.objects.get(user_id=user_id)
-        contract = Contract_Srequest.objects.filter(share2=member).order_by('-id')
+        contract = Contract_Srequest.objects.filter(share4=member).order_by('-id')
 
         n = len(contract)
         paginator = Paginator(contract, 6)
@@ -777,7 +789,7 @@ def shared2_1(request):
         page = request.GET.get('page')
         contracts = paginator.get_page(page)
 
-        return render(request, 'app/shared2_1.html', {'contract': contracts, 'n': n})
+        return render(request, 'app/srrecieved.html', {'contract': contracts, 'n': n})
     except Exception as e:
         print(e)
         return redirect('login')
@@ -800,7 +812,7 @@ def shared4_1(request):
         return redirect('login')
 
 
-def recieved1(request):
+def blrecieved1(request):
     try:
         user_id = request.session['user_id']
         member = Member.objects.get(user_id=user_id)
@@ -812,11 +824,11 @@ def recieved1(request):
         page = request.GET.get('page')
         contracts = paginator.get_page(page)
 
-        return render(request, 'app/recieved1.html', {'contract': contracts, 'n': n})
+        return render(request, 'app/blrecieved1.html', {'contract': contracts, 'n': n})
     except:
         return redirect('login')
 
-def recieved2(request):
+def blrecieved2(request):
     try:
         user_id = request.session['user_id']
         member = Member.objects.get(user_id=user_id)
@@ -828,7 +840,24 @@ def recieved2(request):
         page = request.GET.get('page')
         contracts = paginator.get_page(page)
 
-        return render(request, 'app/recieved2.html', {'contract': contracts, 'n': n})
+        return render(request, 'app/blrecieved2.html', {'contract': contracts, 'n': n})
+    except:
+        return redirect('login')
+
+
+def dorecieved(request):
+    try:
+        user_id = request.session['user_id']
+        member = Member.objects.get(user_id=user_id)
+        contract = Contract_DO.objects.filter(share2=member).order_by('-id')
+        n = len(contract)
+
+        paginator = Paginator(contract, 6)
+
+        page = request.GET.get('page')
+        contracts = paginator.get_page(page)
+
+        return render(request, 'app/dorecieved.html', {'contract': contracts, 'n': n})
     except:
         return redirect('login')
 

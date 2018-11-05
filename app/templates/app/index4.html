@@ -119,7 +119,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-fw fa-clipboard"></i>
-                <span>계약 관리</span>
+                <span>선하증권(B/L)</span>
             </a>
             <div class="dropdown-menu" aria-labelledby="pagesDropdown">
                 <a class="dropdown-item" href="{% url 'forms4_1' %}">B/L 작성</a>
@@ -132,7 +132,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-fw fa-clipboard"></i>
-                <span>D/O 관리</span>
+                <span>인도지시서(D/O)</span>
             </a>
             <div class="dropdown-menu" aria-labelledby="pagesDropdown">
                 <a class="dropdown-item" href="{% url 'forms4_2' %}">D/O 작성</a>
@@ -140,6 +140,15 @@
 
 
             </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-clipboard"></i>
+            <span>받은 문서</span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+           <a class="dropdown-item" href="{% url 'srrecieved' %}">S/R 확인</a>
+          </div>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{% url 'calendar4' %}">

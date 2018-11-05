@@ -101,12 +101,12 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-fw fa-clipboard"></i>
-            <span>송장 관리</span>
+            <span>상업송장(C/I)</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-           <a class="dropdown-item" href="{% url 'forms2' %}">송장 작성</a>
-            <a class="dropdown-item" href="{% url 'ing2' %}">작성한 송장</a>
-            <a class="dropdown-item" href="{% url 'shared2' %}">보낸 송장</a>
+           <a class="dropdown-item" href="{% url 'forms2' %}">C/I 작성</a>
+            <a class="dropdown-item" href="{% url 'ing2' %}">C/I 관리</a>
+
 
           </div>
         </li>
@@ -114,17 +114,20 @@
           <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-fw fa-clipboard"></i>
-            <span>요청서 관리</span>
+            <span>선적요청서(S/R)</span>
           </a>
+
+
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-           <a class="dropdown-item" href="{% url 'forms2_1' %}">요청서 작성</a>
-            <a class="dropdown-item" href="{% url 'ing2_1' %}">작성한 요청서</a>
-            <a class="dropdown-item" href="{% url 'shared2_1' %}">보낸 요청서</a>
+           <a class="dropdown-item" href="{% url 'forms2_1' %}">S/R 작성</a>
+            <a class="dropdown-item" href="{% url 'ing2_1' %}">S/R 관리</a>
+
 
 
           </div>
         </li>
-            <li class="nav-item">
+
+          <li class="nav-item">
           <a class="nav-link" href="{% url 'calendar2' %}">
             <i class="fas fa-fw fa-calendar"></i>
             <span>일정 관리</span></a>

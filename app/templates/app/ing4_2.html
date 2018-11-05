@@ -105,11 +105,11 @@
             <span>환율정보</span></a>
         </li>
 
-          <li class="nav-item dropdown">
+         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-fw fa-clipboard"></i>
-                <span>계약 관리</span>
+                <span>선하증권(B/L)</span>
             </a>
             <div class="dropdown-menu" aria-labelledby="pagesDropdown">
                 <a class="dropdown-item" href="{% url 'forms4_1' %}">B/L 작성</a>
@@ -122,7 +122,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-fw fa-clipboard"></i>
-                <span>D/O 관리</span>
+                <span>인도지시서(D/O)</span>
             </a>
             <div class="dropdown-menu" aria-labelledby="pagesDropdown">
                 <a class="dropdown-item" href="{% url 'forms4_2' %}">D/O 작성</a>
@@ -130,6 +130,15 @@
 
 
             </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-clipboard"></i>
+            <span>받은 문서</span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+           <a class="dropdown-item" href="{% url 'srrecieved' %}">S/R 확인</a>
+          </div>
         </li>
             <li class="nav-item">
           <a class="nav-link" href="{% url 'calendar4' %}">
@@ -166,7 +175,7 @@
 
         <!--진행중인 계약-->
 <div class="container-fluid" style="margin:5px; margin-bottom:100px;">
-    <h1 class="my-4">작성한 D/O({{n}}건)</h1>
+    <h1 class="my-4">인도지시서(D/O) 관리({{n}}건)</h1>
 
     <div class="row">
         {% for c in contract %}
@@ -182,7 +191,7 @@
               {{c.sha256}}</p>
             </div>
             <div class="card-footer">
-              <a href="{% url 'download4_1' %}?id={{ c.id }}" class="btn btn-primary" target="_blank">
+              <a href="{% url 'download4_2' %}?id={{ c.id }}" class="btn btn-primary" target="_blank">
                     {{c.filename}}
               </a>
               <hr>
@@ -301,7 +310,7 @@
         $('input:checked').each(function() {
           check_ids += sep + $(this).val()
           sep = ','
-          alert(share_user)
+
         })
         location = '/app/share4_2?check_id=' + check_ids +'&share_user=' + share_user
         return false

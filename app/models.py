@@ -23,6 +23,7 @@ class Contract(models.Model):
     share1 = models.CharField(max_length=100)
     share2 = models.CharField(max_length=100)
     share3 = models.CharField(max_length=100)
+    share4 = models.CharField(max_length=100)
 
 
 class Contract_invoice(models.Model):
@@ -33,6 +34,7 @@ class Contract_invoice(models.Model):
     share1 = models.CharField(max_length=100)
     share2 = models.CharField(max_length=100)
     share3 = models.CharField(max_length=100)
+    share4 = models.CharField(max_length=100)
 
 
 class Contract_Srequest(models.Model):
@@ -43,6 +45,8 @@ class Contract_Srequest(models.Model):
     share1 = models.CharField(max_length=100)
     share2 = models.CharField(max_length=100)
     share3 = models.CharField(max_length=100)
+    share4 = models.CharField(max_length=100)
+
 
 class Contract_BL(models.Model):
     contractname = models.CharField(max_length=50)
@@ -52,6 +56,8 @@ class Contract_BL(models.Model):
     share1 = models.CharField(max_length=100)
     share2 = models.CharField(max_length=100)
     share3 = models.CharField(max_length=100)
+    share4 = models.CharField(max_length=100)
+
 
 class Contract_DO(models.Model):
     contractname = models.CharField(max_length=50)
@@ -61,3 +67,4 @@ class Contract_DO(models.Model):
     share1 = models.CharField(max_length=100)
     share2 = models.CharField(max_length=100)
     share3 = models.CharField(max_length=100)
+    share4 = models.CharField(max_length=100)
