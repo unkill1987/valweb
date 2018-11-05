@@ -380,7 +380,7 @@ def submit2(request):
 
     time_format = time.strftime('%Y-%m-%d_%H%M%S', time.localtime(time.time()))
 
-    file = open('invoice_' + time_format + '.txt', 'wt')
+    file = open('CI_' + time_format + '.txt', 'wt')
     file.write('COMMECIAL INVOICE' + '\n'
                 'Invoice name:' + invoicename + '\n'
 '1.Shipper/Seller:' + a + '\n'
@@ -405,14 +405,14 @@ def submit2(request):
 
     file.close()
 
-    file = open('invoice_' + time_format + '.txt', 'rb')
+    file = open('CI_' + time_format + '.txt', 'rb')
     data = file.read()
 
     hash = 'SHA-256 : ' + hashlib.sha256(data).hexdigest()
     file.close()
 
     # 데이터 저장
-    contract = Contract_invoice(contractname=invoicename, sha256=hash, filename='invoice_' + time_format + '.txt')
+    contract = Contract_invoice(contractname=invoicename, sha256=hash, filename='CI_' + time_format + '.txt')
 
     # 로그인한 사용자 정보를 Contract에 같이 저장
     user_id = request.session['user_id']
@@ -447,7 +447,7 @@ def submit2_1(request):
 
     time_format = time.strftime('%Y-%m-%d_%H%M%S', time.localtime(time.time()))
 
-    file = open('Srequest_' + time_format + '.txt', 'wt')
+    file = open('SR_' + time_format + '.txt', 'wt')
     file.write('SHIPPING REQUEST' + '\n'
                 'Request name:' + srname + '\n'
 '1.Shipper:' + a + '\n'
@@ -470,14 +470,14 @@ def submit2_1(request):
 
     file.close()
 
-    file = open('Srequest_' + time_format + '.txt', 'rb')
+    file = open('SR_' + time_format + '.txt', 'rb')
     data = file.read()
 
     hash = 'SHA-256 : ' + hashlib.sha256(data).hexdigest()
     file.close()
 
     # 데이터 저장
-    contract = Contract_Srequest(contractname=srname, sha256=hash, filename='Srequest_' + time_format + '.txt')
+    contract = Contract_Srequest(contractname=srname, sha256=hash, filename='SR_' + time_format + '.txt')
 
     # 로그인한 사용자 정보를 Contract에 같이 저장
     user_id = request.session['user_id']
