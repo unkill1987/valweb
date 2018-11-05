@@ -22,46 +22,63 @@ urlpatterns = [
 
     path('index/',views.index, name='index'),
     path('index2/',views.index, name='index2'),
+    path('index4/',views.index, name='index4'),
 
     path('charts/', views.charts, name='charts'),
     path('charts2/', views.charts, name='charts2'),
+    path('charts4/', views.charts, name='charts4'),
 
     path('ing/', views.ing, name='ing'),
     path('ing2/', views.ing2, name='ing2'),
+    path('ing2_1/', views.ing2_1, name='ing2_1'),
+    path('ing4_1/', views.ing4_1, name='ing4_1'),
 
     path('calendar/', views.calendar, name='calendar'),
     path('calendar2/', views.calendar, name='calendar2'),
+    path('calendar4/', views.calendar, name='calendar4'),
 
     path('done/', views.done, name='done'),
     path('done2/', views.done, name='done2'),
 
     path('remove/', views.remove, name='remove'),
     path('remove2/', views.remove2, name='remove2'),
+    path('remove2_1/', views.remove2_1, name='remove2_1'),
+    path('remove4_1/', views.remove4_1, name='remove4_1'),
+
+    path('shareremove1/', views.shareremove1, name='shareremove1'),
+    path('shareremove2/', views.shareremove2, name='shareremove2'),
+    path('shareremove2_1/', views.shareremove2_1, name='shareremove2_1'),
+    path('shareremove4_1/', views.shareremove4_1, name='shareremove4_1'),
 
     path('forms/', views.forms, name='forms'),
     path('forms2/', views.forms2, name='forms2'),
-
-    path('money/', views.money, name='money'),
-    path('people/', views.people, name='people'),
+    path('forms2_1/', views.forms2_1, name='forms2_1'),
+    path('forms4_1/', views.forms4_1, name='forms4_1'),
 
     path('submit/', views.submit, name='submit'),
     path('submit2/', views.submit2, name='submit2'),
+    path('submit2_1/', views.submit2_1, name='submit2_1'),
+    path('submit4_1/', views.submit4_1, name='submit4_1'),
 
     path('share1/', views.share1, name='share1'),
     path('share2/', views.share2, name='share2'),
+    path('share2_1/', views.share2_1, name='share2_1'),
+    path('share4_1/', views.share4_1, name='share4_1'),
 
     path('shared/', views.shared, name='shared'),
     path('shared2/', views.shared2, name='shared2'),
+    path('shared2_1/', views.shared2_1, name='shared2_1'),
 
-    path('submit/', views.submit, name='submit'),
-    path('submit2/', views.submit2, name='submit2'),
-
-
+    path('download/', views.download, name='download'),
+    path('download2/', views.download2, name='download2'),
+    path('download2_1/', views.download2_1, name='download2_1'),
+    path('download4_1/', views.download4_1, name='download4_1'),
 
     path('', views.login, name='login'),
     path('register/', views.register, name='register'),
     path('forgot/', views.forgot, name='forgot'),
-    path('download/', views.download, name='download'),
     path('logout/', views.logout, name='logout'),
+    path('money/', views.money, name='money'),
+    path('people/', views.people, name='people'),
 
 ]

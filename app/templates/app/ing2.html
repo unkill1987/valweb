@@ -107,13 +107,26 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-fw fa-clipboard"></i>
-            <span>계약 관리</span>
+            <span>송장 관리</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <a class="dropdown-item" href="{% url 'forms2' %}">계약 생성</a>
-            <a class="dropdown-item" href="{% url 'ing2' %}">진행중인 계약</a>
-            <a class="dropdown-item" href="{% url 'shared2' %}">공유받은 계약</a>
-            <a class="dropdown-item" href="{% url 'done2' %}">완료된 계약</a>
+           <a class="dropdown-item" href="{% url 'forms2' %}">송장 작성</a>
+            <a class="dropdown-item" href="{% url 'ing2' %}">작성한 송장</a>
+            <a class="dropdown-item" href="{% url 'shared2' %}">보낸 송장</a>
+
+          </div>
+        </li>
+
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-clipboard"></i>
+            <span>요청서 관리</span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+           <a class="dropdown-item" href="{% url 'forms2_1' %}">요청서 작성</a>
+            <a class="dropdown-item" href="{% url 'ing2_1' %}">작성한 요청서</a>
+            <a class="dropdown-item" href="{% url 'shared2_1' %}">보낸 요청서</a>
+
 
           </div>
         </li>
@@ -152,7 +165,7 @@
 
         <!--진행중인 계약-->
 <div class="container-fluid" style="margin:5px; margin-bottom:100px;">
-    <h1 class="my-4">진행중인 계약({{n}}건)</h1>
+    <h1 class="my-4">작성한 송장({{n}}건)</h1>
 
     <div class="row">
         {% for c in contract %}
@@ -168,9 +181,11 @@
               {{c.sha256}}</p>
             </div>
             <div class="card-footer">
-              <a href="{% url 'download' %}?id={{ c.id }}" class="btn btn-primary" target="_blank">
+              <a href="{% url 'download2' %}?id={{ c.id }}" class="btn btn-primary" target="_blank">
                     {{c.filename}}
               </a>
+              <hr>
+              <a>To:{{c.share1}}</a>
             </div>
           </div>
         </div>
@@ -209,7 +224,7 @@
 
     <div style="text-align:center; margin:auto;" >
       <input type="text" name="share_user" id="share_user">
-      <input class="btn btn-primary" type="button" value="공유하기" id="share2">
+      <input class="btn btn-primary" type="button" value="전송하기" id="share2">
       <input class="btn btn-primary" type="button" value="선택삭제" id="delete_btn">
 
 

@@ -101,14 +101,26 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-fw fa-clipboard"></i>
-            <span>계약 관리</span>
+            <span>송장 관리</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+           <a class="dropdown-item" href="{% url 'forms2' %}">송장 작성</a>
+            <a class="dropdown-item" href="{% url 'ing2' %}">작성한 송장</a>
+            <a class="dropdown-item" href="{% url 'shared2' %}">보낸 송장</a>
 
-            <a class="dropdown-item" href="{% url 'forms2' %}">계약 생성</a>
-            <a class="dropdown-item" href="{% url 'ing2' %}">진행중인 계약</a>
-            <a class="dropdown-item" href="{% url 'shared2' %}">공유받은 계약</a>
-            <a class="dropdown-item" href="{% url 'done2' %}">완료된 계약</a>
+          </div>
+        </li>
+
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-clipboard"></i>
+            <span>요청서 관리</span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+           <a class="dropdown-item" href="{% url 'forms2_1' %}">요청서 작성</a>
+            <a class="dropdown-item" href="{% url 'ing2_1' %}">작성한 요청서</a>
+            <a class="dropdown-item" href="{% url 'shared2_1' %}">보낸 요청서</a>
+
 
           </div>
         </li>

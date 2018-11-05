@@ -1,6 +1,7 @@
+
 <!DOCTYPE html>
 {% load static %}
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 
   <head>
 
@@ -10,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'app/img/icon.ico'%}">
-    <title>Valkyrie - Charts</title>
+    <title>Valkyrie - </title>
 
     <!-- Bootstrap core CSS-->
     <link href="{% static 'app/vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
@@ -30,7 +31,7 @@
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-      <a class="navbar-brand mr-1" href="{% url 'index2' %}">Valkyrie system</a>
+      <a class="navbar-brand mr-1" href="{% url 'index4' %}">Valkyrie system</a>
 
       <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
@@ -38,7 +39,12 @@
 
       <!-- Navbar Search -->
       <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <div class="input-group">
 
+          <div class="input-group-append">
+
+          </div>
+        </div>
       </form>
 
       <!-- Navbar -->
@@ -87,45 +93,33 @@
       <!-- Sidebar -->
       <ul class="sidebar navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" href="{% url 'index2' %}">
+          <a class="nav-link" href="{% url 'index4' %}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
           </a>
 
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="">
+          <a class="nav-link" href="{% url 'charts4' %}">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>환율정보</span></a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-fw fa-clipboard"></i>
-            <span>송장 관리</span>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-           <a class="dropdown-item" href="{% url 'forms2' %}">송장 작성</a>
-            <a class="dropdown-item" href="{% url 'ing2' %}">작성한 송장</a>
-            <a class="dropdown-item" href="{% url 'shared2' %}">보낸 송장</a>
-
-          </div>
-        </li>
 
           <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-fw fa-clipboard"></i>
-            <span>요청서 관리</span>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-           <a class="dropdown-item" href="{% url 'forms2_1' %}">요청서 작성</a>
-            <a class="dropdown-item" href="{% url 'ing2_1' %}">작성한 요청서</a>
-            <a class="dropdown-item" href="{% url 'shared2_1' %}">보낸 요청서</a>
+            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-fw fa-clipboard"></i>
+                <span>계약 관리</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                <a class="dropdown-item" href="{% url 'forms4_1' %}">B/L 작성</a>
+                <a class="dropdown-item" href="{% url 'ing4_1' %}">B/L 관리</a>
 
 
-          </div>
+            </div>
         </li>
             <li class="nav-item">
-          <a class="nav-link" href="{% url 'calendar2' %}">
+          <a class="nav-link" href="{% url 'calendar4' %}">
             <i class="fas fa-fw fa-calendar"></i>
             <span>일정 관리</span></a>
         </li>
@@ -138,6 +132,7 @@
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <a class="dropdown-item" href="">결제 내역</a>
             <a class="dropdown-item" href="">결제 하기</a>
+            <a class="dropdown-item" href="">입금 하기</a>
             <a class="dropdown-item" href="">출금 하기</a>
 
           </div>
@@ -155,170 +150,86 @@
           </div>
         </li>
       </ul>
-    <div id="content-wrapper">
 
-      <div class="container-fluid">
-          <!-- Breadcrumbs-->
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a >환율정보</a>
-            </li>
-            <li class="breadcrumb-item active">Charts</li>
-          </ol>
-
-          <!-- Area Chart Example-->
-<div>
-  <div class="container-fluid" style="margin:5px; margin-bottom:100px;">
-    <h1 class="my-4"></h1>
+        <!--진행중인 계약-->
+<div class="container-fluid" style="margin:5px; margin-bottom:100px;">
+    <h1 class="my-4">작성한 B/L({{n}}건)</h1>
 
     <div class="row">
+        {% for c in contract %}
         <div class="col-lg-4 mb-4" >
 
+          <input type="checkbox" id="{{c.id}}" value="{{ c.id }}"><span>Check</span>
           <div class="card h-100">
 
-            <h4 class="card-header">USD(달러)</h4>
+            <h4 class="card-header">{{c.contractname}}</h4>
             <div class="card-body">
-              <table class="card-text">
+              <p class="card-text">
 
-                <tr>
-                  <td>BasePrice : </td>
-                  <td>${{ basePrice1 }}</td>
-                </tr>
-                <tr>
-                  <td>SellingPrice :</td>
-                  <td>${{sellprice1}}</td>
-                </tr>
-                <tr>
-                  <td>BuyingPrice :</td>
-                  <td>${{buyprice1}}</td>
-              </table>
+              {{c.sha256}}</p>
             </div>
             <div class="card-footer">
-            <table>
-            <tr>
-              <td>$</td>
-              <td><input type="text" id="usnum"></td>
-            </tr>
-              <tr>
-                <td></td>
-                <td><input class="btn btn-primary" style="width:170px; height:40px;" type="button" value="결과보기" onclick="mul1()"></td>
-              </tr>
-              <tr>
-                <td>￦</td>
-          <td><input id="result1"></td>
-              </tr>
-                </table>
+              <a href="{% url 'download4_1' %}?id={{ c.id }}" class="btn btn-primary" target="_blank">
+                    {{c.filename}}
+              </a>
+              <hr>
+              <a>수출자명:{{c.share1}}</a><br>
+                <a>수입자명:{{c.share2}}</a>
             </div>
           </div>
         </div>
-      <div class="col-lg-4 mb-4" >
-
-          <div class="card h-100">
-
-            <h4 class="card-header">JPY(엔)</h4>
-            <div class="card-body">
-              <table class="card-text">
-
-                <tr>
-                  <td>BasePrice : </td>
-                  <td>¥{{ basePrice2 }}</td>
-                </tr>
-                <tr>
-                  <td>SellingPrice :</td>
-                  <td>¥{{sellprice2}}</td>
-                </tr>
-                <tr>
-                  <td>BuyingPrice :</td>
-                  <td>¥{{buyprice2}}</td>
-              </table>
-            </div>
-            <div class="card-footer">
-         <table>
-            <tr>
-              <td>¥</td>
-              <td><input type="text" id="jpnum"></td>
-            </tr>
-              <tr>
-                <td></td>
-                <td><input class="btn btn-primary" style="width:170px; height:40px;" type="button" value="결과보기" onclick="mul2()"></td>
-              </tr>
-              <tr>
-                <td>￦</td>
-          <td><input id="result2"></td>
-              </tr>
-                </table>
-          </div>
-            </div>
-          </div>
-
-
-      <div class="col-lg-4 mb-4" >
-
-          <div class="card h-100">
-
-            <h4 class="card-header">CNY(위안)</h4>
-            <div class="card-body">
-              <table class="card-text">
-
-                <tr>
-                  <td>BasePrice : </td>
-                  <td>Y{{ basePrice3 }}</td>
-                </tr>
-                <tr>
-                  <td>SellingPrice :</td>
-                  <td>Y{{sellprice3}}</td>
-                </tr>
-                <tr>
-                  <td>BuyingPrice :</td>
-                  <td>Y{{buyprice3}}</td>
-              </table>
-            </div>
-            <div class="card-footer">
-              <table>
-            <tr>
-              <td>Y</td>
-              <td><input type="text" id="chnum"></td>
-            </tr>
-              <tr>
-                <td></td>
-                <td><input class="btn btn-primary" style="width:170px; height:40px;" type="button" value="결과보기" onclick="mul3()"></td>
-              </tr>
-              <tr>
-                <td>￦</td>
-          <td><input id="result3"></td>
-              </tr>
-                </table>
-
-            </div>
-          </div>
-        </div>
+        {% endfor %}
+<hr>
     </div>
+
+<hr>
+  <div class="pagination" style="text-align:center; margin:auto;">
+    <span class="step-links" style="text-align:center; margin:auto;">
+      <ul class="pagination pagination-lg" >
+        {% if contract.has_previous %}
+            <li><a class="btn" style="font-size:20px" href="?page=1">&laquo; first&nbsp</a></li>
+            <li><a class="btn" style="font-size:20px" href="?page={{ contract.previous_page_number }}">previous</a></li>
+        {% endif %}
+
+
+      {% for pg in contract.paginator.page_range %}
+        {% if blogs.number == pg %}
+          <li><a style="font-size:20px" href="?page={{pg}}" class="btn btn-default">{{pg}}</a></li>
+        {% else %}
+          <li><a style="font-size:20px" href="?page={{pg}}" class="btn">{{pg}}</a></li>
+        {% endif %}
+      {% endfor %}
+
+
+        {% if contract.has_next %}
+            <li><a class="btn" style="font-size:20px" href="?page={{ contract.next_page_number }}">next&nbsp</a></li>
+            <li><a class="btn" style="font-size:20px" href="?page={{ contract.paginator.num_pages }}">last &raquo;</a></li>
+        {% endif %}
+        </ul>
+    </span>
   </div>
+
+  <div class="row">
+
+    <div style="text-align:center; margin:auto;" >수출자명:
+      <input type="text" name="share_user" id="share_user">수입자명:
+        <input type="text" name="share_user2" id="share_user2">
+      <input class="btn btn-primary" type="button" value="전송하기" id="share4_1">
+      <input class="btn btn-primary" type="button" value="선택삭제" id="delete_btn">
+
+
+        </div>
+  </div>
+
+<!--</form>-->
 </div>
 
+        <!-- Sticky Footer -->
 
 
 
-
-          <script>
-            function mul1() {
-            var usnum = document.getElementById('usnum');
-            var result1 = eval(usnum.value)*{{ basePrice1 }}
-            document.getElementById('result1').value = result1;}
-            function mul2() {
-            var jpnum = document.getElementById('jpnum');
-            var result2 = eval(jpnum.value)*{{ basePrice2 }}
-            document.getElementById('result2').value = result2;}
-            function mul3() {
-            var chnum = document.getElementById('chnum');
-            var result3 = eval(chnum.value)*{{ basePrice3 }}
-            document.getElementById('result3').value = result3;}
-
-
-          </script>
-
-
-        </div>
+      </div>
+      <!-- /.content-wrapper -->
 
 
     <!-- /#wrapper -->
@@ -346,7 +257,6 @@
         </div>
       </div>
     </div>
-    </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="{% static 'app/vendor/jquery/jquery.min.js'%}"></script>
@@ -355,30 +265,39 @@
     <!-- Core plugin JavaScript-->
     <script src="{% static 'app/vendor/jquery-easing/jquery.easing.min.js'%}"></script>
 
-    <!-- Page level plugin JavaScript-->
-    <!--<script src="{% static 'app/vendor/chart.js/Chart.min.js'%}"></script>-->
-
     <!-- Custom scripts for all pages-->
     <script src="{% static 'app/js/sb-admin.min.js'%}"></script>
 
-    <!-- Demo scripts for this page-->
-    <!--<script src="{% static 'app/js/demo/chart-area-demo.js'%}"></script>-->
-    <!--<script src="{% static 'app/js/demo/chart-bar-demo.js'%}"></script>-->
-    <!--<script src="{% static 'app/js/demo/chart-pie-demo.js'%}"></script>-->
-<!--<script>-->
-    <!--$('#btn').click(function() {-->
-
-        <!--$.ajax({-->
-          <!--dataType: 'jsonp',-->
-          <!--url: 'https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD',-->
-          <!--success: function(res) {-->
-            <!--$(this).after(res)-->
-          <!--}-->
-        <!--})-->
-    <!--})-->
-      <!--</script>-->
-    </div></div>
   </body>
+  <script>
+      $('#delete_btn').click(function() {
+        check_ids = ''
+        sep = ''
+        $('input:checked').each(function() {
+          check_ids += sep + $(this).val()
+          sep = ','
+        })
 
+        location = '/app/remove4_1?check_id=' + check_ids
+        return false
+      })
+
+      $('#share4_1').click(function(){
+        var share_user = $("#share_user").val();
+        var share_user2 = $("#share_user2").val();
+        check_ids = ''
+        sep = ''
+        $('input:checked').each(function() {
+          check_ids += sep + $(this).val()
+          sep = ','
+        })
+        location = '/app/share4_1?check_id=' + check_ids +'&share_user=' + share_user +'&share_user2=' + share_user2
+        return false
+      })
+
+
+
+
+    </script>
 
 </html>

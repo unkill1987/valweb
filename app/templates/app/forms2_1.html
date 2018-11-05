@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 
   <head>
 
@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'app/img/icon.ico'%}">
-    <title>Valkyrie - Charts</title>
+    <title>Valkyrie - forms</title>
 
     <!-- Bootstrap core CSS-->
     <link href="{% static 'app/vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
@@ -38,7 +38,12 @@
 
       <!-- Navbar Search -->
       <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <div class="input-group">
 
+          <div class="input-group-append">
+
+          </div>
+        </div>
       </form>
 
       <!-- Navbar -->
@@ -94,10 +99,11 @@
 
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="">
+          <a class="nav-link" href="{% url 'charts2' %}">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>환율정보</span></a>
         </li>
+
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-fw fa-clipboard"></i>
@@ -155,170 +161,136 @@
           </div>
         </li>
       </ul>
+
+
+
+       <!--계약서 작성 -->
+
+
     <div id="content-wrapper">
+      <div id="page-wrapper" style="margin:10px;">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">선적요청서 작성</h1>
+                </div>
 
-      <div class="container-fluid">
-          <!-- Breadcrumbs-->
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a >환율정보</a>
-            </li>
-            <li class="breadcrumb-item active">Charts</li>
-          </ol>
-
-          <!-- Area Chart Example-->
-<div>
-  <div class="container-fluid" style="margin:5px; margin-bottom:100px;">
-    <h1 class="my-4"></h1>
-
-    <div class="row">
-        <div class="col-lg-4 mb-4" >
-
-          <div class="card h-100">
-
-            <h4 class="card-header">USD(달러)</h4>
-            <div class="card-body">
-              <table class="card-text">
-
-                <tr>
-                  <td>BasePrice : </td>
-                  <td>${{ basePrice1 }}</td>
-                </tr>
-                <tr>
-                  <td>SellingPrice :</td>
-                  <td>${{sellprice1}}</td>
-                </tr>
-                <tr>
-                  <td>BuyingPrice :</td>
-                  <td>${{buyprice1}}</td>
-              </table>
+                <!-- /.col-lg-12 -->
             </div>
-            <div class="card-footer">
-            <table>
-            <tr>
-              <td>$</td>
-              <td><input type="text" id="usnum"></td>
-            </tr>
-              <tr>
-                <td></td>
-                <td><input class="btn btn-primary" style="width:170px; height:40px;" type="button" value="결과보기" onclick="mul1()"></td>
-              </tr>
-              <tr>
-                <td>￦</td>
-          <td><input id="result1"></td>
-              </tr>
-                </table>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+
+
+                        <div class="panel-body">
+                            <form role="form" action="{% url 'submit2_1' %}" method="post">
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <h2 class="panel-heading">
+                                        SHIPPING REQUEST</h2>
+                                    <input class="form-control" name="srequestname">
+                                    <p style="font-size:25px"> Invoice Form </p>
+                                            <div class="form-group">
+                                            <label>1.Shipper:</label>
+                                            <input class="form-control" name="a">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>2.Consignee:</label>
+                                            <input class="form-control" name="b">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>3.Notify Party:</label>
+                                            <input class="form-control" name="c">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>4.Vessel:</label>
+                                            <input class="form-control" name="d">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>5.Voyage No.:</label>
+                                            <input class="form-control" name="e">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>6.Port of Loading:</label>
+                                            <input class="form-control" name="f">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>7.Port of Discharge:</label>
+                                            <input class="form-control" name="g">
+                                            </div>
+
+
+
+                                    </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                            <label>8.Final Destination:</label>
+                                            <input class="form-control" name="h">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>9.Marking:</label>
+                                            <input class="form-control" name="i">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>10.Packages:</label>
+                                            <input class="form-control" name="j">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>11.Description of Goods:</label>
+                                            <input class="form-control" name="k">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>12.Gross Weight:</label>
+                                            <input class="form-control" name="l">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>13.Measurement:</label>
+                                            <input class="form-control" name="m">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>14.Freight Term:</label>
+                                            <input class="form-control" name="n">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>15.Original B/L:</label>
+                                            <input class="form-control" name="o">
+                                            </div>
+
+                                        </div>
+                                </div>
+
+
+
+                                <!-- /.col-lg-6 (nested) -->
+
+                            <!-- /.row (nested) -->
+                                    <div style="text-align:center">
+                                        <hr>
+                                        <button type="submit" class="btn btn-primary">작성 완료</button>
+                                        <button type="reset" class="btn btn-primary">다시 작성하기</button>
+                                    </div>
+                                                                        {% csrf_token %}
+                            </form>
+                        </div>
+
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
             </div>
-          </div>
-        </div>
-      <div class="col-lg-4 mb-4" >
-
-          <div class="card h-100">
-
-            <h4 class="card-header">JPY(엔)</h4>
-            <div class="card-body">
-              <table class="card-text">
-
-                <tr>
-                  <td>BasePrice : </td>
-                  <td>¥{{ basePrice2 }}</td>
-                </tr>
-                <tr>
-                  <td>SellingPrice :</td>
-                  <td>¥{{sellprice2}}</td>
-                </tr>
-                <tr>
-                  <td>BuyingPrice :</td>
-                  <td>¥{{buyprice2}}</td>
-              </table>
-            </div>
-            <div class="card-footer">
-         <table>
-            <tr>
-              <td>¥</td>
-              <td><input type="text" id="jpnum"></td>
-            </tr>
-              <tr>
-                <td></td>
-                <td><input class="btn btn-primary" style="width:170px; height:40px;" type="button" value="결과보기" onclick="mul2()"></td>
-              </tr>
-              <tr>
-                <td>￦</td>
-          <td><input id="result2"></td>
-              </tr>
-                </table>
-          </div>
-            </div>
-          </div>
-
-
-      <div class="col-lg-4 mb-4" >
-
-          <div class="card h-100">
-
-            <h4 class="card-header">CNY(위안)</h4>
-            <div class="card-body">
-              <table class="card-text">
-
-                <tr>
-                  <td>BasePrice : </td>
-                  <td>Y{{ basePrice3 }}</td>
-                </tr>
-                <tr>
-                  <td>SellingPrice :</td>
-                  <td>Y{{sellprice3}}</td>
-                </tr>
-                <tr>
-                  <td>BuyingPrice :</td>
-                  <td>Y{{buyprice3}}</td>
-              </table>
-            </div>
-            <div class="card-footer">
-              <table>
-            <tr>
-              <td>Y</td>
-              <td><input type="text" id="chnum"></td>
-            </tr>
-              <tr>
-                <td></td>
-                <td><input class="btn btn-primary" style="width:170px; height:40px;" type="button" value="결과보기" onclick="mul3()"></td>
-              </tr>
-              <tr>
-                <td>￦</td>
-          <td><input id="result3"></td>
-              </tr>
-                </table>
-
-            </div>
-          </div>
+            <!-- /.row -->
         </div>
     </div>
-  </div>
-</div>
+
+        <!-- Sticky Footer -->
 
 
 
-
-
-          <script>
-            function mul1() {
-            var usnum = document.getElementById('usnum');
-            var result1 = eval(usnum.value)*{{ basePrice1 }}
-            document.getElementById('result1').value = result1;}
-            function mul2() {
-            var jpnum = document.getElementById('jpnum');
-            var result2 = eval(jpnum.value)*{{ basePrice2 }}
-            document.getElementById('result2').value = result2;}
-            function mul3() {
-            var chnum = document.getElementById('chnum');
-            var result3 = eval(chnum.value)*{{ basePrice3 }}
-            document.getElementById('result3').value = result3;}
-
-
-          </script>
-
-
-        </div>
+      </div>
+      <!-- /.content-wrapper -->
 
 
     <!-- /#wrapper -->
@@ -346,7 +318,6 @@
         </div>
       </div>
     </div>
-    </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="{% static 'app/vendor/jquery/jquery.min.js'%}"></script>
@@ -355,30 +326,9 @@
     <!-- Core plugin JavaScript-->
     <script src="{% static 'app/vendor/jquery-easing/jquery.easing.min.js'%}"></script>
 
-    <!-- Page level plugin JavaScript-->
-    <!--<script src="{% static 'app/vendor/chart.js/Chart.min.js'%}"></script>-->
-
     <!-- Custom scripts for all pages-->
     <script src="{% static 'app/js/sb-admin.min.js'%}"></script>
 
-    <!-- Demo scripts for this page-->
-    <!--<script src="{% static 'app/js/demo/chart-area-demo.js'%}"></script>-->
-    <!--<script src="{% static 'app/js/demo/chart-bar-demo.js'%}"></script>-->
-    <!--<script src="{% static 'app/js/demo/chart-pie-demo.js'%}"></script>-->
-<!--<script>-->
-    <!--$('#btn').click(function() {-->
-
-        <!--$.ajax({-->
-          <!--dataType: 'jsonp',-->
-          <!--url: 'https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD',-->
-          <!--success: function(res) {-->
-            <!--$(this).after(res)-->
-          <!--}-->
-        <!--})-->
-    <!--})-->
-      <!--</script>-->
-    </div></div>
   </body>
-
 
 </html>

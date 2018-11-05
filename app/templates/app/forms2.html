@@ -106,13 +106,26 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-fw fa-clipboard"></i>
-            <span>계약 관리</span>
+            <span>송장 관리</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-           <a class="dropdown-item" href="{% url 'forms2' %}">계약 생성</a>
-            <a class="dropdown-item" href="{% url 'ing2' %}">진행중인 계약</a>
-            <a class="dropdown-item" href="{% url 'shared2' %}">공유된 계약</a>
-            <a class="dropdown-item" href="{% url 'done2' %}">완료된 계약</a>
+           <a class="dropdown-item" href="{% url 'forms2' %}">송장 작성</a>
+            <a class="dropdown-item" href="{% url 'ing2' %}">작성한 송장</a>
+            <a class="dropdown-item" href="{% url 'shared2' %}">보낸 송장</a>
+
+          </div>
+        </li>
+
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-clipboard"></i>
+            <span>요청서 관리</span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+           <a class="dropdown-item" href="{% url 'forms2_1' %}">요청서 작성</a>
+            <a class="dropdown-item" href="{% url 'ing2_1' %}">작성한 요청서</a>
+            <a class="dropdown-item" href="{% url 'shared2_1' %}">보낸 요청서</a>
+
 
           </div>
         </li>
@@ -157,8 +170,9 @@
       <div id="page-wrapper" style="margin:10px;">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">계약 생성</h1>
+                    <h1 class="page-header">송장 작성</h1>
                 </div>
+
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
@@ -171,56 +185,90 @@
                             <form role="form" action="{% url 'submit2' %}" method="post">
 
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <h2 class="panel-heading">
-                                        Contract Name</h2>
-                                    <input class="form-control" name="contractname">
-                                    <p style="font-size:25px"> Address Form </p>
+                                        COMMECIAL INVOICE</h2>
+                                    <input class="form-control" name="invoicename">
+                                    <p style="font-size:25px"> Invoice Form </p>
                                             <div class="form-group">
-                                            <label>Cable Address:</label>
-                                            <input class="form-control" name="cable">
-                                            <p class="help-block"></p>
-                                        </div>
-
-                                </div>
-
-                            <div class="col-lg-4">
-                                <h2> &nbsp </h2>
-                                    <p style="font-size:25px"> Bank Form </p>
+                                            <label>1.Shipper/Seller:</label>
+                                            <input class="form-control" name="a">
+                                            </div>
                                             <div class="form-group">
-                                            <label>Applicant:</label>
-                                            <input class="form-control" name="applicant">
-                                            <p class="help-block"></p>
+                                            <label>2.Consignee:</label>
+                                            <input class="form-control" name="b">
                                             </div>
-                                            <select style="width:300px; height:38px; border-radius:4px" name="code">
-                                                <option value="USD">USD(840)</option>
-                                                <option value="KRW">KRW(410)</option>
-                                                <option value="JPY">JPY(392)</option>
-                                                <option value="CNY">CNY(156)</option>
-
-                                            </select>
-
-
-                                            </div>
-
-
-
-                            <div class="col-lg-4">
-                                <h2> &nbsp </h2>
-                                    <p style="font-size:25px"> Order Form </p>
                                             <div class="form-group">
-                                            <label>Exporter:</label>
-                                            <input class="form-control" name="exporter">
-                                            <p class="help-block"></p>
+                                            <label>3.Departure date:</label>
+                                            <input class="form-control" name="c">
                                             </div>
+                                            <div class="form-group">
+                                            <label>4.Vessel/Flight:</label>
+                                            <input class="form-control" name="d">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>5.From:</label>
+                                            <input class="form-control" name="e">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>6.To:</label>
+                                            <input class="form-control" name="f">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>7.Invoice No.and Date:</label>
+                                            <input class="form-control" name="g">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>8.L/C No.and Date:</label>
+                                            <input class="form-control" name="h">
+                                            </div>
+
 
                                     </div>
 
-
-
-
-
-                            </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                            <label>9.Buyer(if other than consignee):</label>
+                                            <input class="form-control" name="i">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>10.Other reference:</label>
+                                            <input class="form-control" name="j">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>11.Terms of delivery and payment:</label>
+                                            <input class="form-control" name="k">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>12.Shipping Mark:</label>
+                                            <input class="form-control" name="l">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>13.No.and kind of packages:</label>
+                                            <input class="form-control" name="m">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>14.Goods description:</label>
+                                            <input class="form-control" name="n">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>15.Quantity:</label>
+                                            <input class="form-control" name="o">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>16.Unit price:</label>
+                                            <input class="form-control" name="p">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>17. Amount:</label>
+                                            <input class="form-control" name="q">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>18.Singed by:</label>
+                                            <input class="form-control" name="r">
+                                            </div>
+                                        </div>
+                                </div>
 
 
 
