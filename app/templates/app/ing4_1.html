@@ -118,6 +118,19 @@
 
             </div>
         </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-fw fa-clipboard"></i>
+                <span>D/O 관리</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                <a class="dropdown-item" href="{% url 'forms4_2' %}">D/O 작성</a>
+                <a class="dropdown-item" href="{% url 'ing4_2' %}">D/O 관리</a>
+
+
+            </div>
+        </li>
             <li class="nav-item">
           <a class="nav-link" href="{% url 'calendar4' %}">
             <i class="fas fa-fw fa-calendar"></i>
@@ -211,8 +224,8 @@
 
   <div class="row">
 
-    <div style="text-align:center; margin:auto;" >수출자명:
-      <input type="text" name="share_user" id="share_user">수입자명:
+    <div style="text-align:center; margin:auto;" >수입자명:
+      <input type="text" name="share_user" id="share_user">수출자명:
         <input type="text" name="share_user2" id="share_user2">
       <input class="btn btn-primary" type="button" value="전송하기" id="share4_1">
       <input class="btn btn-primary" type="button" value="선택삭제" id="delete_btn">

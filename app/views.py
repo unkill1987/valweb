@@ -9,7 +9,7 @@ import hashlib
 import sys
 import os
 import time
-from app.models import Contract, Member, Contract_invoice, Contract_Srequest, Contract_BL
+from app.models import Contract, Member, Contract_invoice, Contract_Srequest, Contract_BL, Contract_DO
 from valweb import settings
 from django.utils import timezone
 
@@ -33,7 +33,7 @@ def share1(request):
     for id in check_ids:
         try:
             share = Contract.objects.get(id=id)
-            share.share2=share_user
+            share.share3=share_user
             share.save()
 
         except:
@@ -85,6 +85,21 @@ def share4_1(request):
         except:
             pass
     return redirect('ing4_1')
+
+def share4_2(request):
+    check_id = request.GET['check_id']
+    check_ids = check_id.split(',')
+    share_user = request.GET['share_user']
+
+    for id in check_ids:
+        try:
+            share = Contract_DO.objects.get(id=id)
+            share.share1=share_user
+            share.save()
+
+        except:
+            pass
+    return redirect('ing4_2')
 
 
 def remove(request):
@@ -142,6 +157,20 @@ def remove4_1(request):
             pass
 
     return redirect('ing4_1')
+
+def remove4_2(request):
+    # deletes all objects from Car database table
+    # Contract.objects.get('id').delete()
+    check_id = request.GET['check_id']
+    check_ids = check_id.split(',')
+
+    for id in check_ids:
+        try:
+            Contract_DO.objects.get(id=id).delete()
+        except:
+            pass
+
+    return redirect('ing4_2')
 
 def shareremove1(request):
     # deletes all objects from Car database table
@@ -204,6 +233,36 @@ def shareremove4_1(request):
             pass
     return redirect('shared4_1')
 
+def reremove1(request):
+    # deletes all objects from Car database table
+    # Contract.objects.get('id').delete()
+    check_id = request.GET['check_id']
+    check_ids = check_id.split(',')
+
+    for id in check_ids:
+        try:
+            share = Contract_BL.objects.get(id=id)
+            share.share1 = ' '
+            share.save()
+        except:
+            pass
+    return redirect('recieved1')
+
+def reremove2(request):
+    # deletes all objects from Car database table
+    # Contract.objects.get('id').delete()
+    check_id = request.GET['check_id']
+    check_ids = check_id.split(',')
+
+    for id in check_ids:
+        try:
+            share = Contract_BL.objects.get(id=id)
+            share.share2 = ' '
+            share.save()
+        except:
+            pass
+    return redirect('recieved2')
+
 def submit(request):
     contractname = request.POST['contractname']
     cable = request.POST['cable']
@@ -227,7 +286,7 @@ def submit(request):
 
     time_format = time.strftime('%Y-%m-%d_%H%M%S', time.localtime(time.time()))
 
-    file = open('contract_' + time_format + '.txt', 'wt')
+    file = open('LC_' + time_format + '.txt', 'wt')
     file.write('Letter of Credit' + '\n'
                 'Contract:' + contractname + '\n'
                 'Address Form' + '\n'
@@ -253,7 +312,7 @@ def submit(request):
                 'Amount:' + amount + '\n')
     file.close()
 
-    file = open('contract_' + time_format + '.txt', 'rb')
+    file = open('LC_' + time_format + '.txt', 'rb')
     data = file.read()
 
     # hasher = hashlib.md5()
@@ -268,7 +327,7 @@ def submit(request):
     file.close()
 
     # 데이터 저장
-    contract = Contract(contractname=contractname, sha256=hash, filename='contract_' + time_format + '.txt')
+    contract = Contract(contractname=contractname, sha256=hash, filename='LC_' + time_format + '.txt')
 
     # 로그인한 사용자 정보를 Contract에 같이 저장
     user_id = request.session['user_id']
@@ -473,6 +532,57 @@ def submit4_1(request):
 
     return redirect('ing4_1')
 
+
+def submit4_2(request):
+    contractname = request.POST['contractname']
+    a = request.POST['a']
+    b = request.POST['b']
+    c = request.POST['c']
+    d = request.POST['d']
+    e = request.POST['e']
+    f = request.POST['f']
+    g = request.POST['g']
+
+
+
+
+
+    time_format = time.strftime('%Y-%m-%d_%H%M%S', time.localtime(time.time()))
+
+    file = open('DO_' + time_format + '.txt', 'wt')
+    file.write('DO' + '\n'
+                'B/L:' + contractname + '\n'
+'1.Agent name:' + a + '\n'
+'2.Restricted delivery(Yes or no):' + b + '\n'
+'3.Adult signature restriced delivery(Yes or no):' + c + '\n'
+'4.Agent Signture:' + d + '\n'
+'5.ID verified (yes or no):' + e + '\n'
+'6.USPS initals:' + f + '\n'
+'7.Date:' + g + '\n'
+
+
+               )
+
+    file.close()
+
+    file = open('DO_' + time_format + '.txt', 'rb')
+    data = file.read()
+
+    hash = 'SHA-256 : ' + hashlib.sha256(data).hexdigest()
+    file.close()
+
+    # 데이터 저장
+    contract = Contract_DO(contractname=contractname, sha256=hash, filename='DO_' + time_format + '.txt')
+
+    # 로그인한 사용자 정보를 Contract에 같이 저장
+    user_id = request.session['user_id']
+    member = Member.objects.get(user_id=user_id)
+    contract.owner = member
+
+    contract.save()
+
+    return redirect('ing4_2')
+
 def download(request):
     id = request.GET['id']
     c = Contract.objects.get(id=id)
@@ -513,6 +623,18 @@ def download2_1(request):
 def download4_1(request):
     id = request.GET['id']
     c = Contract_BL.objects.get(id=id)
+
+    filepath = os.path.join(settings.BASE_DIR, c.filename)
+    # filepath = os.path.join('/home/valkyrie1234', c.filename)
+    filename = os.path.basename(filepath)
+    with open(filepath, 'rb') as f:
+        response = HttpResponse(f, content_type='text/plain')
+        response['Content-Disposition'] = 'inline; filename="{}"'.format(filename)
+        return response
+
+def download4_2(request):
+    id = request.GET['id']
+    c = Contract_DO.objects.get(id=id)
 
     filepath = os.path.join(settings.BASE_DIR, c.filename)
     # filepath = os.path.join('/home/valkyrie1234', c.filename)
@@ -593,6 +715,23 @@ def ing4_1(request):
     except:
         return redirect('login')
 
+def ing4_2(request):
+    try:
+        user_id = request.session['user_id']
+        member = Member.objects.get(user_id=user_id)
+        contract = Contract_DO.objects.filter(owner=member).order_by('-id')
+
+        n = len(contract)
+
+        paginator = Paginator(contract, 6)
+
+        page = request.GET.get('page')
+        contracts = paginator.get_page(page)
+
+        return render(request, 'app/ing4_2.html', {'contract': contracts, 'n': n})
+    except:
+        return redirect('login')
+
 def shared(request):
     try:
         user_id = request.session['user_id']
@@ -660,6 +799,40 @@ def shared4_1(request):
         print(e)
         return redirect('login')
 
+
+def recieved1(request):
+    try:
+        user_id = request.session['user_id']
+        member = Member.objects.get(user_id=user_id)
+        contract = Contract_BL.objects.filter(share1=member).order_by('-id')
+        n = len(contract)
+
+        paginator = Paginator(contract, 6)
+
+        page = request.GET.get('page')
+        contracts = paginator.get_page(page)
+
+        return render(request, 'app/recieved1.html', {'contract': contracts, 'n': n})
+    except:
+        return redirect('login')
+
+def recieved2(request):
+    try:
+        user_id = request.session['user_id']
+        member = Member.objects.get(user_id=user_id)
+        contract = Contract_BL.objects.filter(share2=member).order_by('-id')
+        n = len(contract)
+
+        paginator = Paginator(contract, 6)
+
+        page = request.GET.get('page')
+        contracts = paginator.get_page(page)
+
+        return render(request, 'app/recieved2.html', {'contract': contracts, 'n': n})
+    except:
+        return redirect('login')
+
+
 def done(request):
 
     try:
@@ -726,7 +899,7 @@ def index(request):
         elif user_role == '2':
             templates = 'app/index2.html'
         elif user_role == '3':
-            templates = 'app/blank.html'
+            templates = 'app/index3.html'
         elif user_role == '4':
             templates = 'app/index4.html'
         else:
@@ -774,9 +947,9 @@ def charts(request):
         elif user_role == '2':
             templates = 'app/charts2.html'
         elif user_role == '3':
-            templates = 'app/blank.html'
+            templates = 'app/charts3.html'
         elif user_role == '4':
-            templates = 'app/chart4.html'
+            templates = 'app/charts4.html'
         else:
             templates = 'app/login.html'
 
@@ -800,7 +973,7 @@ def calendar(request):
         elif user_role == '2':
             templates = 'app/calendar2.html'
         elif user_role == '3':
-            templates = 'app/blank.html'
+            templates = 'app/calendar3.html'
         elif user_role == '4':
             templates = 'app/calendar4.html'
         else:
@@ -831,6 +1004,9 @@ def forms2_1(request):
 
 def forms4_1(request):
     return render(request, 'app/forms4_1.html', {})
+
+def forms4_2(request):
+    return render(request, 'app/forms4_2.html', {})
 
 def login(request):
     if request.method == 'GET':

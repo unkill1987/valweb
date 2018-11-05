@@ -102,17 +102,16 @@
           <a class="nav-link" href="{% url 'charts' %}">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>환율정보</span></a>
-        </li>
-        <li class="nav-item dropdown">
+       <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-fw fa-clipboard"></i>
             <span>계약 관리</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <a class="dropdown-item" href="{% url 'forms' %}">L/C 개설 신청</a>
-            <a class="dropdown-item" href="{% url 'ing' %}">진행중인 계약</a>
+            <a class="dropdown-item" href="{% url 'forms' %}">L/C 신청서 작성</a>
+            <a class="dropdown-item" href="{% url 'ing' %}">작성한 L/C 신청서</a>
             <a class="dropdown-item" href="{% url 'shared' %}">받은 송장</a>
-            <a class="dropdown-item" href="{% url 'done' %}">완료된 계약</a>
+            <a class="dropdown-item" href="{% url 'recieved1' %}">받은 B/L</a>
 
           </div>
         </li>
@@ -157,7 +156,7 @@
       <div id="page-wrapper" style="margin:10px;">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">계약 생성</h1>
+                    <h1 class="page-header">L/C 신청서</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
