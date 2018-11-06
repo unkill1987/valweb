@@ -182,7 +182,7 @@
                     {{c.filename}}
               </a>
             <hr>
-              <a>To:{{c.share3}}</a>
+              <a>To (은행ID):{{c.share3}}</a>
             </div>
           </div>
         </div>
@@ -220,8 +220,8 @@
   <div class="row">
 
     <div style="text-align:center; margin:auto;" >
-      <input type="text" name="share_user" id="share_user">
-      은행명:<input class="btn btn-primary" type="button" value="전송하기" id="share1">
+      은행ID:<input type="text" name="share_user" id="share_user">
+      <input class="btn btn-primary" type="button" value="전송하기" id="share1">
       <input class="btn btn-primary" type="button" value="선택삭제" id="delete_btn">
 
 
@@ -294,13 +294,20 @@
         var share_user = $("#share_user").val();
         check_ids = ''
         sep = ''
+        if($('#share_user').val().length==0){
+        alert("은행ID를 입력하세요.");
+        $('#share_user').focus();return false;}
         $('input:checked').each(function() {
           check_ids += sep + $(this).val()
           sep = ','
-        })
+          alert(share_user+'에게 전송되었습니다.')
+                })
         location = '/app/share1?check_id=' + check_ids +'&share_user=' + share_user
         return false
       })
+
+
+
 
 
 

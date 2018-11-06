@@ -186,8 +186,8 @@
                     {{c.filename}}
               </a>
               <hr>
-              <a>수입자명:{{c.share1}}</a><br>
-                <a>수출자명:{{c.share2}}</a>
+              <a>To (수입자ID):{{c.share1}}</a><br>
+                <a>To (수출자ID):{{c.share2}}</a>
             </div>
           </div>
         </div>
@@ -225,8 +225,8 @@
   <div class="row">
 
     <div style="text-align:center; margin:auto;" >
-      수입자명:<input type="text" name="share_user" id="share_user">
-        수출자명:<input type="text" name="share_user2" id="share_user2">
+      수입자ID:<input type="text" name="share_user" id="share_user">
+        수출자ID:<input type="text" name="share_user2" id="share_user2">
       <input class="btn btn-primary" type="button" value="전송하기" id="share3">
       <input class="btn btn-primary" type="button" value="선택삭제" id="delete_btn">
 
@@ -297,11 +297,19 @@
 
       $('#share3').click(function(){
         var share_user = $("#share_user").val();
+        var share_user2 = $("#share_user2").val();
         check_ids = ''
         sep = ''
+        if($('#share_user').val().length==0){
+        alert("수입자ID를 입력하세요.");
+        $('#share_user').focus();return false;}
+        if($('#share_user2').val().length==0){
+        alert("수출자ID를 입력하세요.");
+        $('#share_user2').focus();return false;}
         $('input:checked').each(function() {
           check_ids += sep + $(this).val()
           sep = ','
+          alert(share_user+','+share_user2+'에게 전송되었습니다.')
         })
         location = '/app/share3?check_id=' + check_ids +'&share_user=' + share_user +'&share_user2=' + share_user2
         return false

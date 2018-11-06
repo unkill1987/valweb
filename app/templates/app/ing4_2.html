@@ -195,7 +195,7 @@
                     {{c.filename}}
               </a>
               <hr>
-                <a>수입자명:{{c.share1}}</a>
+                <a>To (수입자ID):{{c.share1}}</a>
             </div>
           </div>
         </div>
@@ -232,7 +232,7 @@
 
   <div class="row">
 
-    <div style="text-align:center; margin:auto;" >수입자명:
+    <div style="text-align:center; margin:auto;" >수입자ID:
       <input type="text" name="share_user" id="share_user">
       <input class="btn btn-primary" type="button" value="전송하기" id="share4_1">
       <input class="btn btn-primary" type="button" value="선택삭제" id="delete_btn">
@@ -307,10 +307,13 @@
 
         check_ids = ''
         sep = ''
+        if($('#share_user').val().length==0){
+        alert("수입자ID를 입력하세요.");
+        $('#share_user').focus();return false;}
         $('input:checked').each(function() {
           check_ids += sep + $(this).val()
           sep = ','
-
+        alert(share_user+'에게 전송되었습니다.')
         })
         location = '/app/share4_2?check_id=' + check_ids +'&share_user=' + share_user
         return false

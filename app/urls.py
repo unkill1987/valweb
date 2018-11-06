@@ -80,8 +80,6 @@ urlpatterns = [
     path('share4_2/', views.share4_2, name='share4_2'),
 
 
-    path('shared2/', views.shared2, name='shared2'),
-
     path('cirecieved/', views.cirecieved, name='cirecieved'),
     path('blrecieved1/', views.blrecieved1, name='blrecieved1'),
     path('blrecieved2/', views.blrecieved2, name='blrecieved2'),

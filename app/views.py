@@ -104,6 +104,7 @@ def share4_1(request):
     return redirect('ing4_1')
 
 def share4_2(request):
+
     check_id = request.GET['check_id']
     check_ids = check_id.split(',')
     share_user = request.GET['share_user']
@@ -203,66 +204,6 @@ def remove4_2(request):
 
     return redirect('ing4_2')
 
-def shareremove1(request):
-    # deletes all objects from Car database table
-    # Contract.objects.get('id').delete()
-    check_id = request.GET['check_id']
-    check_ids = check_id.split(',')
-
-    for id in check_ids:
-        try:
-            share = Contract_invoice.objects.get(id=id)
-            share.share1 = ' '
-            share.save()
-        except:
-            pass
-    return redirect('shared')
-
-def shareremove2(request):
-    # deletes all objects from Car database table
-    # Contract.objects.get('id').delete()
-    check_id = request.GET['check_id']
-    check_ids = check_id.split(',')
-
-    for id in check_ids:
-        try:
-            share = Contract.objects.get(id=id)
-            share.share2 = ' '
-            share.save()
-        except:
-            pass
-    return redirect('shared2')
-
-def shareremove2_1(request):
-    # deletes all objects from Car database table
-    # Contract.objects.get('id').delete()
-    check_id = request.GET['check_id']
-    check_ids = check_id.split(',')
-
-    for id in check_ids:
-        try:
-            share = Contract_Srequest.objects.get(id=id)
-            share.share4 = ' '
-            share.save()
-        except:
-            pass
-    return redirect('srrecieved')
-
-def shareremove4_1(request):
-    # deletes all objects from Car database table
-    # Contract.objects.get('id').delete()
-    check_id = request.GET['check_id']
-    check_ids = check_id.split(',')
-
-    for id in check_ids:
-        try:
-            share = Contract_BL.objects.get(id=id)
-            share.share1 = ' '
-            share.share2 = ' '
-            share.save()
-        except:
-            pass
-    return redirect('shared4_1')
 
 def blremove1(request):
     # deletes all objects from Car database table
@@ -596,7 +537,8 @@ def submit3(request):
 
     file = open('LC_' + time_format + '.txt', 'wt')
     file.write('Letter of Credit' + '\n'
-'(APPLICATION FOR IRREVOCABLE DOCUMENTARY CREDIT)' + '\n'
+'(APPLICATION FOR IRREVOCABLE DOCUMENTARY CREDIT)' +'\n'+
+letteroflc + '\n'
 '1.Transfer:' + a + '\n'
 '2.Credit Number: ' + b + '\n'
 '3.Advising Bank:' + c + '\n'
@@ -840,6 +782,8 @@ def download4_2(request):
         return response
 
 
+
+
 def ing(request):
     try:
         user_id = request.session['user_id']
@@ -960,23 +904,6 @@ def cirecieved(request):
     except:
         return redirect('login')
 
-def shared2(request):
-    try:
-        user_id = request.session['user_id']
-        member = Member.objects.get(user_id=user_id)
-        contract = Contract.objects.filter(share2=member).order_by('-id')
-
-        n = len(contract)
-        paginator = Paginator(contract, 6)
-
-        page = request.GET.get('page')
-        contracts = paginator.get_page(page)
-
-        return render(request, 'app/shared2.html', {'contract': contracts, 'n': n})
-    except Exception as e:
-        print(e)
-        return redirect('login')
-
 
 def srrecieved(request):
     try:
@@ -991,23 +918,6 @@ def srrecieved(request):
         contracts = paginator.get_page(page)
 
         return render(request, 'app/srrecieved.html', {'contract': contracts, 'n': n})
-    except Exception as e:
-        print(e)
-        return redirect('login')
-
-def shared4_1(request):
-    try:
-        user_id = request.session['user_id']
-        member = Member.objects.get(user_id=user_id)
-        contract = Contract_BL.objects.filter(share2=member).order_by('-id')
-
-        n = len(contract)
-        paginator = Paginator(contract, 6)
-
-        page = request.GET.get('page')
-        contracts = paginator.get_page(page)
-
-        return render(request, 'app/shared4_1.html', {'contract': contracts, 'n': n})
     except Exception as e:
         print(e)
         return redirect('login')
