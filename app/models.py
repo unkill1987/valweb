@@ -25,6 +25,16 @@ class Contract(models.Model):
     share3 = models.CharField(max_length=100)
     share4 = models.CharField(max_length=100)
 
+class Contract_LC(models.Model):
+    contractname = models.CharField(max_length=50)
+    sha256 = models.CharField(max_length=100)
+    filename = models.CharField(max_length=100)
+    owner = models.ForeignKey(Member, on_delete=models.CASCADE, null=True)
+    share1 = models.CharField(max_length=100)
+    share2 = models.CharField(max_length=100)
+    share3 = models.CharField(max_length=100)
+    share4 = models.CharField(max_length=100)
+
 
 class Contract_invoice(models.Model):
     contractname = models.CharField(max_length=50)

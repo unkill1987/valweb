@@ -9,7 +9,7 @@ import hashlib
 import sys
 import os
 import time
-from app.models import Contract, Member, Contract_invoice, Contract_Srequest, Contract_BL, Contract_DO
+from app.models import Contract, Member, Contract_invoice, Contract_Srequest, Contract_BL, Contract_DO, Contract_LC
 from valweb import settings
 from django.utils import timezone
 
@@ -70,6 +70,23 @@ def share2_1(request):
             pass
     return redirect('ing2_1')
 
+def share3(request):
+    check_id = request.GET['check_id']
+    check_ids = check_id.split(',')
+    share_user = request.GET['share_user']
+    share_user2 = request.GET['share_user2']
+
+    for id in check_ids:
+        try:
+            share = Contract_LC.objects.get(id=id)
+            share.share1=share_user
+            share.share2=share_user2
+            share.save()
+
+        except:
+            pass
+    return redirect('ing3')
+
 def share4_1(request):
     check_id = request.GET['check_id']
     check_ids = check_id.split(',')
@@ -129,6 +146,20 @@ def remove2(request):
             pass
 
     return redirect('ing2')
+
+def remove3(request):
+    # deletes all objects from Car database table
+    # Contract.objects.get('id').delete()
+    check_id = request.GET['check_id']
+    check_ids = check_id.split(',')
+
+    for id in check_ids:
+        try:
+            Contract_LC.objects.get(id=id).delete()
+        except:
+            pass
+
+    return redirect('ing3')
 
 def remove2_1(request):
     # deletes all objects from Car database table
@@ -248,6 +279,21 @@ def blremove1(request):
             pass
     return redirect('blrecieved1')
 
+def lcremove1(request):
+    # deletes all objects from Car database table
+    # Contract.objects.get('id').delete()
+    check_id = request.GET['check_id']
+    check_ids = check_id.split(',')
+
+    for id in check_ids:
+        try:
+            share = Contract_LC.objects.get(id=id)
+            share.share1 = ' '
+            share.save()
+        except:
+            pass
+    return redirect('lcrecieved1')
+
 def blremove2(request):
     # deletes all objects from Car database table
     # Contract.objects.get('id').delete()
@@ -262,6 +308,22 @@ def blremove2(request):
         except:
             pass
     return redirect('blrecieved2')
+
+
+def lcremove2(request):
+    # deletes all objects from Car database table
+    # Contract.objects.get('id').delete()
+    check_id = request.GET['check_id']
+    check_ids = check_id.split(',')
+
+    for id in check_ids:
+        try:
+            share = Contract_LC.objects.get(id=id)
+            share.share2 = ' '
+            share.save()
+        except:
+            pass
+    return redirect('lcrecieved2')
 
 def doremove(request):
     # deletes all objects from Car database table
@@ -278,56 +340,61 @@ def doremove(request):
             pass
     return redirect('dorecieved')
 
+def lcrremove(request):
+    # deletes all objects from Car database table
+    # Contract.objects.get('id').delete()
+    check_id = request.GET['check_id']
+    check_ids = check_id.split(',')
+
+    for id in check_ids:
+        try:
+            share = Contract.objects.get(id=id)
+            share.share3 = ' '
+            share.save()
+        except:
+            pass
+    return redirect('lcrrecieved')
+
 def submit(request):
     contractname = request.POST['contractname']
-    cable = request.POST['cable']
-    mail = request.POST['mail']
-    telex = request.POST['telex']
-    to = request.POST['to']
-    dear = request.POST['dear']
-    applicant = request.POST['applicant']
-    beneficiary = request.POST['beneficiary']
-    bank = request.POST['bank']
-    date = request.POST['date']
-    place = request.POST['place']
-    code = request.POST['code']
-    camount = request.POST['camount']
-    cwith = request.POST['with']
-    exporter = request.POST['exporter']
-    commodity = request.POST['commodity']
-    quantity = request.POST['quantity']
-    price = request.POST['price']
-    amount = request.POST['amount']
+    a = request.POST['a']
+    b = request.POST['b']
+    c = request.POST['c']
+    d = request.POST['d']
+    e = request.POST['e']
+    f = request.POST['f']
+    g = request.POST['g']
+    h = request.POST['h']
+    i = request.POST['i']
+    j = request.POST['j']
+    k = request.POST['k']
+    l = request.POST['l']
+    m = request.POST['m']
+    n = request.POST['n']
+    o = request.POST['o']
 
     time_format = time.strftime('%Y-%m-%d_%H%M%S', time.localtime(time.time()))
 
-    file = open('LC_' + time_format + '.txt', 'wt')
+    file = open('LCR_' + time_format + '.txt', 'wt')
     file.write('Letter of Credit' + '\n'
-                'Contract:' + contractname + '\n'
-                'Address Form' + '\n'
-                'Cable Address:' + cable + '\n'
-                'Mailing Address:' + mail + '\n'
-                'Telex Number:' + telex + '\n'
-                'To:' + to + '\n'
-                'Dear Sirs:' + dear + '\n'
-                'Bank Form' + '\n'
-                'Applicant:' + applicant + '\n'
-                'Beneficiary:' + beneficiary + '\n'
-                'Advising Bank:' + bank + '\n'
-                'Expiry Date:' + date + '\n'
-                'Expiry Place:' + place + '\n'
-                'Currency Code:' + code + '\n'
-                'Currency Amount:' + camount + '\n'
-                'Credit Available With:' + cwith + '\n'
-                'Order Form' + '\n'
-                'Exporter:' + exporter + '\n'
-                'Name of Commodity:' + commodity + '\n'
-                'Quantity:' + quantity + '\n'
-                'Unit Price:' + price + '\n'
-                'Amount:' + amount + '\n')
+'1.Advising bank:' + a + '\n'
+'2.Credit No.:' + b + '\n'
+'3.Beneficiary:' + c + '\n'
+'4.Applicant:' + d + '\n'
+'5.L/C Amount and Tolerance:' + e + '\n'
+'6.Type:' + f + '\n'
+'7.Partial shipment:' + g + '\n'
+'8.Transshipment:' + h + '\n'
+'9.Trnasport mode:' + i + '\n'
+'10.Loading(shipment from):' + j + '\n'
+'11.Discharging(shipment to):' + k + '\n'
+'12.Latest shipment date:' + l + '\n'
+'13.All banking charges:' + m + '\n'
+'14.Confirmation:' + n + '\n'
+'15.T/T reimbursement:' + o + '\n')
     file.close()
 
-    file = open('LC_' + time_format + '.txt', 'rb')
+    file = open('LCR_' + time_format + '.txt', 'rb')
     data = file.read()
 
     # hasher = hashlib.md5()
@@ -342,7 +409,7 @@ def submit(request):
     file.close()
 
     # 데이터 저장
-    contract = Contract(contractname=contractname, sha256=hash, filename='LC_' + time_format + '.txt')
+    contract = Contract(contractname=contractname, sha256=hash, filename='LCR_' + time_format + '.txt')
 
     # 로그인한 사용자 정보를 Contract에 같이 저장
     user_id = request.session['user_id']
@@ -489,6 +556,112 @@ def submit2_1(request):
     return redirect('ing2_1')
 
 
+def submit3(request):
+    letteroflc = request.POST['letteroflc']
+    a = request.POST['a']
+    b = request.POST['b']
+    c = request.POST['c']
+    d = request.POST['d']
+    e = request.POST['e']
+    f = request.POST['f']
+    g = request.POST['g']
+    h = request.POST['h']
+    i = request.POST['i']
+    j = request.POST['j']
+    k = request.POST['k']
+    l = request.POST['l']
+    m = request.POST['m']
+    n = request.POST['n']
+    o = request.POST['o']
+    p = request.POST['p']
+    q = request.POST['q']
+    r = request.POST['r']
+    s = request.POST['s']
+    t = request.POST['t']
+    u = request.POST['u']
+    v = request.POST['v']
+    w = request.POST['w']
+    x = request.POST['x']
+    y = request.POST['y']
+    z = request.POST['z']
+    aa = request.POST['aa']
+    bb = request.POST['bb']
+    cc = request.POST['cc']
+    dd = request.POST['dd']
+    ee = request.POST['ee']
+    ff = request.POST['ff']
+    gg = request.POST['gg']
+
+    time_format = time.strftime('%Y-%m-%d_%H%M%S', time.localtime(time.time()))
+
+    file = open('LC_' + time_format + '.txt', 'wt')
+    file.write('Letter of Credit' + '\n'
+'(APPLICATION FOR IRREVOCABLE DOCUMENTARY CREDIT)' + '\n'
+'1.Transfer:' + a + '\n'
+'2.Credit Number: ' + b + '\n'
+'3.Advising Bank:' + c + '\n'
+'4.Expiry Date:' + d + '\n'
+'5.Applicant:' + e + '\n'
+'6.Beneficiary:' + f + '\n'
+'7.Amount:' + g + '\n'
+'8.Partial Shipment:' + h + '\n'
+'9.Latest Shipment Date:' + i + '\n'
+'10.Additional Conditions:' + j + '\n'
+'11.All banking charges:' + k + '\n'
+'12.Documents delivered by:' + l + '\n'
+'13.Confirmation:' + m + '\n'
+'14.Reissue:' + n + '\n'
+'15.Import L/C Transfer:' + o + '\n'
+'16.Draft at:' + p + '\n'
+'17.Usance:' + q + '\n'
+'18.SettlingBank:' + r + '\n'
+'19.Credit:' + s + '\n'
+'20.Transshipment mode:' + t + '\n'
+'21.Authorization:' + u + '\n'
+'22.Port of Loading/Airport of Departure' + v + '\n'
+'23.Place of Taking in Charge:' + w + '\n'
+'24.SIgned/Original/Commercial Invoice :' + x + '\n'
+'25.FULL SET of B/L:' + y + '\n'
+'26.Certificate of Origin in :' + z + '\n'
+'27.Certificate of Analysis in :' + aa + '\n'
+'28.Other Documents Required:' + bb + '\n'
+'29.Description of Goods/Services:' + cc + '\n'
+'30.Price Terms:' + dd + '\n'
+'31.Country of Origin:' + ee + '\n'
+'32.HS CODE:' + ff + '\n'
+'33.CommodityDescription:' + gg + '\n'
+
+               )
+
+    file.close()
+
+    file = open('LC_' + time_format + '.txt', 'rb')
+    data = file.read()
+
+    # hasher = hashlib.md5()
+    # with open('myfile.jpg', 'rb') as afile:
+    #     buf = afile.read()
+    #     hasher.update(buf)
+    # print(hasher.hexdigest())
+    #
+    # a = 'MD5 : ' + hashlib.md5(data).hexdigest()
+    # b = 'SHA-1 : ' + hashlib.sha1(data).hexdigest()
+    hash = 'SHA-256 : ' + hashlib.sha256(data).hexdigest()
+    file.close()
+
+    # 데이터 저장
+    contract = Contract_LC(contractname=letteroflc, sha256=hash, filename='LC_' + time_format + '.txt')
+
+    # 로그인한 사용자 정보를 Contract에 같이 저장
+    user_id = request.session['user_id']
+    member = Member.objects.get(user_id=user_id)
+    contract.owner = member
+
+    contract.save()
+
+    return redirect('ing3')
+
+
 def submit4_1(request):
     contractname = request.POST['contractname']
     a = request.POST['a']
@@ -630,6 +803,17 @@ def download2_1(request):
         response['Content-Disposition'] = 'inline; filename="{}"'.format(filename)
         return response
 
+def download3(request):
+    id = request.GET['id']
+    c = Contract_LC.objects.get(id=id)
+
+    filepath = os.path.join(settings.BASE_DIR, c.filename)
+    # filepath = os.path.join('/home/valkyrie1234', c.filename)
+    filename = os.path.basename(filepath)
+    with open(filepath, 'rb') as f:
+        response = HttpResponse(f, content_type='text/plain')
+        response['Content-Disposition'] = 'inline; filename="{}"'.format(filename)
+        return response
 
 def download4_1(request):
     id = request.GET['id']
@@ -706,6 +890,23 @@ def ing2_1(request):
         contracts = paginator.get_page(page)
 
         return render(request, 'app/ing2_1.html', {'contract': contracts, 'n': n})
+    except:
+        return redirect('login')
+
+def ing3(request):
+    try:
+        user_id = request.session['user_id']
+        member = Member.objects.get(user_id=user_id)
+        contract = Contract_LC.objects.filter(owner=member).order_by('-id')
+
+        n = len(contract)
+
+        paginator = Paginator(contract, 6)
+
+        page = request.GET.get('page')
+        contracts = paginator.get_page(page)
+
+        return render(request, 'app/ing3.html', {'contract': contracts, 'n': n})
     except:
         return redirect('login')
 
@@ -828,6 +1029,22 @@ def blrecieved1(request):
     except:
         return redirect('login')
 
+def lcrecieved1(request):
+    try:
+        user_id = request.session['user_id']
+        member = Member.objects.get(user_id=user_id)
+        contract = Contract_LC.objects.filter(share1=member).order_by('-id')
+        n = len(contract)
+
+        paginator = Paginator(contract, 6)
+
+        page = request.GET.get('page')
+        contracts = paginator.get_page(page)
+
+        return render(request, 'app/lcrecieved1.html', {'contract': contracts, 'n': n})
+    except:
+        return redirect('login')
+
 def blrecieved2(request):
     try:
         user_id = request.session['user_id']
@@ -844,6 +1061,21 @@ def blrecieved2(request):
     except:
         return redirect('login')
 
+def lcrecieved2(request):
+    try:
+        user_id = request.session['user_id']
+        member = Member.objects.get(user_id=user_id)
+        contract = Contract_LC.objects.filter(share2=member).order_by('-id')
+        n = len(contract)
+
+        paginator = Paginator(contract, 6)
+
+        page = request.GET.get('page')
+        contracts = paginator.get_page(page)
+
+        return render(request, 'app/lcrecieved2.html', {'contract': contracts, 'n': n})
+    except:
+        return redirect('login')
 
 def dorecieved(request):
     try:
@@ -858,6 +1090,22 @@ def dorecieved(request):
         contracts = paginator.get_page(page)
 
         return render(request, 'app/dorecieved.html', {'contract': contracts, 'n': n})
+    except:
+        return redirect('login')
+
+def lcrrecieved(request):
+    try:
+        user_id = request.session['user_id']
+        member = Member.objects.get(user_id=user_id)
+        contract = Contract.objects.filter(share3=member).order_by('-id')
+        n = len(contract)
+
+        paginator = Paginator(contract, 6)
+
+        page = request.GET.get('page')
+        contracts = paginator.get_page(page)
+
+        return render(request, 'app/lcrrecieved.html', {'contract': contracts, 'n': n})
     except:
         return redirect('login')
 
@@ -1030,6 +1278,9 @@ def forms2(request):
 
 def forms2_1(request):
     return render(request, 'app/forms2_1.html', {})
+
+def forms3(request):
+    return render(request, 'app/forms3.html', {})
 
 def forms4_1(request):
     return render(request, 'app/forms4_1.html', {})

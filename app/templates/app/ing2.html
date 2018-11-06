@@ -141,6 +141,7 @@
 
 
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+             <a class="dropdown-item" href="{% url 'lcrecieved2' %}">L/C 확인</a>
            <a class="dropdown-item" href="{% url 'blrecieved2' %}">B/L 확인</a>
 
 
@@ -175,7 +176,7 @@
             <span>계약자 관리</span></a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <a class="dropdown-item" href="">수출자</a>
-            <a class="dropdown-item" href="">보험사</a>
+            <a class="dropdown-item" href="">은행</a>
             <a class="dropdown-item" href="">운송사</a>
             <a class="dropdown-item" href="">관세청</a>
           </div>
@@ -242,7 +243,7 @@
   <div class="row">
 
     <div style="text-align:center; margin:auto;" >
-      <input type="text" name="share_user" id="share_user">
+      수입자명:<input type="text" name="share_user" id="share_user">
       <input class="btn btn-primary" type="button" value="전송하기" id="share2">
       <input class="btn btn-primary" type="button" value="선택삭제" id="delete_btn">
 

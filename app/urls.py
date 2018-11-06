@@ -34,6 +34,7 @@ urlpatterns = [
     path('ing/', views.ing, name='ing'),
     path('ing2/', views.ing2, name='ing2'),
     path('ing2_1/', views.ing2_1, name='ing2_1'),
+    path('ing3/', views.ing3, name='ing3'),
     path('ing4_1/', views.ing4_1, name='ing4_1'),
     path('ing4_2/', views.ing4_2, name='ing4_2'),
 
@@ -48,6 +49,7 @@ urlpatterns = [
     path('remove/', views.remove, name='remove'),
     path('remove2/', views.remove2, name='remove2'),
     path('remove2_1/', views.remove2_1, name='remove2_1'),
+    path('remove3/', views.remove3, name='remove3'),
     path('remove4_1/', views.remove4_1, name='remove4_1'),
     path('remove4_2/', views.remove4_2, name='remove4_2'),
 
@@ -59,18 +61,21 @@ urlpatterns = [
     path('forms/', views.forms, name='forms'),
     path('forms2/', views.forms2, name='forms2'),
     path('forms2_1/', views.forms2_1, name='forms2_1'),
+    path('forms3/', views.forms3, name='forms3'),
     path('forms4_1/', views.forms4_1, name='forms4_1'),
     path('forms4_2/', views.forms4_2, name='forms4_2'),
 
     path('submit/', views.submit, name='submit'),
     path('submit2/', views.submit2, name='submit2'),
     path('submit2_1/', views.submit2_1, name='submit2_1'),
+    path('submit3/', views.submit3, name='submit3'),
     path('submit4_1/', views.submit4_1, name='submit4_1'),
     path('submit4_2/', views.submit4_2, name='submit4_2'),
 
     path('share1/', views.share1, name='share1'),
     path('share2/', views.share2, name='share2'),
     path('share2_1/', views.share2_1, name='share2_1'),
+    path('share3/', views.share3, name='share3'),
     path('share4_1/', views.share4_1, name='share4_1'),
     path('share4_2/', views.share4_2, name='share4_2'),
 
@@ -82,16 +87,25 @@ urlpatterns = [
     path('blrecieved2/', views.blrecieved2, name='blrecieved2'),
     path('dorecieved/', views.dorecieved, name='dorecieved'),
     path('srrecieved', views.srrecieved, name='srrecieved'),
+    path('lcrecieved1/', views.lcrecieved1, name='lcrecieved1'),
+    path('lcrecieved2/', views.lcrecieved2, name='lcrecieved2'),
+    path('lcrrecieved/', views.lcrrecieved, name='lcrrecieved'),
+
 
     path('blremove1/', views.blremove1, name='blremove1'),
     path('blremove2/', views.blremove2, name='blremove2'),
+    path('lcremove1/', views.lcremove1, name='lcremove1'),
+    path('lcremove2/', views.lcremove2, name='lcremove2'),
     path('doremove/', views.doremove, name='doremove'),
+    path('lcrremove/', views.lcrremove, name='lcrremove'),
 
     path('download/', views.download, name='download'),
     path('download2/', views.download2, name='download2'),
     path('download2_1/', views.download2_1, name='download2_1'),
+    path('download3/', views.download3, name='download3'),
     path('download4_1/', views.download4_1, name='download4_1'),
     path('download4_2/', views.download4_1, name='download4_2'),
+
 
     path('', views.login, name='login'),
     path('register/', views.register, name='register'),

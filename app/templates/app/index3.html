@@ -114,32 +114,32 @@
             <i class="fas fa-fw fa-chart-area"></i>
             <span>환율정보</span></a>
         </li>
+ <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-clipboard"></i>
+            <span>신용장(L/C) 개설</span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+           <a class="dropdown-item" href="{% url 'forms3' %}">신용장(L/C) 개설</a>
+            <a class="dropdown-item" href="{% url 'ing3' %}">신용장(L/C) 관리</a>
+
+
+          </div>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-fw fa-clipboard"></i>
-            <span>송장 관리</span>
+            <span>받은 문서</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-           <a class="dropdown-item" href="{% url 'forms2' %}">송장 작성</a>
-            <a class="dropdown-item" href="{% url 'ing2' %}">작성한 송장</a>
-            <a class="dropdown-item" href="{% url 'shared2' %}">보낸 송장</a>
+           <a class="dropdown-item" href="{% url 'lcrrecieved' %}">신용장(L/C) 신청서</a>
+
+
 
           </div>
         </li>
 
-          <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-fw fa-clipboard"></i>
-            <span>요청서 관리</span>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-           <a class="dropdown-item" href="{% url 'forms2_1' %}">요청서 작성</a>
-            <a class="dropdown-item" href="{% url 'ing2_1' %}">작성한 요청서</a>
-            <a class="dropdown-item" href="{% url 'shared2_1' %}">보낸 요청서</a>
 
-
-          </div>
-        </li>
             <li class="nav-item">
           <a class="nav-link" href="{% url 'calendar3' %}">
             <i class="fas fa-fw fa-calendar"></i>
@@ -166,7 +166,7 @@
             <span>계약자 관리</span></a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <a class="dropdown-item" href="">수출자</a>
-            <a class="dropdown-item" href="">보험사</a>
+            <a class="dropdown-item" href="">은행</a>
             <a class="dropdown-item" href="">운송사</a>
             <a class="dropdown-item" href="">관세청</a>
           </div>
@@ -187,16 +187,31 @@
 
           <!-- Icon Cards-->
           <div class="row">
-
-            <div class="col-xl-4 col-sm-6 mb-3">
+            <div class="col-xl-3 col-sm-6 mb-3">
+              <div class="card text-white bg-primary o-hidden h-100" >
+                <div class="card-body">
+                  <div class="card-body-icon">
+                    <i class="fas fa-fw fa-edit"></i>
+                  </div>
+                  <div class="mr-5">입력</div>
+                </div>
+                <a class="card-footer text-white clearfix small z-1" href="">
+                  <span class="float-left">View Details</span>
+                  <span class="float-right">
+                    <i class="fas fa-angle-right"></i>
+                  </span>
+                </a>
+              </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-3">
               <div class="card text-white bg-warning o-hidden h-100">
                 <div class="card-body">
                   <div class="card-body-icon">
                     <i class="fas fa-fw fa-list"></i>
                   </div>
-                  <div class="mr-5">진행중인 계약({{n1}})</div>
+                  <div class="mr-5">입력</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="{% url 'ing2' %}">
+                <a class="card-footer text-white clearfix small z-1" href="">
                   <span class="float-left">View Details</span>
                   <span class="float-right">
                     <i class="fas fa-angle-right"></i>
@@ -204,15 +219,15 @@
                 </a>
               </div>
             </div>
-            <div class="col-xl-4 col-sm-6 mb-3">
+            <div class="col-xl-3 col-sm-6 mb-3">
               <div class="card text-white bg-success o-hidden h-100">
                 <div class="card-body">
                   <div class="card-body-icon">
                     <i class="fas fa-fw fa-thumbs-up"></i>
                   </div>
-                  <div class="mr-5">완료된 계약</div>
+                  <div class="mr-5">입력</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="{% url 'done2' %}">
+                <a class="card-footer text-white clearfix small z-1" href="">
                   <span class="float-left">View Details</span>
                   <span class="float-right">
                     <i class="fas fa-angle-right"></i>
@@ -220,13 +235,13 @@
                 </a>
               </div>
             </div>
-            <div class="col-xl-4 col-sm-6 mb-3">
+            <div class="col-xl-3 col-sm-6 mb-3">
               <div class="card text-white bg-danger o-hidden h-100">
                 <div class="card-body">
                   <div class="card-body-icon">
                     <i class="fas fa-fw fa-credit-card"></i>
                   </div>
-                  <div class="mr-5">결제 내역</div>
+                  <div class="mr-5">입력</div>
                 </div>
                 <a class="card-footer text-white clearfix small z-1" href="">
                   <span class="float-left">View Details</span>

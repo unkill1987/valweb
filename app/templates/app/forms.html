@@ -119,6 +119,7 @@
             <span>받은 문서</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+              <a class="dropdown-item" href="{% url 'lcrecieved1' %}">L/C 확인</a>
               <a class="dropdown-item" href="{% url 'cirecieved' %}">C/I 확인</a>
             <a class="dropdown-item" href="{% url 'blrecieved1' %}">B/L 확인</a>
             <a class="dropdown-item" href="{% url 'dorecieved' %}">D/O 확인</a>
@@ -150,7 +151,7 @@
             <span>계약자 관리</span></a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <a class="dropdown-item" href="">수출자</a>
-            <a class="dropdown-item" href="">보험사</a>
+            <a class="dropdown-item" href="">은행</a>
             <a class="dropdown-item" href="">운송사</a>
             <a class="dropdown-item" href="">관세청</a>
           </div>
@@ -161,12 +162,12 @@
 
        <!--계약서 작성 -->
 
-
+<div class="container-fluid">
     <div id="content-wrapper">
-      <div id="page-wrapper" style="margin:10px;">
+      <div id="page-wrapper"  style="margin:10px;">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">신용장(L/C) 신청서</h1>
+                    <h1 class="page-header">신용장(L/C) 신청서 작성</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -180,126 +181,116 @@
                             <form role="form" action="{% url 'submit' %}" method="post">
 
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <h2 class="panel-heading">
                                         LETTER OF CREDIT</h2>
                                     <input class="form-control" name="contractname">
-                                    <p style="font-size:25px"> Address Form </p>
                                             <div class="form-group">
-                                            <label>Cable Address:</label>
-                                            <input class="form-control" name="cable">
+                                            <label>1.Advising bank:</label>
+                                            <input class="form-control" name="a">
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
-                                            <label>Mailing Address:</label>
-                                            <input class="form-control" name="mail">
+                                            <label>2.Credit No.:</label>
+                                            <input class="form-control" name="b">
                                         </div>
                                         <div class="form-group">
-                                            <label>Telex Number:</label>
-                                            <input class="form-control" name="telex">
-                                            <p class="help-block"></p>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>To:</label>
-                                            <input class="form-control" name="to">
+                                            <label>3.Beneficiary:</label>
+                                            <input class="form-control" name="c">
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
-                                            <label>Dear Sirs:</label>
-                                            <input class="form-control" name="dear">
+                                            <label>4.Applicant:</label>
+                                            <input class="form-control" name="d">
                                             <p class="help-block"></p>
                                         </div>
-                                </div>
-                                <!-- /.col-lg-6 (nested) -->
-                            <div class="col-lg-4">
-                                <h2> &nbsp </h2>
-                                    <p style="font-size:25px"> Bank Form </p>
-                                            <div class="form-group">
-                                            <label>Applicant:</label>
-                                            <input class="form-control" name="applicant">
+                                        <div class="form-group">
+                                            <label>5.L/C Amount and Tolerance:</label>
+                                            <input class="form-control" name="e">
                                             <p class="help-block"></p>
-                                            </div>
+                                        </div>
                                             <div class="form-group">
-                                            <label>Beneficiary:</label>
-                                            <input class="form-control" name="beneficiary">
-                                            <p class="help-block"></p>
-                                            </div>
-                                            <div class="form-group">
-                                            <label>Advising Bank:</label>
-                                            <input class="form-control" name="bank">
-                                            <p class="help-block"></p>
-                                            </div>
-                                            <div class="form-group">
-                                            <label>Expiry Date:</label>
-                                            <input type="date" class="form-control" name="date">
-                                            <p class="help-block"></p>
-                                            </div>
-                                            <div class="form-group">
-                                            <label>Expiry Place:</label>
-                                            <input class="form-control" name="place">
-                                            <p class="help-block"></p>
-                                            </div>
-                                            <div class="form-group">
-                                            <label>Currency Code:</label><br>
-                                            <select style="width:300px; height:38px; border-radius:4px" name="code">
-                                                <option value="USD">USD(840)</option>
-                                                <option value="KRW">KRW(410)</option>
-                                                <option value="JPY">JPY(392)</option>
-                                                <option value="CNY">CNY(156)</option>
+                                            <label>6.Type:</label><br>
+                                            <select style="width:300px; height:38px; border-radius:4px" name="f">
+                                                <option value="Sight">Sight</option>
+                                                <option value="Banker's usance">Banker's usance</option>
+                                                <option value="Shipper's usance">Shipper's usance</option>
 
                                             </select>
                                             </div>
-                                            <div class="form-group">
-                                            <label>Currency Amount:</label>
-                                            <input class="form-control" name="camount">
-                                            <p class="help-block"></p>
+                                     <div class="form-group">
+                                            <label>7.Partial shipment:</label><br>
+                                            <select style="width:300px; height:38px; border-radius:4px" name="g">
+                                                <option value="Allowed">Allowed</option>
+                                                <option value="Not allowed">Not allowed</option>
+
+                                            </select>
                                             </div>
-                                            <div class="form-group">
-                                            <label>Credit Available With:</label><br>
-                                            <select style="width:300px; height:38px; border-radius:4px" name="with">
-                                                <option value="Issuing Bank">Issuing Bank</option>
-                                                <option value="Any Bank">Any Bank</option>
+
+                                </div>
+                                <!-- /.col-lg-6 (nested) -->
+                            <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>8.Transshipment:</label><br>
+                                            <select style="width:300px; height:38px; border-radius:4px" name="h">
+                                                <option value="Allowed">Allowed</option>
+                                                <option value="Not allowed">Not allowed</option>
+
+                                            </select>
+                                            </div>
+                                             <div class="form-group">
+                                            <label>9.Trnasport mode:</label><br>
+                                            <select style="width:300px; height:38px; border-radius:4px" name="i">
+                                                <option value="Sea">Sea</option>
+                                                <option value="Air">Air</option>
+                                                <option value="Combined">Combined</option>
                                                 <option value="Other">Other</option>
 
                                             </select>
                                             </div>
+                                            <div class="form-group">
+                                            <label>10.Loading(shipment from):</label>
+                                            <input class="form-control" name="j">
+                                            <p class="help-block"></p>
+                                            </div>
+                                            <div class="form-group">
+                                            <label>11.Discharging(shipment to):</label>
+                                            <input class="form-control" name="k">
+                                            <p class="help-block"></p>
+                                            </div>
+                                            <div class="form-group">
+                                            <label>12.Latest shipment date:</label>
+                                            <input type="date" name="l">
+                                            <p class="help-block"></p>
+                                            </div>
+                                            <div class="form-group">
+                                            <label>13.All banking charges:</label><br>
+                                            <select style="width:300px; height:38px; border-radius:4px" name="m">
+                                                <option value="Applicant">Applicant</option>
+                                                <option value="Beneficiary">Beneficiary</option>
 
+                                            </select>
+                                            </div>
+                                            <div class="form-group">
+                                            <label>14.Confirmation:</label><br>
+                                            <select style="width:300px; height:38px; border-radius:4px" name="n">
+                                                <option value="Confirm">Confirm</option>
+                                                <option value="May add">May add</option>
+                                                  <option value="Without">Without</option>
+                                            </select>
+                                            </div>
+                                             <div class="form-group">
+                                            <label>15.T/T reimbursement:</label><br>
+                                            <select style="width:300px; height:38px; border-radius:4px" name="o">
+                                                <option value="Allowed">Allowed</option>
+                                                <option value="Not allowed">Not allowed</option>
+
+                                            </select>
+                                            </div>
 
                                 </div>
-                            <div class="col-lg-4">
-                                <h2> &nbsp </h2>
-                                    <p style="font-size:25px"> Order Form </p>
-                                            <div class="form-group">
-                                            <label>Exporter:</label>
-                                            <input class="form-control" name="exporter">
-                                            <p class="help-block"></p>
-                                            </div>
-                                            <div class="form-group">
-                                            <label>Name of Commodity:</label>
-                                            <input class="form-control" name="commodity">
-                                            <p class="help-block"></p>
-                                            </div>
-                                            <div class="form-group">
-                                            <label>Quantity:</label>
-                                            <input class="form-control" name="quantity">
-                                            <p class="help-block"></p>
-                                            </div>
-                                            <div class="form-group">
-                                            <label>Unit Price:</label>
-                                            <input class="form-control" name="price">
-                                            <p class="help-block"></p>
-                                            </div>
-                                            <div class="form-group">
-                                            <label>Amount:</label>
-                                            <input class="form-control" name="amount">
-                                            <p class="help-block"></p>
-                                            </div>
 
 
-
-
-
-                                </div>
 
 
 
@@ -314,7 +305,7 @@
                                                                         {% csrf_token %}
                             </form>
                         </div>
-
+                        </div>
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->

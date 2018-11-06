@@ -120,6 +120,7 @@
             <span>받은 문서</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+            <a class="dropdown-item" href="{% url 'lcrecieved1' %}">L/C 확인</a>
             <a class="dropdown-item" href="{% url 'cirecieved' %}">C/I 확인</a>
             <a class="dropdown-item" href="{% url 'blrecieved1' %}">B/L 확인</a>
             <a class="dropdown-item" href="{% url 'dorecieved' %}">D/O 확인</a>
@@ -151,7 +152,7 @@
             <span>계약자 관리</span></a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <a class="dropdown-item" href="">수출자</a>
-            <a class="dropdown-item" href="">보험사</a>
+            <a class="dropdown-item" href="">은행</a>
             <a class="dropdown-item" href="">운송사</a>
             <a class="dropdown-item" href="">관세청</a>
           </div>
@@ -159,8 +160,9 @@
       </ul>
 
         <!--진행중인 계약-->
-<div class="container-fluid" style="margin:5px; margin-bottom:100px;">
-    <h1 class="my-4">작성한 L/C 신청서({{n}}건)</h1>
+<div class="container-fluid" style="margin-bottom:100px;">
+  <div id="container-wrapper">
+    <h1 class="my-4">신용장(L/C) 신청서 관리({{n}}건)</h1>
 
     <div class="row">
         {% for c in contract %}
@@ -179,7 +181,8 @@
               <a href="{% url 'download' %}?id={{ c.id }}" class="btn btn-primary" target="_blank">
                     {{c.filename}}
               </a>
-
+            <hr>
+              <a>To:{{c.share3}}</a>
             </div>
           </div>
         </div>
@@ -218,12 +221,13 @@
 
     <div style="text-align:center; margin:auto;" >
       <input type="text" name="share_user" id="share_user">
-      <input class="btn btn-primary" type="button" value="공유하기" id="share1">
+      은행명:<input class="btn btn-primary" type="button" value="전송하기" id="share1">
       <input class="btn btn-primary" type="button" value="선택삭제" id="delete_btn">
 
 
         </div>
   </div>
+    </div>
 
 <!--</form>-->
 </div>
