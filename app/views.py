@@ -9,7 +9,7 @@ import hashlib
 import sys
 import os
 import time
-from app.models import Contract, Member, Contract_invoice, Contract_Srequest, Contract_BL, Contract_DO, Contract_LC
+from app.models import Contract, Member, Contract_CI, Contract_SR, Contract_BL, Contract_DO, Contract_LC
 from valweb import settings
 from django.utils import timezone
 
@@ -47,7 +47,7 @@ def share2(request):
 
     for id in check_ids:
         try:
-            share = Contract_invoice.objects.get(id=id)
+            share = Contract_CI.objects.get(id=id)
             share.share1=share_user
             share.save()
 
@@ -62,7 +62,7 @@ def share2_1(request):
 
     for id in check_ids:
         try:
-            share = Contract_Srequest.objects.get(id=id)
+            share = Contract_SR.objects.get(id=id)
             share.share4=share_user
             share.save()
 
@@ -142,7 +142,7 @@ def remove2(request):
 
     for id in check_ids:
         try:
-            Contract_invoice.objects.get(id=id).delete()
+            Contract_CI.objects.get(id=id).delete()
         except:
             pass
 
@@ -170,7 +170,7 @@ def remove2_1(request):
 
     for id in check_ids:
         try:
-            Contract_Srequest.objects.get(id=id).delete()
+            Contract_SR.objects.get(id=id).delete()
         except:
             pass
 
@@ -203,6 +203,22 @@ def remove4_2(request):
             pass
 
     return redirect('ing4_2')
+
+
+def ciremove(request):
+    # deletes all objects from Car database table
+    # Contract.objects.get('id').delete()
+    check_id = request.GET['check_id']
+    check_ids = check_id.split(',')
+
+    for id in check_ids:
+        try:
+            share = Contract_CI.objects.get(id=id)
+            share.share1 = ' '
+            share.save()
+        except:
+            pass
+    return redirect('cirecieved')
 
 
 def blremove1(request):
@@ -295,6 +311,22 @@ def lcrremove(request):
         except:
             pass
     return redirect('lcrrecieved')
+
+
+def srremove(request):
+    # deletes all objects from Car database table
+    # Contract.objects.get('id').delete()
+    check_id = request.GET['check_id']
+    check_ids = check_id.split(',')
+
+    for id in check_ids:
+        try:
+            share = Contract_SR.objects.get(id=id)
+            share.share4 = ' '
+            share.save()
+        except:
+            pass
+    return redirect('cirecieved')
 
 def submit(request):
     contractname = request.POST['contractname']
@@ -420,7 +452,7 @@ def submit2(request):
     file.close()
 
     # 데이터 저장
-    contract = Contract_invoice(contractname=invoicename, sha256=hash, filename='CI_' + time_format + '.txt')
+    contract = Contract_CI(contractname=invoicename, sha256=hash, filename='CI_' + time_format + '.txt')
 
     # 로그인한 사용자 정보를 Contract에 같이 저장
     user_id = request.session['user_id']
@@ -485,7 +517,7 @@ def submit2_1(request):
     file.close()
 
     # 데이터 저장
-    contract = Contract_Srequest(contractname=srname, sha256=hash, filename='SR_' + time_format + '.txt')
+    contract = Contract_SR(contractname=srname, sha256=hash, filename='SR_' + time_format + '.txt')
 
     # 로그인한 사용자 정보를 Contract에 같이 저장
     user_id = request.session['user_id']
@@ -723,7 +755,7 @@ def download(request):
 
 def download2(request):
     id = request.GET['id']
-    c = Contract_invoice.objects.get(id=id)
+    c = Contract_CI.objects.get(id=id)
 
     filepath = os.path.join(settings.BASE_DIR, c.filename)
     # filepath = os.path.join('/home/valkyrie1234', c.filename)
@@ -735,7 +767,7 @@ def download2(request):
 
 def download2_1(request):
     id = request.GET['id']
-    c = Contract_Srequest.objects.get(id=id)
+    c = Contract_SR.objects.get(id=id)
 
     filepath = os.path.join(settings.BASE_DIR, c.filename)
     # filepath = os.path.join('/home/valkyrie1234', c.filename)
@@ -804,7 +836,7 @@ def ing2(request):
     try:
         user_id = request.session['user_id']
         member = Member.objects.get(user_id=user_id)
-        contract = Contract_invoice.objects.filter(owner=member).order_by('-id')
+        contract = Contract_CI.objects.filter(owner=member).order_by('-id')
         n = len(contract)
 
         # to = Contract_invoice.objects.get(share1=share1)
@@ -824,7 +856,7 @@ def ing2_1(request):
     try:
         user_id = request.session['user_id']
         member = Member.objects.get(user_id=user_id)
-        contract = Contract_Srequest.objects.filter(owner=member).order_by('-id')
+        contract = Contract_SR.objects.filter(owner=member).order_by('-id')
 
         n = len(contract)
 
@@ -892,7 +924,7 @@ def cirecieved(request):
     try:
         user_id = request.session['user_id']
         member = Member.objects.get(user_id=user_id)
-        contract = Contract_invoice.objects.filter(share1=member).order_by('-id')
+        contract = Contract_CI.objects.filter(share1=member).order_by('-id')
         n = len(contract)
 
         paginator = Paginator(contract, 6)
@@ -909,7 +941,7 @@ def srrecieved(request):
     try:
         user_id = request.session['user_id']
         member = Member.objects.get(user_id=user_id)
-        contract = Contract_Srequest.objects.filter(share4=member).order_by('-id')
+        contract = Contract_SR.objects.filter(share4=member).order_by('-id')
 
         n = len(contract)
         paginator = Paginator(contract, 6)

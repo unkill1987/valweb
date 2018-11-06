@@ -53,10 +53,7 @@ urlpatterns = [
     path('remove4_1/', views.remove4_1, name='remove4_1'),
     path('remove4_2/', views.remove4_2, name='remove4_2'),
 
-    path('shareremove1/', views.shareremove1, name='shareremove1'),
-    path('shareremove2/', views.shareremove2, name='shareremove2'),
-    path('shareremove2_1/', views.shareremove2_1, name='shareremove2_1'),
-    path('shareremove4_1/', views.shareremove4_1, name='shareremove4_1'),
+
 
     path('forms/', views.forms, name='forms'),
     path('forms2/', views.forms2, name='forms2'),
@@ -96,6 +93,8 @@ urlpatterns = [
     path('lcremove2/', views.lcremove2, name='lcremove2'),
     path('doremove/', views.doremove, name='doremove'),
     path('lcrremove/', views.lcrremove, name='lcrremove'),
+    path('ciremove/', views.ciremove, name='ciremove'),
+    path('srremove/', views.lcrremove, name='srremove'),
 
     path('download/', views.download, name='download'),
     path('download2/', views.download2, name='download2'),

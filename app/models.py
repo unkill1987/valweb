@@ -36,7 +36,7 @@ class Contract_LC(models.Model):
     share4 = models.CharField(max_length=100)
 
 
-class Contract_invoice(models.Model):
+class Contract_CI(models.Model):
     contractname = models.CharField(max_length=50)
     sha256 = models.CharField(max_length=100)
     filename = models.CharField(max_length=100)
@@ -47,7 +47,7 @@ class Contract_invoice(models.Model):
     share4 = models.CharField(max_length=100)
 
 
-class Contract_Srequest(models.Model):
+class Contract_SR(models.Model):
     contractname = models.CharField(max_length=50)
     sha256 = models.CharField(max_length=100)
     filename = models.CharField(max_length=100)
