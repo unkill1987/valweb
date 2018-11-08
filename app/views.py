@@ -1,14 +1,20 @@
-import mpld3
+from calendar import monthrange
+
+
 import requests
+from django.template import RequestContext
+from django.utils.datetime_safe import date
+from django.utils.safestring import mark_safe
 from pylab import *
-import pandas_datareader.data as web
+
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 import hashlib
 import sys
 import os
 import time
+
 from app.models import Contract, Member, Contract_CI, Contract_SR, Contract_BL, Contract_DO, Contract_LC
 from valweb import settings
 from django.utils import timezone
@@ -1084,25 +1090,25 @@ def logout(request):
 
 
 def index(request):
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
-    res1 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD', headers=headers)
-    json_data = res1.json()
-    basePrice1 = json_data[0]['basePrice']
-    sellprice1 = json_data[0]['cashSellingPrice']
-    buyprice1 = json_data[0]['cashBuyingPrice']
-
-    res2 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWJPY', headers=headers)
-    json_data = res2.json()
-    basePrice2 = json_data[0]['basePrice']
-    sellprice2 = json_data[0]['cashSellingPrice']
-    buyprice2 = json_data[0]['cashBuyingPrice']
-
-    res3 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWCNY', headers=headers)
-    json_data = res3.json()
-    basePrice3 = json_data[0]['basePrice']
-    sellprice3 = json_data[0]['cashSellingPrice']
-    buyprice3 = json_data[0]['cashBuyingPrice']
+    # headers = {
+    #     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
+    # res1 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWUSD', headers=headers)
+    # json_data = res1.json()
+    # basePrice1 = json_data[0]['basePrice']
+    # sellprice1 = json_data[0]['cashSellingPrice']
+    # buyprice1 = json_data[0]['cashBuyingPrice']
+    #
+    # res2 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWJPY', headers=headers)
+    # json_data = res2.json()
+    # basePrice2 = json_data[0]['basePrice']
+    # sellprice2 = json_data[0]['cashSellingPrice']
+    # buyprice2 = json_data[0]['cashBuyingPrice']
+    #
+    # res3 = requests.get('https://quotation-api-cdn.dunamu.com/v1/forex/recent?codes=FRX.KRWCNY', headers=headers)
+    # json_data = res3.json()
+    # basePrice3 = json_data[0]['basePrice']
+    # sellprice3 = json_data[0]['cashSellingPrice']
+    # buyprice3 = json_data[0]['cashBuyingPrice']
 
     try:
 
@@ -1124,9 +1130,12 @@ def index(request):
         else:
             templates = 'app/login.html'
 
-        return render(request, templates, {'n': n,'n1':n1,'basePrice1': basePrice1,'sellprice1':sellprice1,'buyprice1':buyprice1,
-                                               'basePrice2':basePrice2,'sellprice2':sellprice2,'buyprice2':buyprice2,
-                                               'basePrice3':basePrice3,'sellprice3':sellprice3,'buyprice3':buyprice3})
+        # return render(request, templates, {'n': n,'n1':n1,'basePrice1': basePrice1,'sellprice1':sellprice1,'buyprice1':buyprice1,
+        #                                        'basePrice2':basePrice2,'sellprice2':sellprice2,'buyprice2':buyprice2,
+        #                                        'basePrice3':basePrice3,'sellprice3':sellprice3,'buyprice3':buyprice3})
+        return render(request, templates,
+                      {'n': n, 'n1': n1})
+
     except Exception as e:
         print(e)
         return redirect('login')
